@@ -6,7 +6,7 @@ Stardew Valley.
 
 ## Goal
 
-Complete the final bundle consisting of starfruit, truffle oil, a diamond, a sturgeon, cactus.
+Complete the final bundle consisting of starfruit, truffle oil, a diamond, a sturgeon, and cactus.
 
 ## How to compile and run
 
@@ -22,4 +22,4 @@ Entering numbers 1-9 to do actions presented by the terminal.
 
 ## Extra credit
 
-(TBA — or write "None")
+Weather system with gameplay effects, smarter bundle planner, random number generator for fishing, mining, and foraging luck
