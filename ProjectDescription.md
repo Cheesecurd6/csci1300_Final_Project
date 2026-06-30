@@ -1,4 +1,4 @@
-#Project Plan
+# Project Plan
 
 ## Theme
 
@@ -6,15 +6,15 @@ Stardew Valley.
 
 ## Classes
 
-Player, Villager, Location, Item, Quest, Inventory, Bundle, Weather
+Player, Villager, Location, Item, Quest, Inventory, Bundle, Weather.
 
 ## Limited Resources
 
-Relationship, Energy, Inventory space
+Relationship, Energy, Inventory space.
 
 ## Time Handling
 
-Most actions will increase the time, but depending on the action there might be a different increase
+Most actions will increase the time, but depending on the action there might be a different increase.
 
 ## Extra Credit
 
