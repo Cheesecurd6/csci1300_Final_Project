@@ -18,7 +18,9 @@ Entering numbers 1-9 to do actions presented by the terminal.
 
 ## Classes
 
-(TBA — list each class and what it does)
+Player, Villager, Location, Item, Quest, Inventory, Bundle, Weather.
+
+Exact use TBA
 
 ## Extra credit
 
