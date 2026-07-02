@@ -3,6 +3,8 @@
 #include <vector>
 #include "player.hpp"
 #include "location.hpp"
+#include "villager.hpp"
+#include "Item.hpp"
 using namespace std;
 
 // First finish farm
@@ -38,6 +40,7 @@ int main() {
     Player main;
     Location farm;
     std::string farmName;
+    Item inventory[10];
 
     std::cout << "Welcome to my final project" << std::endl << std::endl << std::endl;
     main.setName();
