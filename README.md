@@ -20,8 +20,8 @@ Entering numbers 1-9 to do actions presented by the terminal.
 
 Player, Villager, Location, Item, Quest, Inventory, Bundle, Weather.
 
-Exact uses of the classses TBA
+Exact uses of the classses TBA.
 
 ## Extra credit
 
-Weather system with gameplay effects, smarter bundle planner, random number generator for fishing, mining, and foraging luck
+Weather system with gameplay effects, smarter bundle planner, random number generator for fishing, mining, and foraging luck.

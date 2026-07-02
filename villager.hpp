@@ -1,3 +1,5 @@
+#ifndef VILLAGER_H
+#define VILLAGER_H
 #include <iostream>
 class Villager {
     public:
@@ -17,3 +19,5 @@ class Villager {
     std::string quest;
     bool questResult;
 };
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef PLAYER_H
+#define PLAYER_H
 #include <string>
 class Player {
     public:
@@ -21,3 +23,5 @@ class Player {
     int energy;
     int joja;
 };
+
+#endif
