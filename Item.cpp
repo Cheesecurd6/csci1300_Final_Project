@@ -14,19 +14,25 @@
         return name;
     }
 
-    Item::Item(std::string d, int a, int v, std::string n) {
+    bool Item::getSeed() {
+        return seed;
+    }
+
+    Item::Item(std::string d, int a, int v, std::string n, bool s) {
         description = d;
         amount = a;
         value = v;
         name = n;
+        seed = s;
     }
     Item::Item() {
         description = " ";
         amount = 0;
         value = 0;
         name = " ";
+        seed = 0;
     }
 
-    int Item::setAmount(int a) {
+    void Item::setAmount(int a) {
         amount += a;
     }

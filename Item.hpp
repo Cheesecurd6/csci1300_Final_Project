@@ -7,16 +7,18 @@ class Item {
     int amount;
     int value;
     std::string name;
+    bool seed;
 
     public:
     std::string getDescription();
     int getAmount();
     int getValue();
     std::string getName();
+    bool getSeed();
 
-    Item(std::string d, int a, int v, std::string n);
+    Item(std::string d, int a, int v, std::string n, bool s);
     Item();
-    int setAmount(int a);
+    void setAmount(int a);
 };
 
 #endif

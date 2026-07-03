@@ -13,7 +13,7 @@ class Location {
     void setName(std::string locationName);
     void setNeighbors(std::vector<Location> nearbyLocations);
     
-    private:
+    protected:
     std::vector<std::string> people;
     std::string name;
     std::vector<Location> neighbors;
