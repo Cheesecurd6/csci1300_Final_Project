@@ -19,66 +19,7 @@ using namespace std;
 //. You'll have to hardcode seed positions in inventory
 
 
-void farmTerminal(Player p, Farm l, Item inventory[]) {
-    // Overview of what can be done on the farm
-    while(true) {
-        int choice;
-        cout << "What would you like to do next? " << endl;
-        cout << "1. Leave the " << l.getName() << endl;
-        cout << "2. Tend to the farm" << endl;
-        cout << "3. Sleep" << endl;
-        cout << "4. Check inventory" << endl;
-        cout << "5. Check quests" << endl;
-        cout << "-1. Exit the game" << endl;
-        cin >> choice;
 
-        switch(choice) {
-
-            case 1: {
-                cout << "Leaving the farm!" << endl;
-                break;
-            }
-
-            case 2: {
-                // Overview of what tending can be done
-                int count = 1;
-                int choice2;
-                while(true) {
-                cout << "You have " << p.getEnergy() << " energy." << endl;
-                for (int i = 0; i < 10; i++) {
-                    if (inventory[i].getSeed()) {
-                        cout << "You have " << inventory[i].getAmount() << " seeds." << endl;
-                    }
-                }
-
-                cout << "You have " << l.getHowManyParsnipsPlanted() << " parsnips planted and " << l.getHowManyParsnipsUnwatered() << "unwatered." << endl;
-                cout << "You have " << l.getHowManyStarfruitsPlanted() << " starfruit planted and " << l.getHowManyStarfruitsUnwatered() << "unwatered." << endl;
-                cout << "You have " << l.getHowManyBlueberriesPlanted() << " blueberry bushes planted and " << l.getHowManyBlueberriesUnwatered() << "unwatered." << endl;
-                cout << endl;
-                cout << "What would you like to do?" << endl;
-                for (int i = 0; i < 10; i++) {
-                    if (inventory[i].getSeed()) {
-                        cout << count << ". Plant " << inventory[i].getName() << " seeds." << endl;
-                        count++;
-                    }
-                }
-                cin >> choice2;
-                    switch (choice2) {
-
-                    }
-                break;
-                }
-            }
-
-            
-            case -1: {
-                return;
-            }
-
-
-        }
-    }
-}
 
 void whereAmI(std::string name,std::string location) {
     cout << "Hi " << name << " you're currently at " << location << endl;
@@ -108,6 +49,8 @@ int main() {
 
     whereAmI(mainPlayer.getName(),mainPlayer.getLocation());
 
-    farmTerminal(mainPlayer, farm, inventory);
+    farm.farmTerminal(mainPlayer,inventory);
+
+    cout << farm.getHowManyParsnipsPlanted() << endl;
 
 }   

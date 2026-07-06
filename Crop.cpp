@@ -1,9 +1,10 @@
 #include "Crop.hpp"
 #include <string>
 
-    Crop::Crop(std::string n, int d) {
+    Crop::Crop(std::string n, int d, bool harvestable) {
         name = n;
         daysToGrow = d;
+        h = harvestable; 
     }
 
     bool Crop::getWaterStatus() {
@@ -18,4 +19,9 @@
         }
         wateredToday = false;
     }
-    bool harvestable();
+    void Crop::harvestable() {
+        if(daysGrown == daysToGrow) {
+            h = true;
+        }
+
+    }

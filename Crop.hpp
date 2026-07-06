@@ -8,14 +8,15 @@ class Crop {
     int daysToGrow;
     int daysGrown;
     bool wateredToday;
-    bool dayHasPassed;
+    // bool dayHasPassed;
+    bool h;
 
     public:
-    Crop(std::string n, int d);
+    Crop(std::string n, int d, bool harvestable);
     bool getWaterStatus();
     void water();
     void nextDay();
-    bool harvestable();
+    void harvestable();
 
 
 };
