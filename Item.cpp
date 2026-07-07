@@ -1,5 +1,7 @@
 #include <string>
 #include "Item.hpp"
+#include <iostream>
+using namespace std;
 
     std::string Item::getDescription() {
         return description;
@@ -34,5 +36,5 @@
     }
 
     void Item::setAmount(int a) {
-        amount += a;
+    amount += a;
     }

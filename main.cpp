@@ -32,9 +32,9 @@ int main() {
     Player mainPlayer;
     Farm farm;
     std::string farmName;
-    Item parsnipSeeds("The humblest of crops", 10, 30, "Parnsnip", 1);
-    Item starfruitSeeds("Truly luxurious fruit with a slight tangy flavor ", 0, 100, "Starfruit", 1);
-    Item blueberrySeeds("Grows so that one plant can produce fruit mutiple times", 2, 50, "Blueberry", 1);
+    Item parsnipSeeds("The humblest of crops", 10, 30, "Parsnip seeds", 1);
+    Item starfruitSeeds("Truly luxurious fruit with a slight tangy flavor ", 15, 100, "Starfruit seeds", 1);
+    Item blueberrySeeds("Grows so that one plant can produce fruit mutiple times", 5, 50, "Blueberry seeds", 1);
     Item inventory[10] {parsnipSeeds,starfruitSeeds,blueberrySeeds};
 
     std::cout << "Welcome to my final project" << std::endl << std::endl << std::endl;

@@ -8,7 +8,7 @@
     std::string Player::getName() const {
         return name;
     }
-    std::string Player::getDay() const {
+    int Player::getDay() const {
         return day;
     }
     int Player::getEnergy() const {
@@ -25,14 +25,31 @@
         std::cout << "What's your name? ";
         getline(std::cin , name);
     }
-    void Player::setDay(std::string playerDay) {
+    void Player::setDay(int playerDay) {
         day = playerDay;
     }
     void Player::setEnergy(int playerEnergy) {
-        energy = playerEnergy;
+        if (playerEnergy == 0) {
+            std::cout << "You've run out of energy" << std::endl;
+            newDay();
+        }
+        else {
+            energy = playerEnergy;
+        }
     }
     void Player::setJoja(int playerJoja) {
         joja = playerJoja;
+    }
+
+    void Player::setTime() {
+        time++;
+        if (time == 100) {
+            day++;
+        }
+    }
+
+    void Player::newDay() {
+        
     }
 
     

@@ -5,13 +5,15 @@ class Player {
     public:
     std::string getLocation() const;
     std::string getName() const;
-    std::string getDay() const;
+    int getDay() const;
     int getEnergy() const;
     int getJojaInfluence() const;
 
     void setLocation(std::string playerLocation);
+    void newDay();
+    void setTime();
     void setName();
-    void setDay(std::string playerDay);
+    void setDay(int playerDay);
     void setEnergy(int playerEnergy);
     void setJoja(int playerJoja);
 
@@ -20,7 +22,9 @@ class Player {
     std::string location;
     std::string name;
     std::string day;
-    int energy;
+    int time;
+    int day;
+    int energy = 100;
     int joja;
 };
 

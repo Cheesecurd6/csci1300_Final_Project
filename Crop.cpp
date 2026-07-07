@@ -5,6 +5,8 @@
         name = n;
         daysToGrow = d;
         h = harvestable; 
+        daysGrown = 0;
+        wateredToday = false;
     }
 
     bool Crop::getWaterStatus() {

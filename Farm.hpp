@@ -17,12 +17,13 @@ class Farm : public Location{
     public:
     void plant(int parsnipSeeds, int starfuitSeeds, int blueberrySeeds);
     void waterParsnips(int cropsToBeWatered);
-    void waterStarfruits(int cropsToBeWatered, int energy);
+    void waterStarfruits(int cropsToBeWatered);
     void waterBlueberries(int cropsToBeWatered);
 
     int getHowManyParsnipsPlanted();
     int getHowManyStarfruitsPlanted();
     int getHowManyBlueberriesPlanted();
+    Player getThePlayer();
 
     int getHowManyParsnipsUnwatered();
     int getHowManyStarfruitsUnwatered();
