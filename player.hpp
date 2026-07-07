@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include <string>
+
 class Player {
     public:
     std::string getLocation() const;
@@ -21,7 +22,6 @@ class Player {
     private:
     std::string location;
     std::string name;
-    std::string day;
     int time;
     int day;
     int energy = 100;

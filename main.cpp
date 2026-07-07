@@ -22,7 +22,7 @@ using namespace std;
 
 
 void whereAmI(std::string name,std::string location) {
-    cout << "Hi " << name << " you're currently at " << location << endl;
+    cout << "Hi " << name << " you're currently at the" << location << endl;
 }
 
 
@@ -40,17 +40,15 @@ int main() {
     std::cout << "Welcome to my final project" << std::endl << std::endl << std::endl;
     mainPlayer.setEnergy(100);
     mainPlayer.setName();
-
-    std::cout << "What's the name of your farm? ";
-    getline(std::cin , farmName);
-    farm.setName(farmName);
+    farm.setName("Farm");
 
     mainPlayer.setLocation(farm.getName());
 
-    whereAmI(mainPlayer.getName(),mainPlayer.getLocation());
+    while (true) {
+        if (mainPlayer.getLocation() == "Farm") {
+            farm.farmTerminal(mainPlayer,inventory);
+        }
+    }
 
-    farm.farmTerminal(mainPlayer,inventory);
-
-    cout << farm.getHowManyParsnipsPlanted() << endl;
 
 }   

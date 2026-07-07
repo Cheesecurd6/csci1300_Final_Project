@@ -36,6 +36,7 @@
         else {
             energy = playerEnergy;
         }
+        energy = playerEnergy;
     }
     void Player::setJoja(int playerJoja) {
         joja = playerJoja;
@@ -44,12 +45,15 @@
     void Player::setTime() {
         time++;
         if (time == 100) {
-            day++;
+            newDay();
         }
     }
 
     void Player::newDay() {
-        
+        day++;
+        energy = 100;
+        location = "Farm";
+        std::cout << "It's a new day, you're back on the farm" << std::endl;
     }
 
     

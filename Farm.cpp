@@ -191,6 +191,7 @@ using namespace std;
                             count++; 
                         }
                     }
+                    cout << "7. Exit" << endl;
                     cin >> choice2;
                     //choice for second menu
                         switch (choice2) {
@@ -277,7 +278,9 @@ using namespace std;
                                 waterBlueberries(waterCount);
                             }
 
-
+                            case 7: {
+                                break;
+                            }
                         }
                 }
                 break;
@@ -290,8 +293,18 @@ using namespace std;
                 }
             }
 
+            case 4: {
+
+            }
+
+            case 5: {
+                thePlayer.newDay();
+                return;
+            }
+ 
             
             case -1: {
+
                 return;
             }
             default: {
@@ -304,3 +317,4 @@ using namespace std;
 Player Farm::getThePlayer() {
     return thePlayer;
 }
+
