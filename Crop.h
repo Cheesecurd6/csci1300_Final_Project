@@ -17,6 +17,7 @@ class Crop {
     void water();
     void nextDay();
     void harvestable();
+    bool getIfHarvestable();
 
 
 };

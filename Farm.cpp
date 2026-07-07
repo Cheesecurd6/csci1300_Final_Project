@@ -1,8 +1,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "Farm.hpp"
-#include "Crop.hpp"
+#include "Farm.h"
+#include "Crop.h"
 
 using namespace std;
 
@@ -140,7 +140,7 @@ using namespace std;
         return count;
     }
 
-    void Farm::farmTerminal(Player p, Item inventory[]) {
+    bool Farm::farmTerminal(Player p, Item inventory[]) {
     // Overview of what can be done on the farm
     thePlayer = p;
     while(true) {
@@ -165,7 +165,8 @@ using namespace std;
             case 2: {
                 // Overview of what tending can be done
                 int choice2;
-                while(true) {
+                bool exit = true;
+                while(exit) {
                     p = thePlayer;
                     int count = 1;
                     cout << endl;
@@ -221,6 +222,7 @@ using namespace std;
                                 cout << "How many do you want to water? ";
                                 cin >> waterCount;
                                 waterParsnips(waterCount);
+                                break;
                             }
 
                             case 3: {
@@ -249,6 +251,7 @@ using namespace std;
                                 cout << "How many do you want to water? ";
                                 cin >> waterCount;
                                 waterStarfruits(waterCount);
+                                break;
                             }
                             case 5: {
                                 int cropCount;
@@ -276,9 +279,11 @@ using namespace std;
                                 cout << "How many do you want to water? ";
                                 cin >> waterCount;
                                 waterBlueberries(waterCount);
+                                break;
                             }
 
                             case 7: {
+                                exit = false;
                                 break;
                             }
                         }
@@ -299,16 +304,23 @@ using namespace std;
 
             case 5: {
                 thePlayer.newDay();
-                return;
+                for (unsigned int i = 0; i < parsnips.size(); i++) {
+                    parsnips[i].nextDay();
+                }
+                for (unsigned int i = 0; i < starfruits.size(); i++) {
+                    starfruits[i].nextDay();
+                }
+                for (unsigned int i = 0; i < blueberries.size(); i++) {
+                    blueberries[i].nextDay();
+                }
+                return true;
             }
  
             
             case -1: {
-
-                return;
+                return false;
             }
             default: {
-
             }
         }
     }
@@ -316,5 +328,20 @@ using namespace std;
 
 Player Farm::getThePlayer() {
     return thePlayer;
+}
+
+void Farm::harvestParsnips(int inventory[10], int howManyHarvest) {
+    int harvestCount = 0;
+    for (unsigned int i = 0; i < parsnips.size(); i++ ) {
+        if (parsnips[i].getIfHarvestable()) {
+            harvestCount++;
+        }
+
+        if (harvestCount == howManyHarvest){
+            break;
+        }
+    }
+
+
 }
 

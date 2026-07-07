@@ -1,12 +1,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "player.hpp"
-#include "location.hpp"
-#include "villager.hpp"
-#include "Item.hpp"
-#include "Farm.hpp"
-#include "Crop.hpp"
+#include "player.h"
+#include "location.h"
+#include "villager.h"
+#include "Item.h"
+#include "Farm.h"
+#include "Crop.h"
 using namespace std;
 
 // First finish farm
@@ -43,10 +43,11 @@ int main() {
     farm.setName("Farm");
 
     mainPlayer.setLocation(farm.getName());
-
-    while (true) {
+    bool gameOn = true;
+    while (gameOn) {
         if (mainPlayer.getLocation() == "Farm") {
-            farm.farmTerminal(mainPlayer,inventory);
+            gameOn = farm.farmTerminal(mainPlayer,inventory);
+            mainPlayer = farm.getThePlayer();
         }
     }
 

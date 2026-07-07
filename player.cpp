@@ -1,6 +1,6 @@
 #include <string>
 #include <iostream>
-#include "player.hpp"
+#include "player.h"
 
     std::string Player::getLocation() const {
         return location;

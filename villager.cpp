@@ -1,5 +1,5 @@
 #include <iostream>
-#include "villager.hpp"
+#include "villager.h"
     std::string Villager::getDescription() const {
         return description;
     }

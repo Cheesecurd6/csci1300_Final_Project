@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-#include "location.hpp"
+#include "location.h"
 #include <iostream>
 std::string Location::getName() const {
     return name;

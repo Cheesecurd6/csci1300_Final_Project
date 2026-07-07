@@ -1,4 +1,4 @@
-#include "Crop.hpp"
+#include "Crop.h"
 #include <string>
 
     Crop::Crop(std::string n, int d, bool harvestable) {
@@ -27,3 +27,7 @@
         }
 
     }
+
+     bool Crop::getIfHarvestable() {
+        return h;
+     }

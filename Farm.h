@@ -2,10 +2,10 @@
 #define FARM_H
 #include <string>
 #include <vector>
-#include "location.hpp"
-#include "Crop.hpp"
-#include "player.hpp"
-#include "Item.hpp"
+#include "location.h"
+#include "Crop.h"
+#include "player.h"
+#include "Item.h"
 
 class Farm : public Location{
     private:
@@ -16,6 +16,9 @@ class Farm : public Location{
     
     public:
     void plant(int parsnipSeeds, int starfuitSeeds, int blueberrySeeds);
+    void harvestParsnips(int inventory[10],int howManyHarvest);
+    void harvestStarfruits(int inventory[10],int howManyHarvest);
+    void harvestBlueberries(int inventory[10],int howManyHarvest);
     void waterParsnips(int cropsToBeWatered);
     void waterStarfruits(int cropsToBeWatered);
     void waterBlueberries(int cropsToBeWatered);
@@ -23,13 +26,17 @@ class Farm : public Location{
     int getHowManyParsnipsPlanted();
     int getHowManyStarfruitsPlanted();
     int getHowManyBlueberriesPlanted();
+    int getHowManyParsnipsHarvestable();
+    int getHowManyStarfruitsHarvestable();
+    int getHowManyBlueberriesHarvestable();
+    
     Player getThePlayer();
 
     int getHowManyParsnipsUnwatered();
     int getHowManyStarfruitsUnwatered();
     int getHowManyBlueberriesUnwatered();
 
-    void farmTerminal(Player p, Item inventory[]);
+    bool farmTerminal(Player p, Item inventory[]);
 
 };
 
