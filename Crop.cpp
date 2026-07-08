@@ -20,6 +20,7 @@
                 daysGrown++;
         }
         wateredToday = false;
+        harvestable();
     }
     void Crop::harvestable() {
         if(daysGrown == daysToGrow) {

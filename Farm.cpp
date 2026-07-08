@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Farm.h"
 #include "Crop.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -61,7 +62,7 @@ using namespace std;
                         thePlayer.setEnergy(thePlayer.getEnergy() - 2*count);
                         break;
                     }
-                    else if (i == (parsnips.size() - 1) ){
+                    else if (i == (starfruits.size() - 1) ){
                         thePlayer.setEnergy(thePlayer.getEnergy() - 2*count);
                         break;
                     }
@@ -87,7 +88,7 @@ using namespace std;
                         thePlayer.setEnergy(thePlayer.getEnergy() - 2*count);
                         break;
                     }
-                    else if (i == (parsnips.size() - 1) ){
+                    else if (i == (blueberries.size() - 1) ){
                         thePlayer.setEnergy(thePlayer.getEnergy() - 2*count);
                         break;
                     }
@@ -140,6 +141,36 @@ using namespace std;
         return count;
     }
 
+    int Farm::getHowManyParsnipsHarvestable() {
+        int count = 0;
+        for (unsigned int i = 0; i < parsnips.size(); i++) {
+            if (parsnips[i].getIfHarvestable()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    int Farm::getHowManyStarfruitsHarvestable() {
+        int count = 0;
+        for (unsigned int i = 0; i < starfruits.size(); i++) {
+            if (starfruits[i].getIfHarvestable()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    int Farm::getHowManyBlueberriesHarvestable() {
+        int count = 0;
+        for (unsigned int i = 0; i < blueberries.size(); i++) {
+            if (blueberries[i].getIfHarvestable()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     bool Farm::farmTerminal(Player p, Item inventory[]) {
     // Overview of what can be done on the farm
     thePlayer = p;
@@ -168,7 +199,6 @@ using namespace std;
                 bool exit = true;
                 while(exit) {
                     p = thePlayer;
-                    int count = 1;
                     cout << endl;
                     cout << "You have " << p.getEnergy() << " energy." << endl;
                     for (int i = 0; i < 10; i++) {
@@ -177,22 +207,26 @@ using namespace std;
                         }
                     }
 
-                    cout << "You have " << getHowManyParsnipsPlanted() << " parsnips planted and " << getHowManyParsnipsUnwatered() << " unwatered." << endl;
-                    cout << "You have " << getHowManyStarfruitsPlanted() << " starfruit planted and " << getHowManyStarfruitsUnwatered() << " unwatered." << endl;
-                    cout << "You have " << getHowManyBlueberriesPlanted() << " blueberry bushes planted and " << getHowManyBlueberriesUnwatered() << " unwatered." << endl;
+                    cout << "You have " << getHowManyParsnipsPlanted() << " parsnips planted and " << getHowManyParsnipsUnwatered() << " unwatered. " << getHowManyParsnipsHarvestable() << " are harvestable." << endl;
+                    cout << "You have " << getHowManyStarfruitsPlanted() << " starfruit planted and " << getHowManyStarfruitsUnwatered() << " unwatered. " << getHowManyStarfruitsHarvestable() << " are harvestable." << endl;
+                    cout << "You have " << getHowManyBlueberriesPlanted() << " blueberry bushes planted and " << getHowManyBlueberriesUnwatered() << " unwatered. " << getHowManyBlueberriesHarvestable() << " are harvestable." << endl;
+
                     cout << endl;
+
+
                     cout << "Watering crops takes 2 energy" << endl;
                     cout << "What would you like to do?" << endl;
-
-                    for (int i = 0; i < 10; i++) {
-                        if (inventory[i].getSeed()) {
-                            cout << count << ". Plant " << inventory[i].getName() << endl;
-                            count++;
-                            cout << count << ". Water " << inventory[i].getName() << "(s)." << endl;
-                            count++; 
-                        }
-                    }
-                    cout << "7. Exit" << endl;
+                    
+                    cout << "1. Plant parsnip seeds" << endl;
+                    cout << "2. Water parsnips" << endl;
+                    cout << "3. Harvest parsnips" << endl;
+                    cout << "4. Plant starfruit seeds" << endl;
+                    cout << "5. Water starfruits" << endl;
+                    cout << "6. Harvest starfruits" << endl;
+                    cout << "7. Plant blueberry seeds" << endl;
+                    cout << "8. Water blueberries" << endl;
+                    cout << "9. Harvest blueberries" << endl;
+                    cout << "10. Exit" << endl;
                     cin >> choice2;
                     //choice for second menu
                         switch (choice2) {
@@ -226,6 +260,14 @@ using namespace std;
                             }
 
                             case 3: {
+                                int howManyHarvest;
+                                cout << "How many do you want to harvest? ";
+                                cin >> howManyHarvest;
+                                harvestParsnips(inventory,howManyHarvest); 
+                                break;
+                            }
+
+                            case 4: {
                                 int cropCount;
                                 cout << "How many do you want to plant? ";
                                 cin >> cropCount;
@@ -246,14 +288,22 @@ using namespace std;
                                 break;
                             }
 
-                            case 4: {
+                            case 5: {
                                 int waterCount;
                                 cout << "How many do you want to water? ";
                                 cin >> waterCount;
                                 waterStarfruits(waterCount);
                                 break;
                             }
-                            case 5: {
+
+                            case 6: {
+                                int howManyHarvest;
+                                cout << "How many do you want to harvest? ";
+                                cin >> howManyHarvest;
+                                harvestStarfruits(inventory,howManyHarvest); 
+                                break;
+                            }
+                            case 7: {
                                 int cropCount;
                                 cout << "How many do you want to plant? ";
                                 cin >> cropCount;
@@ -274,15 +324,22 @@ using namespace std;
                                 break;
                             }
 
-                            case 6: {
+                            case 8: {
                                 int waterCount;
                                 cout << "How many do you want to water? ";
                                 cin >> waterCount;
                                 waterBlueberries(waterCount);
                                 break;
                             }
+                            case 9: {
+                                int howManyHarvest;
+                                cout << "How many do you want to harvest? ";
+                                cin >> howManyHarvest;
+                                harvestBlueberries(inventory,howManyHarvest); 
+                                break;
+                            }
 
-                            case 7: {
+                            case 10: {
                                 exit = false;
                                 break;
                             }
@@ -296,6 +353,7 @@ using namespace std;
                 for (int i = 0; i < 10; i++) {
                     cout << inventory[i].getAmount() << " " << inventory[i].getName() << endl;
                 }
+                break;
             }
 
             case 4: {
@@ -314,6 +372,7 @@ using namespace std;
                     blueberries[i].nextDay();
                 }
                 return true;
+                break;
             }
  
             
@@ -330,18 +389,91 @@ Player Farm::getThePlayer() {
     return thePlayer;
 }
 
-void Farm::harvestParsnips(int inventory[10], int howManyHarvest) {
+void Farm::harvestParsnips(Item inventory[10], int howManyHarvest) {
     int harvestCount = 0;
-    for (unsigned int i = 0; i < parsnips.size(); i++ ) {
-        if (parsnips[i].getIfHarvestable()) {
-            harvestCount++;
+    bool spaceFound = false;
+        for (unsigned int i = 0; i < parsnips.size(); i++ ) {
+            if (parsnips[i].getIfHarvestable()) {
+                harvestCount++;
+                parsnips.erase(parsnips.begin() + i);
+            }
+
+            if (harvestCount == howManyHarvest){
+                break;
+            }
+        }
+        for (unsigned int i = 0; i < 10; i++) {
+            if (inventory[i].getAmount() == 0 || inventory[i].getName() == "Parnip(s)") {
+                spaceFound = true;
+                inventory[i] = Item ("Grows so that one plant can produce fruit mutiple times ",harvestCount,30, "Parsnip(s)",1);
+                break;
+            }
         }
 
-        if (harvestCount == howManyHarvest){
-            break;
+        if (spaceFound == false) {
+            cout << "Your unable to harvest you don't have any inventory space" << endl;
+        }
+}
+
+
+    void Farm::harvestStarfruits(Item inventory[10], int howManyHarvest) {
+    int harvestCount = 0;
+        bool spaceFound = false;
+        for (unsigned int i = 0; i < starfruits.size();) {
+            if (starfruits[i].getIfHarvestable()) {
+                harvestCount++;
+                starfruits.erase(starfruits.begin() + i);
+            
+
+            if (harvestCount == howManyHarvest){
+                break;
+            }
+            }
+            else {
+                i++;
+            }
+
+        }
+        for (unsigned int i = 0; i < 10; i++) {
+            if (inventory[i].getAmount() == 0 || inventory[i].getName() == "Starfruit(s)") {
+                spaceFound = true;
+                inventory[i] = Item ("Truly luxurious fruit with a slight tangy flavor ",harvestCount,30, "Starfruit(s)",1);
+                break;
+            }
+        }
+
+        if (spaceFound == false) {
+            cout << "Your unable to harvest you don't have any inventory space" << endl;
+        }
+    }
+
+    void Farm::harvestBlueberries(Item inventory[10], int howManyHarvest) {
+    int harvestCount = 0;
+        bool spaceFound = false;
+        for (unsigned int i = 0; i < blueberries.size(); i++ ) {
+            if (blueberries[i].getIfHarvestable()) {
+                harvestCount++;
+                blueberries.erase(blueberries.begin() + i);
+            }
+
+            if (harvestCount == howManyHarvest){
+                break;
+            }
+        }
+        for (unsigned int i = 0; i < 10; i++) {
+            if (inventory[i].getAmount() == 0 || inventory[i].getName() == "Blueberry(s)") {
+                spaceFound = true;
+                inventory[i] = Item ("Grows so that one plant can produce fruit mutiple times ",harvestCount,30, "Blueberry(s)",1);
+                break;
+            }
+        }
+
+        if (spaceFound == false) {
+            cout << "Your unable to harvest you don't have any inventory space" << endl;
         }
     }
 
 
-}
+
+
 

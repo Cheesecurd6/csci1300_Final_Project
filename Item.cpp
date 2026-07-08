@@ -37,4 +37,10 @@ using namespace std;
 
     void Item::setAmount(int a) {
     amount += a;
+    if (amount == 0) {
+        description = " ";
+        amount = 0;
+        value = 0;
+        seed = 1;
+    }
     }

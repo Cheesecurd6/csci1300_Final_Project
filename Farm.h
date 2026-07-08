@@ -16,9 +16,9 @@ class Farm : public Location{
     
     public:
     void plant(int parsnipSeeds, int starfuitSeeds, int blueberrySeeds);
-    void harvestParsnips(int inventory[10],int howManyHarvest);
-    void harvestStarfruits(int inventory[10],int howManyHarvest);
-    void harvestBlueberries(int inventory[10],int howManyHarvest);
+    void harvestParsnips(Item inventory[10],int howManyHarvest);
+    void harvestStarfruits(Item inventory[10],int howManyHarvest);
+    void harvestBlueberries(Item inventory[10],int howManyHarvest);
     void waterParsnips(int cropsToBeWatered);
     void waterStarfruits(int cropsToBeWatered);
     void waterBlueberries(int cropsToBeWatered);
