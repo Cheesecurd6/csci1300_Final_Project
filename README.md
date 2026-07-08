@@ -2,7 +2,7 @@
 
 ## Theme
 
-Stardew Valley.
+My game's theme is based off of the game Stardew Valley. It's not a one to one replica obviously, but a few of Stardew's characters and locations are included. Also, the general gameplay of farming and doing quests like in Stardew is also done here. The main gameplay loop is similar.
 
 ## Goal
 

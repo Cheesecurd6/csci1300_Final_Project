@@ -392,15 +392,20 @@ Player Farm::getThePlayer() {
 void Farm::harvestParsnips(Item inventory[10], int howManyHarvest) {
     int harvestCount = 0;
     bool spaceFound = false;
-        for (unsigned int i = 0; i < parsnips.size(); i++ ) {
+        for (unsigned int i = 0; i < parsnips.size();) {
             if (parsnips[i].getIfHarvestable()) {
                 harvestCount++;
                 parsnips.erase(parsnips.begin() + i);
-            }
+            
 
             if (harvestCount == howManyHarvest){
                 break;
             }
+            }
+            else {
+                i++;
+            }
+
         }
         for (unsigned int i = 0; i < 10; i++) {
             if (inventory[i].getAmount() == 0 || inventory[i].getName() == "Parnip(s)") {
@@ -450,15 +455,20 @@ void Farm::harvestParsnips(Item inventory[10], int howManyHarvest) {
     void Farm::harvestBlueberries(Item inventory[10], int howManyHarvest) {
     int harvestCount = 0;
         bool spaceFound = false;
-        for (unsigned int i = 0; i < blueberries.size(); i++ ) {
+        for (unsigned int i = 0; i < blueberries.size();) {
             if (blueberries[i].getIfHarvestable()) {
                 harvestCount++;
                 blueberries.erase(blueberries.begin() + i);
-            }
+            
 
             if (harvestCount == howManyHarvest){
                 break;
             }
+            }
+            else {
+                i++;
+            }
+
         }
         for (unsigned int i = 0; i < 10; i++) {
             if (inventory[i].getAmount() == 0 || inventory[i].getName() == "Blueberry(s)") {
