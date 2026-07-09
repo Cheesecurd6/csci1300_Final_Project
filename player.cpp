@@ -36,7 +36,6 @@
         else {
             energy = playerEnergy;
         }
-        energy = playerEnergy;
     }
     void Player::setJoja(int playerJoja) {
         joja = playerJoja;
@@ -44,12 +43,7 @@
 
     bool Player::setTime() {
         time++;
-        if (time == 5) {
-            return newDay();
-        }
-        else {
-            return false;
-        }
+        return time == 5;
     }
 
     void Player::setRealTime(int t) {
@@ -64,8 +58,26 @@
         return true;
     }
 
+     bool Player::newDayOutside() {
+        dayHasPassed = 1;
+        location = "Farm";
+        return true;
+     }
+
     int Player::getTime() {
         return time;
+    }
+
+    bool Player::getIfDayPassed() {
+        return dayHasPassed;
+    }
+
+    int Player::getGold() {
+        return gold;
+    }
+
+    void Player::setGold(int additionalGold) {
+        gold+=additionalGold;
     }
 
     

@@ -7,7 +7,7 @@ std::string Location::getName() const {
 }
 void Location::getPeople() const {
     for (unsigned int i = 0; i < people.size(); i++) {
-        std::cout << people[i] << ", ";
+        std::cout << people[i].getName() << ", ";
     }
     std::cout << "are here" << std::endl;
 }
@@ -19,7 +19,7 @@ for (unsigned int i = 0; i < neighbors.size(); i++) {
 }
 
 
-void Location::setPeople(std::vector<std::string> locationPeople) {
+void Location::setPeople(std::vector<Villager> locationPeople) {
     people = locationPeople;
 }
 
@@ -29,4 +29,9 @@ void Location::setName(std::string locationName) {
 
 void Location::setNeighbors(std::vector<Location> nearbyLocations) {
     neighbors = nearbyLocations;
+}
+
+Location::Location(std::string n, std::vector<Villager> p) {
+    name = n;
+    people = p;
 }

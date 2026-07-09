@@ -6,6 +6,7 @@
 #include "Crop.h"
 #include "player.h"
 #include "Item.h"
+#include "villager.h"
 
 class Farm : public Location{
     private:
@@ -13,10 +14,9 @@ class Farm : public Location{
     std::vector<Crop> starfruits;
     std::vector<Crop> blueberries;
     Player thePlayer;
-    int time = 0;
-    int day = 0;
     
     public:
+    Farm(std::string n, std::vector<Villager> people);
     void plant(int parsnipSeeds, int starfuitSeeds, int blueberrySeeds);
     void harvestParsnips(Item inventory[10],int howManyHarvest);
     void harvestStarfruits(Item inventory[10],int howManyHarvest);
@@ -24,6 +24,8 @@ class Farm : public Location{
     void waterParsnips(int cropsToBeWatered);
     void waterStarfruits(int cropsToBeWatered);
     void waterBlueberries(int cropsToBeWatered);
+    void newDay();
+    
 
     int getHowManyParsnipsPlanted();
     int getHowManyStarfruitsPlanted();

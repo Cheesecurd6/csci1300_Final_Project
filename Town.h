@@ -8,9 +8,14 @@
 #include "Item.h"
 
 class Town : public Location{
-
+    public:
     void store();
-    bool townTerminal(Player p, int inventory[10]);
+    Player getThePlayer();
+    bool townTerminal(Player p, Item inventory[10]);
+    Town(std::string n, std::vector<Villager> people);
+
+    private:
+    Player thePlayer;
 
 };
 
