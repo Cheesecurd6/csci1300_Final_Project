@@ -9,7 +9,8 @@
 
 class Town : public Location{
     public:
-    void store();
+    void buy(Item inventory[10], std::string name, std::string description, int price);
+    void sell(Item inventory[10], std::string name, int value);
     Player getThePlayer();
     bool townTerminal(Player p, Item inventory[10]);
     Town(std::string n, std::vector<Villager> people);

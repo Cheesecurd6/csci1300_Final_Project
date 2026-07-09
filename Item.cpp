@@ -9,9 +9,6 @@ using namespace std;
     int Item::getAmount() {
         return amount;
     }
-    int Item::getValue() {
-        return value;
-    }
     std::string Item::getName() {
         return name;
     }
@@ -20,17 +17,15 @@ using namespace std;
         return seed;
     }
 
-    Item::Item(std::string d, int a, int v, std::string n, bool s) {
+    Item::Item(std::string d, int a, std::string n, bool s) {
         description = d;
         amount = a;
-        value = v;
         name = n;
         seed = s;
     }
     Item::Item() {
         description = " ";
         amount = 0;
-        value = 0;
         name = " ";
         seed = 0;
     }
@@ -40,7 +35,6 @@ using namespace std;
     if (amount == 0) {
         description = " ";
         amount = 0;
-        value = 0;
         seed = 1;
     }
     }

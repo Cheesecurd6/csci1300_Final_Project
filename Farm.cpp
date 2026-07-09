@@ -264,6 +264,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                                         break;
                                     }
                                 }
+                                if (thePlayer.setTime()) {
+                                    newDay();
+                                    return true;
+                                }
                                 break;
                             }
 
@@ -272,6 +276,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                                 cout << "How many do you want to water? ";
                                 cin >> waterCount;
                                 waterParsnips(waterCount);
+                                if (thePlayer.setTime()) {
+                                    newDay();
+                                    return true;
+                                }
                                 break;
                             }
 
@@ -280,6 +288,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                                 cout << "How many do you want to harvest? ";
                                 cin >> howManyHarvest;
                                 harvestParsnips(inventory,howManyHarvest); 
+                                if (thePlayer.setTime()) {
+                                    newDay();
+                                    return true;
+                                }
                                 break;
                             }
 
@@ -301,6 +313,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                                         break;
                                     }
                                 }
+                                if (thePlayer.setTime()) {
+                                    newDay();
+                                    return true;
+                                }
                                 break;
                             }
 
@@ -309,6 +325,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                                 cout << "How many do you want to water? ";
                                 cin >> waterCount;
                                 waterStarfruits(waterCount);
+                                if (thePlayer.setTime()) {
+                                    newDay();
+                                    return true;
+                                }
                                 break;
                             }
 
@@ -317,6 +337,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                                 cout << "How many do you want to harvest? ";
                                 cin >> howManyHarvest;
                                 harvestStarfruits(inventory,howManyHarvest); 
+                                if (thePlayer.setTime()) {
+                                    newDay();
+                                    return true;
+                                }
                                 break;
                             }
                             case 7: {
@@ -337,6 +361,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                                         break;
                                     }
                                 }
+                                if (thePlayer.setTime()) {
+                                    newDay();
+                                    return true;
+                                }
                                 break;
                             }
 
@@ -345,6 +373,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                                 cout << "How many do you want to water? ";
                                 cin >> waterCount;
                                 waterBlueberries(waterCount);
+                                if (thePlayer.setTime()) {
+                                    newDay();
+                                    return true;
+                                }
                                 break;
                             }
                             case 9: {
@@ -352,6 +384,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                                 cout << "How many do you want to harvest? ";
                                 cin >> howManyHarvest;
                                 harvestBlueberries(inventory,howManyHarvest); 
+                                if (thePlayer.setTime()) {
+                                    newDay();
+                                    return true;
+                                }
                                 break;
                             }
 
@@ -371,6 +407,10 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                     cout << inventory[i].getAmount() << " " << inventory[i].getName() << endl;
                     }
                 }
+                if (thePlayer.setTime()) {
+                    newDay();
+                    return true;
+                }
                 break;
             }
 
@@ -388,11 +428,16 @@ Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
                 cout << "                Beach" << endl;
 
                 cout << endl << "Currently at " << thePlayer.getLocation() << "." << endl;
+                if (thePlayer.setTime()) {
+                    newDay();
+                    return true;
+                }
                 break;
             }
 
             case 6: {
-                newDay(); 
+                newDay();
+                break;
             }
  
             
@@ -428,9 +473,9 @@ void Farm::harvestParsnips(Item inventory[10], int howManyHarvest) {
 
         }
         for (unsigned int i = 0; i < 10; i++) {
-           if (inventory[i].getName() == "Parsnip(s)" && !(inventory[i].getAmount() == 0)) {
+           if (inventory[i].getName() == "Parsnip(s)") {
             spaceFound = true;
-            inventory[i] = Item ("The humblest of crops ",harvestCount,35, "Parsnip(s)",0);
+            inventory[i].setAmount(harvestCount);
             break;
             }
         }
@@ -438,7 +483,7 @@ void Farm::harvestParsnips(Item inventory[10], int howManyHarvest) {
             if (spaceFound == true) {break;}
             if (inventory[i].getAmount() == 0) {
                 spaceFound = true;
-                inventory[i] = Item ("The humblest of crops  ",harvestCount,35, "Parsnip(s)",0);
+                inventory[i] = Item ("The humblest of crops  ",harvestCount, "Parsnip(s)",0);
                 break;
             }
         }
@@ -468,9 +513,9 @@ void Farm::harvestParsnips(Item inventory[10], int howManyHarvest) {
 
         }
         for (unsigned int i = 0; i < 10; i++) {
-           if (inventory[i].getName() == "Starfruit(s)" && !(inventory[i].getAmount() == 0)) {
+           if (inventory[i].getName() == "Starfruit(s)") {
             spaceFound = true;
-            inventory[i] = Item ("Truly luxurious fruit with a slight tangy flavor ",harvestCount,100, "Starfruit(s)",0);
+            inventory[i].setAmount(harvestCount);
             break;
             }
         }
@@ -478,7 +523,7 @@ void Farm::harvestParsnips(Item inventory[10], int howManyHarvest) {
             if (spaceFound == true) {break;}
             if (inventory[i].getAmount() == 0) {
                 spaceFound = true;
-                inventory[i] = Item ("Truly luxurious fruit with a slight tangy flavor ",harvestCount,100, "Starfruit(s)",0);
+                inventory[i] = Item ("Truly luxurious fruit with a slight tangy flavor ",harvestCount, "Starfruit(s)",0);
                 break;
             }
         }
@@ -507,9 +552,9 @@ void Farm::harvestParsnips(Item inventory[10], int howManyHarvest) {
 
         }
         for (unsigned int i = 0; i < 10; i++) {
-           if (inventory[i].getName() == "Blueberry(s)" && !(inventory[i].getAmount() == 0)) {
+           if (inventory[i].getName() == "Blueberry(s)") {
             spaceFound = true;
-            inventory[i] = Item ("Grows so that one plant can produce fruit mutiple times ",harvestCount,50, "Blueberry(s)",0);
+            inventory[i].setAmount(harvestCount);
             break;
             }
         }
@@ -518,7 +563,7 @@ void Farm::harvestParsnips(Item inventory[10], int howManyHarvest) {
             if (spaceFound == true) {break;}
             if (inventory[i].getAmount() == 0) {
                 spaceFound = true;
-                inventory[i] = Item ("Grows so that one plant can produce fruit mutiple times ",harvestCount,50, "Blueberry(s)",0);
+                inventory[i] = Item ("Grows so that one plant can produce fruit mutiple times ",harvestCount, "Blueberry(s)",0);
                 break;
             }
         }

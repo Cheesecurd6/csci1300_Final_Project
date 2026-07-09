@@ -98,202 +98,31 @@ bool Town::townTerminal(Player p, Item inventory[10]) {
 
                     switch(choice2) {
                         case 1: {
-                            int amountBought;
-                            cout << "Parsnips seeds cost 25 gold" << endl;
-                            cout << "How many would you like to purchase? ";
-                            cin >> amountBought;
-
-                            if (amountBought * 25 <= thePlayer.getGold()) {
-                                bool spaceFound = false;
-                            for (unsigned int i = 0; i < 10; i++) {
-                                if (inventory[i].getName() == "Parsnip seeds" && !(inventory[i].getAmount() == 0)) {
-                                    spaceFound = true;
-                                    inventory[i].setAmount(amountBought);
-                                    thePlayer.setGold(-(amountBought * 25));
-                                    break;
-                                    }
-                                }
-                            for (unsigned int i = 0; i < 10; i++) {
-                                if (spaceFound == true) {break;}
-                                if (inventory[i].getAmount() == 0) {
-                                    spaceFound = true;
-                                    inventory[i] = Item ("Seeds for parsnips",amountBought,25, "Parsnip seeds",1);
-                                    thePlayer.setGold(-(amountBought * 25));
-                                    break;
-                                }
-                            }
-
-                            if (spaceFound == false) {
-                                cout << "Your unable to buy, you don't have any inventory space" << endl;
-                            }
-                            } 
-                            else {
-                                cout << "You don't have enough gold to buy that many." << endl;
-                            }
+                            buy(inventory,"Parsnip seeds", "The humblest of crops",25);
                             break;
                         }
                         case 2: {
-                            int amountSold;
-                            int parsnipIndex;
-                            bool parsnipFound = 0;
-                            cout << "Parsnips sell for 35 gold each" << endl;
-                            for (int i = 0; i < 10; i++) {
-                                if (inventory[i].getName() == "Parsnip(s)" && inventory[i].getAmount() > 0) {
-                                    parsnipIndex = i;
-                                    parsnipFound = 1;
-                                    break;
-                                }
-                            }
-                            if (parsnipFound) {
-                                cout << "You currently have " << inventory[parsnipIndex].getAmount() << " " << inventory[parsnipIndex].getName() << "." << endl;
-                                cout << "How many do you want to sell? ";
-                                cin >> amountSold;
-
-                            if (amountSold <= inventory[parsnipIndex].getAmount()) {
-                                inventory[parsnipIndex].setAmount(-amountSold);
-                                thePlayer.setGold(amountSold * 35);
-                            }
-                            else {
-                                cout << "You don't have that many parsnips" << endl;
-                            }
-                            }
-                            else {
-                                cout << "You don't have any parsnips to sell" << endl;
-                            }
+                            sell( inventory, "Parsnip(s)" , 40);
                             break;
                         }
 
                         case 3: {
-                            int amountBought;
-                            cout << "Starfruit seeds cost 50 gold" << endl;
-                            cout << "How many would you like to purchase? ";
-                            cin >> amountBought;
-
-                            if (amountBought * 50 <= thePlayer.getGold()) {
-                                bool spaceFound = false;
-                                for (unsigned int i = 0; i < 10; i++) {
-                                    if (inventory[i].getName() == "Starfruit seeds" && !(inventory[i].getAmount() == 0)) {
-                                        spaceFound = true;
-                                        inventory[i].setAmount(amountBought);
-                                        thePlayer.setGold(-(amountBought * 50));
-                                        break;
-                                        }
-                                    }
-                                for (unsigned int i = 0; i < 10; i++) {
-                                    if (spaceFound == true) {break;}
-                                    if (inventory[i].getAmount() == 0) {
-                                        spaceFound = true;
-                                        inventory[i] = Item ("Seeds for starfruit",amountBought,50, "Starfruit seeds",1);
-                                        thePlayer.setGold(-(amountBought * 50));
-                                        break;
-                                    }
-                                }
-
-                                if (spaceFound == false) {
-                                    cout << "Your unable to buy, you don't have any inventory space" << endl;
-                                }
-                            } 
-                            else {
-                                cout << "You don't have enough gold to buy that many." << endl;
-                            }
+                            buy(inventory,"Starfruit seeds", "Truly luxurious fruit with a slight tangy flavor",50);
                             break;
                         }
 
                         case 4: {
-                            int amountSold;
-                            int starfruitIndex;
-                            bool starfruitFound = 0;
-                            cout << "Starfruits sell for 200 gold each" << endl;
-                            for (int i = 0; i < 10; i++) {
-                                if (inventory[i].getName() == "Starfruit(s)" && inventory[i].getAmount() > 0) {
-                                    starfruitIndex = i;
-                                    starfruitFound = 1;
-                                    break;
-                                }
-                            }
-                            if (starfruitFound) {
-                                cout << "You currently have " << inventory[starfruitIndex].getAmount() << " " << inventory[starfruitIndex].getName() << "." << endl;
-                                cout << "How many do you want to sell? ";
-                                cin >> amountSold;
-
-                            if (amountSold <= inventory[starfruitIndex].getAmount()) {
-                                inventory[starfruitIndex].setAmount(-amountSold);
-                                thePlayer.setGold(amountSold * 200);
-                            }
-                            else {
-                                cout << "You don't have that many starfruits" << endl;
-                            }
-                            }
-                            else {
-                                cout << "You don't have any starfruits to sell" << endl;
-                            }
+                            sell( inventory, "Starfruit(s)" , 200);
                             break;
                         }
 
                         case 5: {
-                            int amountBought;
-                            cout << "Blueberry seeds cost 35 gold" << endl;
-                            cout << "How many would you like to purchase? ";
-                            cin >> amountBought;
-
-                            if (amountBought * 35 <= thePlayer.getGold()) {
-                                bool spaceFound = false;
-                                for (unsigned int i = 0; i < 10; i++) {
-                                    if (inventory[i].getName() == "Blueberry seeds" && !(inventory[i].getAmount() == 0)) {
-                                        spaceFound = true;
-                                        inventory[i].setAmount(amountBought);
-                                        thePlayer.setGold(-(amountBought * 35));
-                                        break;
-                                        }
-                                    }
-                                for (unsigned int i = 0; i < 10; i++) {
-                                    if (spaceFound == true) {break;}
-                                    if (inventory[i].getAmount() == 0) {
-                                        spaceFound = true;
-                                        inventory[i] = Item ("Seeds for blueberries",amountBought,35, "Blueberry seeds",1);
-                                        thePlayer.setGold(-(amountBought * 35));
-                                        break;
-                                    }
-                                }
-
-                                if (spaceFound == false) {
-                                    cout << "Your unable to buy, you don't have any inventory space" << endl;
-                                }
-                            } 
-                            else {
-                                cout << "You don't have enough gold to buy that many." << endl;
-                            }
+                            buy(inventory,"Blueberry seeds", "Grows so that one plant can produce fruit mutiple times",35);
                             break;
                         }
 
                         case 6: {
-                            int amountSold;
-                            int blueberryIndex;
-                            bool blueberryFound = 0;
-                            cout << "Blueberries sell for 50 gold each" << endl;
-                            for (int i = 0; i < 10; i++) {
-                                if (inventory[i].getName() == "Blueberry(s)" && inventory[i].getAmount() > 0) {
-                                    blueberryIndex = i;
-                                    blueberryFound= 1;
-                                    break;
-                                }
-                            }
-                            if (blueberryFound) {
-                                cout << "You currently have " << inventory[blueberryIndex].getAmount() << " " << inventory[blueberryIndex].getName() << "." << endl;
-                                cout << "How many do you want to sell? ";
-                                cin >> amountSold;
-
-                            if (amountSold <= inventory[blueberryIndex].getAmount()) {
-                                inventory[blueberryIndex].setAmount(-amountSold);
-                                thePlayer.setGold(amountSold * 50);
-                            }
-                            else {
-                                cout << "You don't have that many blueberries" << endl;
-                            }
-                            }
-                            else {
-                                cout << "You don't have any blueberries to sell" << endl;
-                            }
+                            sell( inventory, "Blueberry(s)" , 50);
                             break;
                         }
                         break;
@@ -307,5 +136,71 @@ bool Town::townTerminal(Player p, Item inventory[10]) {
             }
         }
     
+    }
+}
+
+void Town::buy(Item inventory[10], std::string name, std::string description, int price) {
+    int amountBought;
+    cout << name << "cost " << price << " gold" << endl;
+    cout << "How many would you like to purchase? ";
+    cin >> amountBought;
+
+    if (amountBought * price <= thePlayer.getGold()) {
+        bool spaceFound = false;
+        for (unsigned int i = 0; i < 10; i++) {
+            if (inventory[i].getName() == name && !(inventory[i].getAmount() == 0)) {
+                spaceFound = true;
+                inventory[i].setAmount(amountBought);
+                thePlayer.setGold(-(amountBought * price));
+                break;
+                }
+            }
+        for (unsigned int i = 0; i < 10; i++) {
+            if (spaceFound == true) {break;}
+            if (inventory[i].getAmount() == 0) {
+                spaceFound = true;
+                inventory[i] = Item (description,amountBought, name ,1);
+                thePlayer.setGold(-(amountBought * price));
+                break;
+            }
+        }
+
+        if (spaceFound == false) {
+            cout << "Your unable to buy, you don't have any inventory space" << endl;
+        }
+    } 
+    else {
+        cout << "You don't have enough gold to buy that many." << endl;
+    }
+                            
+}
+
+void Town::sell(Item inventory[10], std::string name, int value) {
+    int amountSold;
+    int index;
+    bool found = 0;
+    cout << name << " sell for " << value << " gold each" << endl;
+    for (int i = 0; i < 10; i++) {
+        if (inventory[i].getName() == name) {
+            index = i;
+            found = 1;
+            break;
+        }
+    }
+    if (found) {
+        cout << "You currently have " << inventory[index].getAmount() << " " << inventory[index].getName() << "." << endl;
+        cout << "How many do you want to sell? ";
+        cin >> amountSold;
+
+    if (amountSold <= inventory[index].getAmount()) {
+        inventory[index].setAmount(-amountSold);
+        thePlayer.setGold(amountSold * value);
+    }
+    else {
+        cout << "You don't have that many " << name  << "." << endl;
+    }
+    }
+    else {
+        cout << "You don't have any " << name <<  " to sell." << endl;
     }
 }
