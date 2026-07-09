@@ -42,18 +42,30 @@
         joja = playerJoja;
     }
 
-    void Player::setTime() {
+    bool Player::setTime() {
         time++;
-        if (time == 100) {
-            newDay();
+        if (time == 5) {
+            return newDay();
+        }
+        else {
+            return false;
         }
     }
 
-    void Player::newDay() {
+    void Player::setRealTime(int t) {
+        time = t;
+    }
+
+    bool Player::newDay() {
+        time = 0;
         day++;
         energy = 100;
         location = "Farm";
-        std::cout << "It's a new day, you're back on the farm" << std::endl;
+        return true;
+    }
+
+    int Player::getTime() {
+        return time;
     }
 
     

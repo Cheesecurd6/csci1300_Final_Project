@@ -45,6 +45,10 @@ int main() {
     mainPlayer.setLocation(farm.getName());
     bool gameOn = true;
     while (gameOn) {
+        if (mainPlayer.getDay() == 2) {
+            cout << "Game over" << endl;
+            break;
+        }
         if (mainPlayer.getLocation() == "Farm") {
             gameOn = farm.farmTerminal(mainPlayer,inventory);
             mainPlayer = farm.getThePlayer();

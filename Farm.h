@@ -13,6 +13,8 @@ class Farm : public Location{
     std::vector<Crop> starfruits;
     std::vector<Crop> blueberries;
     Player thePlayer;
+    int time = 0;
+    int day = 0;
     
     public:
     void plant(int parsnipSeeds, int starfuitSeeds, int blueberrySeeds);

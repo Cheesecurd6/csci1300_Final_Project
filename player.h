@@ -9,10 +9,12 @@ class Player {
     int getDay() const;
     int getEnergy() const;
     int getJojaInfluence() const;
+    int getTime();
 
     void setLocation(std::string playerLocation);
-    void newDay();
-    void setTime();
+    bool newDay();
+    bool setTime();
+    void setRealTime(int t);
     void setName();
     void setDay(int playerDay);
     void setEnergy(int playerEnergy);
@@ -22,8 +24,8 @@ class Player {
     private:
     std::string location;
     std::string name;
-    int time;
-    int day;
+    int time = 0;
+    int day = 0;
     int energy = 100;
     int joja;
 };
