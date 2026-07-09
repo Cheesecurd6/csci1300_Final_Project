@@ -185,7 +185,8 @@ using namespace std;
         cout << "2. Tend to the farm" << endl;
         cout << "3. Check inventory" << endl;
         cout << "4. Check quests" << endl;
-        cout << "5. Sleep" << endl;
+        cout << "5. Check map" << endl;
+        cout << "6. Sleep" << endl;
         cout << "-1. Exit the game" << endl;
         cout << "===========================" << endl;
         cin >> choice;
@@ -196,7 +197,7 @@ using namespace std;
         switch(choice) {
 
             case 1: {
-                cout << "Leaving the farm!" << endl;
+                cout << "Leaving the farm! Going to town." << endl;
                 break;
             }
 
@@ -375,6 +376,19 @@ using namespace std;
             }
 
             case 5: {
+                cout << "                Mines" << endl;
+                cout << "                  |" << endl;
+                cout << "                  |" << endl;
+                cout << "Farm ----------- Town ----------- Joja Mart" << endl;
+                cout << "                  |" << endl;
+                cout << "                  |" << endl;
+                cout << "                Beach" << endl;
+
+                cout << endl << "Currently at " << thePlayer.getLocation() << "." << endl;
+                break;
+            }
+
+            case 6: {
                 thePlayer.newDay();
                 for (unsigned int i = 0; i < parsnips.size(); i++) {
                     parsnips[i].nextDay();
