@@ -41,6 +41,37 @@ bool Town::townTerminal(Player p, Item inventory[10]) {
        
         switch(choice) {
             case 1: {
+                int choice2;
+                cout << "Where do you want to go?" << endl;
+                cout << "===========================" << endl;
+                cout << "1. The Farm" << endl;
+                cout << "2. The Mines" << endl;
+                cout << "3. The Joja Mart" << endl;
+                cout << "4. The Beach" << endl;
+                cout << "===========================" << endl;
+                cin >> choice2;
+                switch(choice2) {
+                    case 1: {
+                        thePlayer.setLocation("Farm");
+                        return true;
+                        break;
+                    }
+                    case 2: {
+                        thePlayer.setLocation("Mines");
+                        return true;
+                        break;
+                    }
+                    case 3: {
+                        thePlayer.setLocation("Joja Mart");
+                        return true;
+                        break;
+                    }
+                    case 4: {
+                        thePlayer.setLocation("Beach");
+                        return true;
+                        break;
+                    }
+                }
             }
 
             case 2: {
@@ -79,8 +110,12 @@ bool Town::townTerminal(Player p, Item inventory[10]) {
                 bool exit = true;
                 while(exit) {
                     // Store menu
-                    cout << "What do you want buy/sell?" << endl;
+                    cout << endl;
+                    cout << "===========================" << endl;
+                    cout << "Day: " << thePlayer.getDay() << " Time: " << thePlayer.getTime() << endl;
                     cout << "You currently have " << thePlayer.getGold() << " gold" << endl;
+                    cout << "===========================" << endl;
+                    cout << "What do you want to buy/sell?" << endl;
                     cout << "===========================" << endl;
                     cout << "1. Buy parsnip seeds." << endl;
                     cout << "2. Sell parsnips" << endl;
@@ -91,9 +126,10 @@ bool Town::townTerminal(Player p, Item inventory[10]) {
                     cout << "7. Exit" << endl;
                     cout << "===========================" << endl;
                     cin >> choice2;
+
                     if (thePlayer.setTime()) {
-                    thePlayer.newDayOutside();
-                    return true;
+                        thePlayer.newDayOutside();
+                        return true;
                     }
 
                     switch(choice2) {
@@ -125,10 +161,12 @@ bool Town::townTerminal(Player p, Item inventory[10]) {
                             sell( inventory, "Blueberry(s)" , 50);
                             break;
                         }
-                        break;
+                        case 7: {
+                            exit = false;
+                        }
                     }
                 }
-
+                break;
             }
 
             case -1: {

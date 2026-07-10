@@ -43,7 +43,7 @@
 
     bool Player::setTime() {
         time++;
-        return time == 5;
+        return time == 20;
     }
 
     void Player::setRealTime(int t) {

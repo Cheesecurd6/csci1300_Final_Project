@@ -21,24 +21,17 @@ class Farm : public Location{
     void harvestParsnips(Item inventory[10],int howManyHarvest);
     void harvestStarfruits(Item inventory[10],int howManyHarvest);
     void harvestBlueberries(Item inventory[10],int howManyHarvest);
-    void waterParsnips(int cropsToBeWatered);
-    void waterStarfruits(int cropsToBeWatered);
-    void waterBlueberries(int cropsToBeWatered);
     void newDay();
     
 
-    int getHowManyParsnipsPlanted();
-    int getHowManyStarfruitsPlanted();
-    int getHowManyBlueberriesPlanted();
-    int getHowManyParsnipsHarvestable();
-    int getHowManyStarfruitsHarvestable();
-    int getHowManyBlueberriesHarvestable();
     
     Player getThePlayer();
 
-    int getHowManyParsnipsUnwatered();
-    int getHowManyStarfruitsUnwatered();
-    int getHowManyBlueberriesUnwatered();
+    int getUnwatered(std::vector<Crop> crops);
+    int getPlanted(std::vector<Crop> crops);
+    int getHarvestable(std::vector<Crop> crops);
+    void waterCrops(std::vector<Crop> crops,std::string name);
+    void harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string name, std::string description);
 
     bool farmTerminal(Player p, Item inventory[]);
 
