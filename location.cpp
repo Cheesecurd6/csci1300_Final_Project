@@ -5,11 +5,8 @@
 std::string Location::getName() const {
     return name;
 }
-void Location::getPeople() const {
-    for (unsigned int i = 0; i < people.size(); i++) {
-        std::cout << people[i].getName() << ", ";
-    }
-    std::cout << "are here" << std::endl;
+std::vector<Villager> Location::getPeople() const {
+    return people;
 }
 
 void Location::getNeighboringLocations() const {

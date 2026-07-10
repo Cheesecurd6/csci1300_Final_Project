@@ -121,6 +121,11 @@ while(true) {
         case 1: {
             cout << "Leaving the farm! Going to town." << endl;
             thePlayer.setLocation("Town");
+            if (thePlayer.setTime()) {
+                cout << "It got too late, you passed out" << endl;
+                newDay();
+                return true;
+            }
             return true;
             break;
         }
@@ -183,6 +188,7 @@ while(true) {
                                 }
                             }
                             if (thePlayer.setTime()) {
+                                cout << "It got too late, you passed out" << endl;
                                 newDay();
                                 return true;
                             }
@@ -192,6 +198,7 @@ while(true) {
                         case 2: {
                             waterCrops(parsnips,"parsnips");
                             if (thePlayer.setTime()) {
+                                cout << "It got too late, you passed out" << endl;
                                 newDay();
                                 return true;
                             }
@@ -201,6 +208,7 @@ while(true) {
                         case 3: {
                             harvestCrops(parsnips, inventory, "Parsnip(s)" , "The humblest of crops");
                             if (thePlayer.setTime()) {
+                                cout << "It got too late, you passed out" << endl;
                                 newDay();
                                 return true;
                             }
@@ -226,6 +234,7 @@ while(true) {
                                 }
                             }
                             if (thePlayer.setTime()) {
+                                cout << "It got too late, you passed out" << endl;
                                 newDay();
                                 return true;
                             }
@@ -235,8 +244,9 @@ while(true) {
                         case 5: {
                         waterCrops(starfruits,"starfruits");
                         if (thePlayer.setTime()) {
-                            newDay();
-                            return true;
+                                cout << "It got too late, you passed out" << endl;
+                                newDay();
+                                return true;
                         }
                         break;
                         }
@@ -244,6 +254,7 @@ while(true) {
                         case 6: {
                             harvestCrops(starfruits, inventory, "Starfruit(s)" , "Truly luxurious fruit with a slight tangy flavor");
                             if (thePlayer.setTime()) {
+                                cout << "It got too late, you passed out" << endl;
                                 newDay();
                                 return true;
                             }
@@ -268,6 +279,7 @@ while(true) {
                                 }
                             }
                             if (thePlayer.setTime()) {
+                                cout << "It got too late, you passed out" << endl;
                                 newDay();
                                 return true;
                             }
@@ -277,6 +289,7 @@ while(true) {
                         case 8: {
                             waterCrops(blueberries,"blueberries");
                             if (thePlayer.setTime()) {
+                                cout << "It got too late, you passed out" << endl;
                                 newDay();
                                 return true;
                             }
@@ -285,6 +298,7 @@ while(true) {
                         case 9: {
                             harvestCrops(blueberries, inventory, "Blueberry(s)" , "Grows so that one plant can produce fruit mutiple times");
                             if (thePlayer.setTime()) {
+                                cout << "It got too late, you passed out" << endl;
                                 newDay();
                                 return true;
                             }
@@ -308,6 +322,7 @@ while(true) {
                 }
             }
             if (thePlayer.setTime()) {
+                cout << "It got too late, you passed out" << endl;
                 newDay();
                 return true;
             }
@@ -329,6 +344,7 @@ while(true) {
 
             cout << endl << "Currently at " << thePlayer.getLocation() << "." << endl;
             if (thePlayer.setTime()) {
+                cout << "It got too late, you passed out" << endl;
                 newDay();
                 return true;
             }

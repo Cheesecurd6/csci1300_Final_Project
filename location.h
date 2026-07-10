@@ -9,7 +9,7 @@ class Location {
 
     Location(std::string n, std::vector<Villager> p);
     std::string getName() const;
-    void getPeople() const;
+    std::vector<Villager> getPeople() const;
     void getNeighboringLocations() const;
 
     void setPeople(std::vector<Villager> locationPeople);

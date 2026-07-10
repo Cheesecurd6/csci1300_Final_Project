@@ -8,6 +8,7 @@
 #include "Farm.h"
 #include "Crop.h"
 #include "Town.h"
+#include "Quest.h"
 using namespace std;
 
 
@@ -25,7 +26,8 @@ void whereAmI(std::string name,std::string location) {
 int main() {
     Player mainPlayer;
     vector<Villager> farmPeople;
-    vector<Villager> townPeople;
+    vector<Villager> townPeople {Villager("the town's mayor", "Lewis","Bring Lewis his parsnips"),Villager("the local storekeep for the general store we got here", "Pierre","Corporate Espionage")};
+    Quest playerQuests[10] = {Quest("Gather 10 parsnips and give them to Mayor Lewis, free of charge, in exchange for a reward","Bring Lewis his parsnips", Item("Truffle oil smells funky but can be used to cook amazing dishes",1,"Truffle Oil",0),0,0 )};
     Farm farm("Farm", farmPeople);
     Town town("Town", townPeople);
     std::string farmName;
@@ -51,7 +53,7 @@ int main() {
             mainPlayer = farm.getThePlayer();
         }
         else if (mainPlayer.getLocation() == "Town") {
-            gameOn = town.townTerminal(mainPlayer,inventory);
+            gameOn = town.townTerminal(mainPlayer,inventory,playerQuests);
             mainPlayer = town.getThePlayer();
         }
     }

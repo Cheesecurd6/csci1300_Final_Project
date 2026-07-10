@@ -3,6 +3,7 @@
 #include <iostream>
 class Villager {
     public:
+    Villager(std::string d,std::string n,std::string q);
     std::string getDescription() const;
     std::string getName() const;
     std::string getQuest() const;

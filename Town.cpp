@@ -14,7 +14,7 @@ Player Town::getThePlayer() {
     return thePlayer;
 }
 
-bool Town::townTerminal(Player p, Item inventory[10]) {
+bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
     thePlayer = p;
 
     while(true) {
@@ -35,6 +35,7 @@ bool Town::townTerminal(Player p, Item inventory[10]) {
         cout << "===========================" << endl;
         cin >> choice;
         if (thePlayer.setTime()) {
+            cout << "It got too late, you passed out" << endl;
             thePlayer.newDayOutside();
             return true;
         }
@@ -75,7 +76,53 @@ bool Town::townTerminal(Player p, Item inventory[10]) {
             }
 
             case 2: {
+                int choice2;
+                cout << "1. Talk to " << getPeople()[0].getName() << endl;
+                cout << "2. Talk to " << getPeople()[1].getName() << endl;
+                switch(choice2) {
+                    case 1: {
+                        int choice3;
+                        cout << "Oh hello there, " << "I'm " << getPeople()[0].getName() << " " << getPeople()[0].getDescription() << ", what can I do for you?" << endl;
+                        cout << "===========================" << endl;
+                        cout << "1. How do I complete the bundle?" << endl;
+                        cout << "2. How's Joja's influence in Stardew Valley?" << endl;
+                        cout << "3. Is there anything I can help you with " << endl;
+                        cout << "===========================" << endl;
+                        cin >> choice3;
+                        switch (choice3) {
+                            case 1:{}
+                            case 2:{}
+                            case 3: {
+                                cout << endl;
+                                bool isActive;
+                                bool isCompleted;
+                                for (int i = 0; i < 10; i++) {
+                                    if (playerQuests[i].getName() == getPeople()[0].getQuest()) {
+                                        isActive = playerQuests[i].getIfActive();
+                                        isCompleted = playerQuests[i].getIfCompleted();
+                                    } 
+                                } 
 
+                                if (!isCompleted && !isActive) {
+                                    cout << "As a matter of fact there is. Bring me ten parsnips and I'll reward you with a surprise." << endl;
+                                    for (int i = 0; i < 10; i++) {
+                                        if (playerQuests[i].getName() == getPeople()[0].getQuest()) {
+
+                                        } 
+                                    } 
+                                
+                                }
+                                else if (!isCompleted && isActive) {
+                                    cout << "Yes the task I gave you earlier." << endl;
+                                }
+                                else if(isCompleted) {
+                                    cout << "No nothing else for now." << endl;
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
 
             case 3: {
@@ -128,6 +175,7 @@ bool Town::townTerminal(Player p, Item inventory[10]) {
                     cin >> choice2;
 
                     if (thePlayer.setTime()) {
+                        cout << "It got too late, you passed out" << endl;
                         thePlayer.newDayOutside();
                         return true;
                     }
