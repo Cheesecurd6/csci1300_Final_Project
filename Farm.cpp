@@ -92,7 +92,7 @@ int Farm::getHarvestable(std::vector<Crop> crops) {
 }
 
 
-bool Farm::farmTerminal(Player p, Item inventory[]) {
+bool Farm::farmTerminal(Player p, Item inventory[], Quest playerQuests[]) {
 // Overview of what can be done on the farm
 thePlayer = p;
 if (thePlayer.getIfDayPassed()) {
@@ -330,7 +330,13 @@ while(true) {
         }
 
         case 4: {
-
+                cout << "Your quests are: " << endl;
+                for (int i = 0; i < 10; i++) {
+                    if (playerQuests[i].getIfActive()) {
+                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
+                    }
+                }
+                break;
         }
 
         case 5: {
@@ -423,6 +429,9 @@ void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string
 
     if (spaceFound == false) {
         cout << "Your unable to harvest as you don't have any inventory space" << endl;
+    }
+    else {
+        cout << "You harvested " << harvestCount << " " << name << "." << endl;
     }
 }
 

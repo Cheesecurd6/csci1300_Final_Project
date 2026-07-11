@@ -7,6 +7,7 @@
 #include "player.h"
 #include "Item.h"
 #include "villager.h"
+#include "Quest.h"
 
 class Farm : public Location{
     private:
@@ -33,7 +34,7 @@ class Farm : public Location{
     void waterCrops(std::vector<Crop> crops,std::string name);
     void harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string name, std::string description);
 
-    bool farmTerminal(Player p, Item inventory[]);
+    bool farmTerminal(Player p, Item inventory[], Quest playerQuests[]);
 
 };
 

@@ -31,6 +31,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
         cout << "4. Check quests" << endl;
         cout << "5. Check map" << endl;
         cout << "6. Sell/Buy items at the store" << endl;
+        cout << "7. Check the bundle" << endl;
         cout << "-1. Exit the game" << endl;
         cout << "===========================" << endl;
         cin >> choice;
@@ -89,28 +90,12 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                         cout << "===========================" << endl;
                         cout << "\"Oh hello there " << thePlayer.getName() << ", I'm " << getPeople()[0].getName() << " " << getPeople()[0].getDescription() << ", what can I do for you?\"" << endl;
                         cout << "===========================" << endl;
-                        for (int i = 0; i < 10; i++) {
-                            if (playerQuests[i].getName() == getPeople()[0].getQuest()) {
-                                if (playerQuests[i].getIfActive()) {
-                                   if (searchPlayerInventory(playerQuests[i].getRequirement(),inventory)) {
-                                    cout << "===========================" << endl;
-                                    cout << "\"Oh I see you have the items I asked for thank you for this. Now for your reward.\"" << endl;
-                                    if (addItem(inventory,playerQuests[i].getReward())) {
-                                        cout << "\"Here you go, it's" << playerQuests[i].getReward().getName() << ".\"" << endl;
-                                        cout << "===========================" << endl;
-                                    }
-                                    else {
-                                        cout << "\"Sorry it looks like you don't have enough inventory space, come back when you do have the requisite space.\"" << endl;
-                                        cout << "===========================" << endl;
-                                    }
-                                   }
-                                }
-                            } 
-                        } 
+                        questCheck(0, playerQuests, inventory);
+
                         cout << "===========================" << endl;
-                        cout << "\"1. How do I complete the bundle?\"" << endl;
-                        cout << "\"2. How's Joja's influence in Stardew Valley?\"" << endl;
-                        cout << "\"3. Is there anything I can help you with?\"" << endl;
+                        cout << "1. \"How do I complete the bundle?\"" << endl;
+                        cout << "2. \"How's Joja's influence in Stardew Valley?\"" << endl;
+                        cout << "3. \"Is there anything I can help you with?\"" << endl;
                         cout << "===========================" << endl;
                         cin >> choice3;
                         switch (choice3) {
@@ -147,6 +132,57 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                         }
                         break;
                     }
+                    case 2: {
+                        int choice3;
+                        cout << "===========================" << endl;
+                        cout << "\"Oh hello there " << thePlayer.getName() << ", I'm " << getPeople()[1].getName() << " " << getPeople()[1].getDescription() << ", what can I do for you?\"" << endl;
+                        cout << "===========================" << endl;
+                        questCheck(1, playerQuests, inventory);
+                        cout << "===========================" << endl;
+                        cout << "1. \"Can you help me complete the final bundle?\"" << endl;
+                        cout << "2. \"How do I buy things?\"" << endl;
+                        cout << "3. \"Is there anything I can help you with?\"" << endl;
+                        cout << "===========================" << endl;
+
+                        cin >> choice3;
+                        switch (choice3) {
+                            case 1:{}
+                            case 2:{}
+                            case 3: {
+                                cout << endl;
+                                bool isActive;
+                                bool isCompleted;
+                                for (int i = 0; i < 10; i++) {
+                                    if (playerQuests[i].getName() == getPeople()[1].getQuest()) {
+                                        isActive = playerQuests[i].getIfActive();
+                                        isCompleted = playerQuests[i].getIfCompleted();
+                                    } 
+                                } 
+
+                                if (!isCompleted && !isActive) {
+                                    cout << "\"Yes there is. Take this new seed that I acquired from the desert and plant it, and then bring me the result. In exchange I'll give you the crystal fruit you need for the bundle, a fruit for a fruit." << endl << "Also you can already purchase seeds of this new plant from me, I'm just giving you this one for free.\"" << endl;
+                                    if (addItem(inventory,  Item("Truly luxurious fruit with a slight tangy flavor ", 1, "Starfruit seeds", 1))) {
+                                        for (int i = 0; i < 10; i++) {
+                                            if (playerQuests[i].getName() == getPeople()[1].getQuest()) {
+                                                playerQuests[i].setIfActive(1);
+                                            } 
+                                        } 
+                                    }
+
+                                    
+                                
+                                }
+                                else if (!isCompleted && isActive) {
+                                    cout << "\"Yes the task I gave you earlier.\"" << endl;
+                                }
+                                else if(isCompleted) {
+                                    cout << "\"No nothing else for now.\"" << endl;
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 }
                 break;
             }
@@ -162,13 +198,25 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
             }
 
             case 4: {
-                cout << "Your quests are: " << endl;
-                for (int i = 0; i < 10; i++) {
+                bool hasQuests = false;
+                cout << "Your bundle quests are: " << endl;
+                for (int i = 0; i < 5; i++) {
                     if (playerQuests[i].getIfActive()) {
+                        hasQuests = true;
                         cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
                     }
                 }
-
+                cout << "Your other quests are: " << endl;
+                for (int i = 5; i < 10; i++) {
+                    if (playerQuests[i].getIfActive()) {
+                        hasQuests = true;
+                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
+                    }
+                }
+                if (!hasQuests) {
+                    cout << "You have no other quests active currently" << endl;
+                }
+                break;
             }
 
             case 5: {
@@ -249,6 +297,10 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                 break;
             }
 
+            case 7: {
+                questCheck(0, playerQuests, inventory);
+            }
+
             case -1: {
                 return false;
             }
@@ -259,7 +311,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
 
 void Town::buy(Item inventory[10], std::string name, std::string description, int price) {
     int amountBought;
-    cout << name << "cost " << price << " gold" << endl;
+    cout << name << " cost " << price << " gold." << endl;
     cout << "How many would you like to purchase? ";
     cin >> amountBought;
 
@@ -364,3 +416,30 @@ bool Town::addItem(Item inventory[10], Item questReward) {
         return true;
     }
 }
+
+ void Town::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
+    for (int i = 0; i < 10; i++) {
+        if (playerQuests[i].getName() == getPeople()[p].getQuest()) {
+            if (playerQuests[i].getIfActive()) {
+                if (searchPlayerInventory(playerQuests[i].getRequirement(),inventory)) {
+                cout << "===========================" << endl;
+                cout << "\"Oh I see you have the items I asked for thank you for this. Now for your reward.\"" << endl;
+                if (addItem(inventory,playerQuests[i].getReward())) {
+                    cout << "\"Here you go, it's " << playerQuests[i].getReward().getName() << ".\"" << endl;
+                    cout << "===========================" << endl;
+                    playerQuests[i].setIfActive(0);
+                    playerQuests[i].setIfCompleted(1);
+                }
+                else {
+                    cout << "\"Sorry it looks like you don't have enough inventory space, come back when you do have the requisite space.\"" << endl;
+                    cout << "===========================" << endl;
+                }
+                }
+            }
+        } 
+    }
+ }
+
+ void Town::bundleCheck(int q, Quest playerQuests[10], Item inventory[10]) {
+    
+ }

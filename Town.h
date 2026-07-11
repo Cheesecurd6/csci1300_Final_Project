@@ -16,6 +16,8 @@ class Town : public Location{
     Player getThePlayer();
     bool townTerminal(Player p, Item inventory[10], Quest playerQuests[10]);
     bool searchPlayerInventory(Item questItem, Item inventory[10]);
+    void questCheck(int p, Quest playerQuests[10], Item inventory[10]);
+    void bundleCheck(int q, Quest playerQuests[10], Item inventory[10]);
     Town(std::string n, std::vector<Villager> people);
 
     private:
