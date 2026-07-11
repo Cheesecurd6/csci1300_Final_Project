@@ -22,7 +22,7 @@ A weather system with gameplay effects implemented using the "weather" class. Ea
 
 A smarter bundle planner gives the player more information when examining the bundle. The bundle class will have a function providing information, that information will come from accessing the different instances of the quest class. The bundle class will take key information from the quests needed to complete the bundle.
 
-Mining, fishing, and foraging luck based on a random number generator. Using the "random" library from c++ a random number generator will be impelemented determining the reward of the player mining, fishing, and foraging. The generator can then be skewed to a certain result based on the luck of the day.
+Mining and fishing luck based on a random number generator. Using the "random" library from c++ a random number generator will be impelemented determining the reward of the player mining, fishing, and foraging. The generator can then be skewed to a certain result based on the luck of the day.
 
 ## Tradeoff System
 
@@ -40,6 +40,6 @@ A connected location map that changes when areas are unlocked. Also, displays wh
 
 ## Win/Loss
 
-Winning requires finishing the bundle in the span of two weeks. Winning endings will change based on Joja influence and relationship with villages.
+Winning requires finishing the bundle in the span of two weeks. Winning endings will change based on Joja influence and relationship with villagers.
 
 Losing requires the player to fail to finish the bundle in the two week timespan. Ending will change based on relationship with villagers.

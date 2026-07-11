@@ -23,6 +23,9 @@ using namespace std;
         name = n;
         seed = s;
     }
+    Item::Item(std::string d) {
+        name = d;
+    }
     Item::Item() {
         description = " ";
         amount = 0;

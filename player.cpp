@@ -58,11 +58,11 @@
         return true;
     }
 
-     bool Player::newDayOutside() {
+    bool Player::newDayOutside() {
         dayHasPassed = 1;
         location = "Farm";
         return true;
-     }
+    }
 
     int Player::getTime() {
         return time;
@@ -80,4 +80,9 @@
         gold+=additionalGold;
     }
 
-    
+    bool Player::getBundle() {
+        return bundleDone;
+    }
+    void Player::setBundle(bool s) {
+        bundleDone = s;
+    }

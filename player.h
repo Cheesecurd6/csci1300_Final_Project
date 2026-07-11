@@ -11,6 +11,8 @@ class Player {
     int getJojaInfluence() const;
     int getTime();
     int getGold();
+    bool getBundle();
+    void setBundle(bool s);
     bool getIfDayPassed();
 
     void setLocation(std::string playerLocation);
@@ -34,6 +36,7 @@ class Player {
     int joja;
     int gold = 500;
     bool dayHasPassed = 0;
+    bool bundleDone = 0;
 };
 
 #endif

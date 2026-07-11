@@ -15,6 +15,7 @@ class Item {
     bool getSeed();
 
     Item(std::string d, int a, std::string n, bool s);
+    Item(std::string d);
     Item();
     void setAmount(int a);
 };

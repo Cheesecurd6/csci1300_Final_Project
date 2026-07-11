@@ -14,7 +14,7 @@ Player Town::getThePlayer() {
     return thePlayer;
 }
 
-bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
+bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], int bundleTracker[]) {
     thePlayer = p;
 
     while(true) {
@@ -99,7 +99,20 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                         cout << "===========================" << endl;
                         cin >> choice3;
                         switch (choice3) {
-                            case 1:{}
+                            case 1:{
+                                cout << "\"Well theres a few important things you can do." << endl;
+                                cout << "For the blueberries you'll just have to buy 2 seeds from the store we got here and plant them yourself." << endl;
+                                cout << "I can help you with the truffle oil myself, just ask me later if there's anything I need help with." << endl;
+                                cout << "Pierre definitely has a crystal fruit so go ask him if you can help him with anything in return for the fruit." << endl;
+                                cout << "The octopus you'd definitely have to ask Willey about." << endl;
+                                cout << "Finally, the diamond is the thing I'm most unsure about, maybe travel to the mines to see if someone can help you out.\"" << endl;
+                                for (int i = 0; i < 5; i++) {
+                                    if (bundleTracker[i] == 0) {
+                                        bundleTracker[i] = 1;
+                                    }
+                                }
+                                break;
+                            }
                             case 2:{}
                             case 3: {
                                 cout << endl;
@@ -119,6 +132,9 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                                             playerQuests[i].setIfActive(1);
                                         } 
                                     } 
+                                    if (bundleTracker[1] == 1) {
+                                            bundleTracker[1] = 2;
+                                    }
                                 
                                 }
                                 else if (!isCompleted && isActive) {
@@ -139,7 +155,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                         cout << "===========================" << endl;
                         questCheck(1, playerQuests, inventory);
                         cout << "===========================" << endl;
-                        cout << "1. \"Can you help me complete the final bundle?\"" << endl;
+                        cout << "1. \"How's the store doing?\"" << endl;
                         cout << "2. \"How do I buy things?\"" << endl;
                         cout << "3. \"Is there anything I can help you with?\"" << endl;
                         cout << "===========================" << endl;
@@ -166,7 +182,13 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                                             if (playerQuests[i].getName() == getPeople()[1].getQuest()) {
                                                 playerQuests[i].setIfActive(1);
                                             } 
-                                        } 
+                                        }
+                                        if (bundleTracker[2] == 1) {
+                                            bundleTracker[2] = 2;
+                                        }
+                                    }
+                                    else {
+                                        cout << "\"Oh sorry it looks like you don't have enough inventory space to carry this seed right now, come back later when you have space.\"" << endl;
                                     }
 
                                     
@@ -203,14 +225,15 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                 for (int i = 0; i < 5; i++) {
                     if (playerQuests[i].getIfActive()) {
                         hasQuests = true;
-                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
+                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << "." << endl;
                     }
                 }
+                hasQuests = false;
                 cout << "Your other quests are: " << endl;
                 for (int i = 5; i < 10; i++) {
                     if (playerQuests[i].getIfActive()) {
                         hasQuests = true;
-                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
+                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() <<  ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
                     }
                 }
                 if (!hasQuests) {
@@ -244,11 +267,11 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                     cout << "===========================" << endl;
                     cout << "What do you want to buy/sell?" << endl;
                     cout << "===========================" << endl;
-                    cout << "1. Buy parsnip seeds." << endl;
+                    cout << "1. Buy parsnip seeds, the humblest of crops" << endl;
                     cout << "2. Sell parsnips" << endl;
-                    cout << "3. Buy starfruit seeds." << endl;
+                    cout << "3. Buy starfruit seeds, truly luxurious fruit with a slight tangy flavor" << endl;
                     cout << "4. Sell starfruits" << endl;
-                    cout << "5. Buy blueberry seeds." << endl;
+                    cout << "5. Buy blueberry seeds, grows so that one plant can produce mutiple fruit" << endl;
                     cout << "6. Sell blueberries" << endl;
                     cout << "7. Exit" << endl;
                     cout << "===========================" << endl;
@@ -281,7 +304,15 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                         }
 
                         case 5: {
-                            buy(inventory,"Blueberry seeds", "Grows so that one plant can produce fruit mutiple times",35);
+                            buy(inventory,"Blueberry seeds", "Grows so that one plant can produce mutiple fruits when harvested",35);
+                            for (int i = 0; i < 10; i++) {
+                                if ((inventory[i].getName() == "Blueberry seeds") && (inventory[i].getAmount() >= 2)) {
+                                    if (bundleTracker[0] == 1) {
+                                        bundleTracker[0] = 2;
+                                    }
+                                }
+                            }
+
                             break;
                         }
 
@@ -298,7 +329,30 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
             }
 
             case 7: {
-                questCheck(0, playerQuests, inventory);
+                bool bundleComplete = 1;
+                for (int i = 0; i < 5; i++) {
+                    bundleCheck(i, playerQuests, inventory);
+                }
+
+                cout << "Bundle items still needed: " << endl;
+                for (int i = 0; i < 5; i++) {
+                    if (playerQuests[i].getIfActive()) {
+                        cout << playerQuests[i].getRequirement().getAmount() << " " << playerQuests[i].getRequirement().getName() << "." << endl;
+                    }
+                }
+                
+                bundlePlanner(playerQuests,bundleTracker);
+                for (int i = 0; i < 5; i++) {
+                    if (!playerQuests[i].getIfCompleted()) {
+                        bundleComplete = 0;
+                    }
+                }
+
+                if (bundleComplete) {
+                    thePlayer.setBundle(1);
+                    return true;
+                }
+                break;
             }
 
             case -1: {
@@ -334,7 +388,6 @@ void Town::buy(Item inventory[10], std::string name, std::string description, in
                 break;
             }
         }
-
         if (spaceFound == false) {
             cout << "Your unable to buy, you don't have any inventory space" << endl;
         }
@@ -441,5 +494,71 @@ bool Town::addItem(Item inventory[10], Item questReward) {
  }
 
  void Town::bundleCheck(int q, Quest playerQuests[10], Item inventory[10]) {
-    
- }
+    if (searchPlayerInventory(playerQuests[q].getRequirement(),inventory)) {
+    cout << "===========================" << endl;
+    cout << "The bundle requirements you possess have been removed from your inventory and added to the bundle." << endl;
+    cout << "The requirement met is " << playerQuests[q].getDescription() << "." << endl;
+    cout << "===========================" << endl;
+    playerQuests[q].setIfActive(0);
+    playerQuests[q].setIfCompleted(1);
+    }
+}
+ 
+void Town::bundlePlanner(Quest playerQuests[10], int bundleTracker[]) {
+    cout << "Bundle Planner: " << endl;
+    if (!playerQuests[0].getIfCompleted()) {
+        cout << "Crop requirement: ";
+        if (bundleTracker[0] == 0) {
+            cout << "Talk to Mayor Lewis about your next step" << endl;
+        }
+        else if (bundleTracker[0] == 1) {
+            cout << "Buy 2 blueberry seeds from Pierre's shop in town" << endl;
+        }
+        else if (bundleTracker[0] == 2) {
+            cout << "Plant at least 2 blueberry seeds on your farm" << endl;
+        }
+        else if (bundleTracker[0] == 3) {
+            cout << "Water the blueberry bushes you've got planted each day, after 6 days they should be harvestable" << endl;
+        }
+        else if (bundleTracker[0] == 4) {
+            cout << "Harvest your blueberries and bring them to the bundle." << endl;
+        }
+    }
+    if (!playerQuests[1].getIfCompleted()) {
+        cout << "Animal product requirement: ";
+        if (bundleTracker[1] == 0) {
+            cout << "Talk to Mayor Lewis about your next step" << endl;
+        }
+        else if (bundleTracker[1] == 1) {
+            cout << "Talk to Lewis and see if he needs help with anything" << endl;
+        }
+        else if (bundleTracker[1] == 2) {
+            cout << "Plant 10 parnip seeds, buy some in town if you don't have any" << endl;
+        }
+        else if (bundleTracker[1] == 3) {
+            cout << "Water the parsnips you've planted each day, after 2 days they should be harvestable" << endl;
+        }
+        else if (bundleTracker[1] == 4) {
+            cout << "Harvest your parsnips and bring them to the Lewis." << endl;
+        }
+    }
+
+    if (!playerQuests[2].getIfCompleted()) {
+        cout << "Forage requirement: ";
+        if (bundleTracker[2] == 0) {
+            cout << "Talk to Mayor Lewis about your next step" << endl;
+        }
+        else if (bundleTracker[2] == 1) {
+            cout << "Talk to Pierre and find out if he needs help with anything in exchange for the crystal fruit" << endl;
+        }
+        else if (bundleTracker[2] == 2) {
+            cout << "Plant the starfruit seed Pierre gave you" << endl;
+        }
+        else if (bundleTracker[2] == 3) {
+            cout << "Water the starfruit you've planted each day, after 4 days it should be harvestable" << endl;
+        }
+        else if (bundleTracker[2] == 4) {
+            cout << "Harvest your starfruit and bring it to Pierre." << endl;
+        }
+    }
+}

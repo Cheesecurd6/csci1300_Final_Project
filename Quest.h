@@ -16,7 +16,6 @@ class Quest {
     Item requirement;
     bool isActive;
     bool isCompleted;
-    bool isBundle;
 
     public:
 

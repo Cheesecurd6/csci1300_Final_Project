@@ -23,7 +23,7 @@
         harvestable();
     }
     void Crop::harvestable() {
-        if(daysGrown == daysToGrow) {
+        if(daysGrown >= daysToGrow) {
             h = true;
         }
 

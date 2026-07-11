@@ -34,7 +34,7 @@ class Farm : public Location{
     void waterCrops(std::vector<Crop> crops,std::string name);
     void harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string name, std::string description);
 
-    bool farmTerminal(Player p, Item inventory[], Quest playerQuests[]);
+    bool farmTerminal(Player p, Item inventory[], Quest playerQuests[], int bundleTracker[]);
 
 };
 

@@ -92,7 +92,7 @@ int Farm::getHarvestable(std::vector<Crop> crops) {
 }
 
 
-bool Farm::farmTerminal(Player p, Item inventory[], Quest playerQuests[]) {
+bool Farm::farmTerminal(Player p, Item inventory[], Quest playerQuests[], int bundleTracker[]) {
 // Overview of what can be done on the farm
 thePlayer = p;
 if (thePlayer.getIfDayPassed()) {
@@ -100,6 +100,23 @@ if (thePlayer.getIfDayPassed()) {
 }
 while(true) {
     int choice;
+    if (getHarvestable(blueberries) >= 2) {
+        if (bundleTracker[0] == 3) {
+            bundleTracker[0] = 4;
+        }
+    }
+
+    if (getHarvestable(parsnips) >= 10) {
+        if (bundleTracker[1] == 3) {
+            bundleTracker[1] = 4;
+        }
+    }
+
+    if (getHarvestable(starfruits) >= 1) {
+        if (bundleTracker[2] == 3) {
+            bundleTracker[2] = 4;
+        }
+    }
 
     cout << endl << endl;
     cout << "Day: " << thePlayer.getDay() << " Time: " << thePlayer.getTime() << endl;
@@ -121,11 +138,6 @@ while(true) {
         case 1: {
             cout << "Leaving the farm! Going to town." << endl;
             thePlayer.setLocation("Town");
-            if (thePlayer.setTime()) {
-                cout << "It got too late, you passed out" << endl;
-                newDay();
-                return true;
-            }
             return true;
             break;
         }
@@ -170,12 +182,13 @@ while(true) {
                 //choice for second menu
                     switch (choice2) {
                         case 1: {
+                            bool found = false;
                             int cropCount;
                             cout << "How many do you want to plant? ";
                             cin >> cropCount;
                             for (int i = 0; i < 10; i++) {
                                 if (inventory[i].getName() == "Parsnip seeds") {
-
+                                    found = true;
                                     if (inventory[i].getAmount() < cropCount) {
                                         cout << "You don't have enough parsnip seeds." << endl;
                                     }
@@ -183,8 +196,16 @@ while(true) {
                                         plant(cropCount, 0, 0);
                                         inventory[i].setAmount(-cropCount);
                                     }
-
                                     break;
+                                }
+                            }
+                            if (!found) {
+                                cout << "You don't have any parsnip seeds" << endl;
+                            }
+                            
+                            if (getPlanted(parsnips) >= 10) {
+                                if (bundleTracker[1] == 2) {
+                                    bundleTracker[1] = 3;
                                 }
                             }
                             if (thePlayer.setTime()) {
@@ -216,12 +237,13 @@ while(true) {
                         }
 
                         case 4: {
+                            bool found = false;
                             int cropCount;
                             cout << "How many do you want to plant? ";
                             cin >> cropCount;
                             for (int i = 0; i < 10; i++) {
-                                if (inventory[i].getName() == "Starfruit seeds") {
-
+                                if (inventory[i].getName() ==  "Starfruit seeds") {
+                                    found = true;
                                     if (inventory[i].getAmount() < cropCount) {
                                         cout << "You don't have enough starfruit seeds." << endl;
                                     }
@@ -229,8 +251,15 @@ while(true) {
                                         plant(0, cropCount, 0);
                                         inventory[i].setAmount(-cropCount);
                                     }
-
                                     break;
+                                }
+                            }
+                            if (!found) {
+                                cout << "You don't have any starfruit seeds" << endl;
+                            }
+                            if (getPlanted(starfruits) >= 1) {
+                                if (bundleTracker[2] == 2) {
+                                    bundleTracker[2] = 3;
                                 }
                             }
                             if (thePlayer.setTime()) {
@@ -261,12 +290,13 @@ while(true) {
                             break;
                         }
                         case 7: {
+                            bool found = false;
                             int cropCount;
                             cout << "How many do you want to plant? ";
                             cin >> cropCount;
                             for (int i = 0; i < 10; i++) {
                                 if (inventory[i].getName() == "Blueberry seeds") {
-
+                                    found = true;
                                     if (inventory[i].getAmount() < cropCount) {
                                         cout << "You don't have enough blueberry seeds." << endl;
                                     }
@@ -274,8 +304,15 @@ while(true) {
                                         plant(0, 0, cropCount);
                                         inventory[i].setAmount(-cropCount);
                                     }
-
                                     break;
+                                }
+                            }
+                            if (!found) {
+                                cout << "You don't have any blueberry seeds" << endl;
+                            }
+                            if (getPlanted(blueberries) >= 2) {
+                                if (bundleTracker[0] == 2) {
+                                    bundleTracker[0] = 3;
                                 }
                             }
                             if (thePlayer.setTime()) {
@@ -326,15 +363,38 @@ while(true) {
                 newDay();
                 return true;
             }
+            if (thePlayer.setTime()) {
+                cout << "It got too late, you passed out" << endl;
+                newDay();
+                return true;
+            }
             break;
         }
 
         case 4: {
-                cout << "Your quests are: " << endl;
-                for (int i = 0; i < 10; i++) {
+                bool hasQuests = false;
+                cout << "Your bundle quests are: " << endl;
+                for (int i = 0; i < 5; i++) {
                     if (playerQuests[i].getIfActive()) {
-                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
+                        hasQuests = true;
+                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << "." << endl;
                     }
+                }
+                hasQuests = false;
+                cout << "Your other quests are: " << endl;
+                for (int i = 5; i < 10; i++) {
+                    if (playerQuests[i].getIfActive()) {
+                        hasQuests = true;
+                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() <<  ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
+                    }
+                }
+                if (!hasQuests) {
+                    cout << "You have no other quests active currently" << endl;
+                }
+                if (thePlayer.setTime()) {
+                cout << "It got too late, you passed out" << endl;
+                newDay();
+                return true;
                 }
                 break;
         }
@@ -413,7 +473,12 @@ void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string
     for (unsigned int i = 0; i < 10; i++) {
         if (inventory[i].getName() == name) {
         spaceFound = true;
+        if (name == "Blueberry(s)") {
+            inventory[i].setAmount(harvestCount * 5);
+        }
+        else {
         inventory[i].setAmount(harvestCount);
+        }
         break;
         }
     }
@@ -422,7 +487,12 @@ void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string
         if (spaceFound == true) {break;}
         if (inventory[i].getAmount() == 0) {
             spaceFound = true;
+            if (name == "Blueberry(s)") {
+            inventory[i] = Item (description,harvestCount*5, name,0);
+            }
+            else {
             inventory[i] = Item (description,harvestCount, name,0);
+            }
             break;
         }
     }
