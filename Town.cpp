@@ -73,20 +73,44 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                         break;
                     }
                 }
+                break;
             }
 
             case 2: {
                 int choice2;
+                cout << "===========================" << endl;
                 cout << "1. Talk to " << getPeople()[0].getName() << endl;
                 cout << "2. Talk to " << getPeople()[1].getName() << endl;
+                cout << "===========================" << endl;
+                cin >> choice2;
                 switch(choice2) {
                     case 1: {
                         int choice3;
-                        cout << "Oh hello there, " << "I'm " << getPeople()[0].getName() << " " << getPeople()[0].getDescription() << ", what can I do for you?" << endl;
                         cout << "===========================" << endl;
-                        cout << "1. How do I complete the bundle?" << endl;
-                        cout << "2. How's Joja's influence in Stardew Valley?" << endl;
-                        cout << "3. Is there anything I can help you with " << endl;
+                        cout << "\"Oh hello there " << thePlayer.getName() << ", I'm " << getPeople()[0].getName() << " " << getPeople()[0].getDescription() << ", what can I do for you?\"" << endl;
+                        cout << "===========================" << endl;
+                        for (int i = 0; i < 10; i++) {
+                            if (playerQuests[i].getName() == getPeople()[0].getQuest()) {
+                                if (playerQuests[i].getIfActive()) {
+                                   if (searchPlayerInventory(playerQuests[i].getRequirement(),inventory)) {
+                                    cout << "===========================" << endl;
+                                    cout << "\"Oh I see you have the items I asked for thank you for this. Now for your reward.\"" << endl;
+                                    if (addItem(inventory,playerQuests[i].getReward())) {
+                                        cout << "\"Here you go, it's" << playerQuests[i].getReward().getName() << ".\"" << endl;
+                                        cout << "===========================" << endl;
+                                    }
+                                    else {
+                                        cout << "\"Sorry it looks like you don't have enough inventory space, come back when you do have the requisite space.\"" << endl;
+                                        cout << "===========================" << endl;
+                                    }
+                                   }
+                                }
+                            } 
+                        } 
+                        cout << "===========================" << endl;
+                        cout << "\"1. How do I complete the bundle?\"" << endl;
+                        cout << "\"2. How's Joja's influence in Stardew Valley?\"" << endl;
+                        cout << "\"3. Is there anything I can help you with?\"" << endl;
                         cout << "===========================" << endl;
                         cin >> choice3;
                         switch (choice3) {
@@ -104,25 +128,27 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
                                 } 
 
                                 if (!isCompleted && !isActive) {
-                                    cout << "As a matter of fact there is. Bring me ten parsnips and I'll reward you with a surprise." << endl;
+                                    cout << "\"As a matter of fact there is. Bring me ten parsnips and I'll reward you with some truffle oil I've been holding on to.\"" << endl;
                                     for (int i = 0; i < 10; i++) {
                                         if (playerQuests[i].getName() == getPeople()[0].getQuest()) {
-
+                                            playerQuests[i].setIfActive(1);
                                         } 
                                     } 
                                 
                                 }
                                 else if (!isCompleted && isActive) {
-                                    cout << "Yes the task I gave you earlier." << endl;
+                                    cout << "\"Yes the task I gave you earlier.\"" << endl;
                                 }
                                 else if(isCompleted) {
-                                    cout << "No nothing else for now." << endl;
+                                    cout << "\"No nothing else for now.\"" << endl;
                                 }
+                                break;
                             }
                         }
-
+                        break;
                     }
                 }
+                break;
             }
 
             case 3: {
@@ -136,6 +162,12 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10]) {
             }
 
             case 4: {
+                cout << "Your quests are: " << endl;
+                for (int i = 0; i < 10; i++) {
+                    if (playerQuests[i].getIfActive()) {
+                        cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
+                    }
+                }
 
             }
 
@@ -288,5 +320,47 @@ void Town::sell(Item inventory[10], std::string name, int value) {
     }
     else {
         cout << "You don't have any " << name <<  " to sell." << endl;
+    }
+}
+
+bool Town::searchPlayerInventory(Item questItem , Item inventory[10]) {
+    for (int i = 0; i < 10; i++) {
+        if (inventory[i].getName() == questItem.getName()) {
+            if(inventory[i].getAmount() >= questItem.getAmount()) {
+                inventory[i].setAmount(-questItem.getAmount());
+                return true;
+            }
+            else {
+            return false;
+            }
+        }
+    }
+    return false;
+}
+
+bool Town::addItem(Item inventory[10], Item questReward) {
+    bool spaceFound = false;
+    for (unsigned int i = 0; i < 10; i++) {
+            if (inventory[i].getName() == questReward.getName()) {
+            spaceFound = true;
+            inventory[i].setAmount(questReward.getAmount());
+            break;
+            }
+        }
+
+    for (unsigned int i = 0; i < 10; i++) {
+        if (spaceFound == true) {break;}
+        if (inventory[i].getAmount() == 0) {
+            spaceFound = true;
+            inventory[i] = questReward;
+            break;
+        }
+    }
+
+    if (spaceFound == false) {
+        return false;
+    }
+    else {
+        return true;
     }
 }

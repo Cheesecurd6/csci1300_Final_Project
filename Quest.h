@@ -13,16 +13,18 @@ class Quest {
     std::string description;
     std::string name;
     Item reward;
+    Item requirement;
     bool isActive;
     bool isCompleted;
 
     public:
 
-    Quest(std::string d, std::string n, Item i, bool a, bool c);
+    Quest(std::string d, std::string n, Item i, Item r, bool a, bool c);
     Quest();
     std::string getDescription();
     std::string getName();
     Item getReward();
+    Item getRequirement();
     bool getIfActive();
     bool getIfCompleted();
 

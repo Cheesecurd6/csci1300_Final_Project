@@ -9,25 +9,32 @@
 #include "Quest.h"
 
     
-Quest::Quest(std::string d,std::string n, Item i, bool a, bool c) {
+Quest::Quest(std::string d,std::string n, Item i, Item r, bool a, bool c) {
     description = d;
     name = n;
     reward = i;
     isActive = a;
     isCompleted = c;
+    requirement = r;
 }
 
 Quest::Quest() {
     description = "";
+    name = "";
     reward = Item();
     isActive = 0;
     isCompleted = 0;
+    requirement = Item();
 }
 std::string Quest::getDescription() {
     return description;
 }
 Item Quest::getReward() {
     return reward;
+}
+
+Item Quest::getRequirement() {
+    return requirement;
 }
 bool Quest::getIfActive() {
     return isActive;
@@ -46,3 +53,4 @@ void Quest::setIfActive(bool a) {
 void Quest::setIfCompleted(bool c) {
     isCompleted = c;
 }
+
