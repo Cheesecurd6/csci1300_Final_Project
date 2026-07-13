@@ -8,7 +8,7 @@
 #include "Town.h"
 using namespace std;
 
-Town::Town(std::string n, std::vector<Villager> people) : Location(n, people) {}
+Town::Town(std::string n, std::vector<Villager> people, int l) : Location(n, people,l) {}
 
 Player Town::getThePlayer() {
     return thePlayer;
@@ -105,7 +105,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                                 cout << "I can help you with the truffle oil myself, just ask me later if there's anything I need help with." << endl;
                                 cout << "Pierre definitely has a crystal fruit so go ask him if you can help him with anything in return for the fruit." << endl;
                                 cout << "The octopus you'd definitely have to ask Willey about." << endl;
-                                cout << "Finally, the diamond is the thing I'm most unsure about, maybe travel to the mines to see if someone can help you out.\"" << endl;
+                                cout << "Finally, the diamond is the thing I'm most unsure about, maybe travel to the mines and see if the Dwarf can help you. Be warned he's a tad paranoid.\"" << endl;
                                 for (int i = 0; i < 5; i++) {
                                     if (bundleTracker[i] == 0) {
                                         bundleTracker[i] = 1;
@@ -521,7 +521,7 @@ void Town::bundlePlanner(Quest playerQuests[10], int bundleTracker[]) {
             cout << "Water the blueberry bushes you've got planted each day, after 6 days they should be harvestable" << endl;
         }
         else if (bundleTracker[0] == 4) {
-            cout << "Harvest your blueberries and bring them to the bundle." << endl;
+            cout << "Harvest your blueberries and bring them to the bundle" << endl;
         }
     }
     if (!playerQuests[1].getIfCompleted()) {
@@ -539,7 +539,7 @@ void Town::bundlePlanner(Quest playerQuests[10], int bundleTracker[]) {
             cout << "Water the parsnips you've planted each day, after 2 days they should be harvestable" << endl;
         }
         else if (bundleTracker[1] == 4) {
-            cout << "Harvest your parsnips and bring them to the Lewis." << endl;
+            cout << "Harvest your parsnips and bring them to the Lewis" << endl;
         }
     }
 
@@ -558,7 +558,22 @@ void Town::bundlePlanner(Quest playerQuests[10], int bundleTracker[]) {
             cout << "Water the starfruit you've planted each day, after 4 days it should be harvestable" << endl;
         }
         else if (bundleTracker[2] == 4) {
-            cout << "Harvest your starfruit and bring it to Pierre." << endl;
+            cout << "Harvest your starfruit and bring it to Pierre" << endl;
+        }
+    }
+    if (!playerQuests[4].getIfCompleted()) {
+        cout << "Mineral requirement: ";
+        if (bundleTracker[4] == 0) {
+            cout << "Talk to Mayor Lewis about your next step" << endl;
+        }
+        else if (bundleTracker[4] == 1) {
+            cout << "Go to the mines and talk to the Dwarf about obtaining a diamond" << endl;
+        }
+        else if (bundleTracker[4] == 2) {
+            cout << "Find three emeralds for the Dwarf" << endl;
+        }
+        else if (bundleTracker[4] == 3) {
+            cout << "Bring your three emeralds to the Dwarf" << endl;
         }
     }
 }

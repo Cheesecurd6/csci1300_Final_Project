@@ -29,8 +29,8 @@ int main() {
     vector<Villager> townPeople{};
     Player mainPlayer;
     vector<Villager> farmPeople;
-    vector<Villager> minePeople {Villager("the only dwarf left", "The Dwarf", "All the Ores")};
-    
+    vector<Villager> minePeople {Villager("the only dwarf left", "The Dwarf", "The Crown Jewels")};
+
     ifstream inFile("townVillager.txt");
     if (!inFile.is_open()) {
         cout << "Error: could not open townVillager.txt" << endl;
@@ -58,13 +58,14 @@ int main() {
                             Quest("Bring truffle oil to the final bundle in town", "Complete the final bundle's animal product requirement", Item("being one step closer to finishing the bundle"), Item("Truffle oil smells funky but can be used to cook amazing dishes",1,"Truffle Oil",0),1,0),
                             Quest("Bring a crystal fruit to the final bundle in town", "Complete the final bundle's forage requirement", Item("being one step closer to finishing the bundle"), Item("A prize fruit, often only foraged during the winter or collected from the coldest depths of the mines",1,"Crystal Fruit",0),1,0),
                             Quest("Bring an octpus to the final bundle in town", "Complete the final bundle's fish requirement", Item("being one step closer to finishing the bundle"),Item("A mysterious creature from the depths of the ocean; delicious with a little lemona and salt", 1, "Octopus",0),1,0),
-                            Quest("Bring a diamond to the final bundle in town", "Complete the final bundle's mineral requirement", Item("being one step closer to finishing the bundle"),Item("Shiny shiny", 1, "Diamond", 0),1,0),
+                            Quest("Bring a diamond to the final bundle in town", "Complete the final bundle's mineral requirement", Item("being one step closer to finishing the bundle"),Item("Shiny shiny", 1, "Diamond(s)", 0),1,0),
                             Quest("Gather 10 parsnips and give them to Mayor Lewis, free of charge, in exchange for a reward","Bring Lewis his parsnips", Item("Truffle oil smells funky but can be used to cook amazing dishes",1,"Truffle Oil",0), Item("The humblest of crops" , 10, "Parsnip(s)", 0),0,0 ), 
-                            Quest("Take the starfruit seed Pierre gave you and plant it. Deliver to him the final product","Research for Pierre",Item("A prize fruit, often only foraged during the winter or collected from the coldest depths of the mines",1,"Crystal Fruit",0), Item("Truly luxurious fruit with a slight tangy flavor", 1 , "Starfruit(s)",0 ),0,0)
+                            Quest("Take the starfruit seed Pierre gave you and plant it. Deliver to him the final product","Research for Pierre",Item("A prize fruit, often only foraged during the winter or collected from the coldest depths of the mines",1,"Crystal Fruit",0), Item("Truly luxurious fruit with a slight tangy flavor", 1 , "Starfruit(s)",0 ),0,0),
+                            Quest("Venture into the mines and find an emerald for the Dwarf","The Crown Jewels", Item("Shiny shiny", 1, "Diamond(s)", 0), Item("A lovely shade of green with an enchanting shimmer", 3, "Emerald(s)",0),0,0)
                         };
-    Farm farm("Farm", farmPeople);
-    Town town("Town", townPeople);
-    Mines mines("Mines",minePeople);
+    Farm farm("Farm", farmPeople,0);
+    Town town("Town", townPeople,0);
+    Mines mines("Mines",minePeople,0);
     std::string farmName;
     Item parsnipSeeds("The humblest of crops " , 10, "Parsnip seeds", 1);
     //Item starfruitSeeds("Truly luxurious fruit with a slight tangy flavor ", 15, "Starfruit seeds", 1);

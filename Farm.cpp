@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Farm::Farm(std::string n, std::vector<Villager> people) : Location(n, people) {
+Farm::Farm(std::string n, std::vector<Villager> people, int l) : Location(n, people, l) {
 }
 
 // Try/Catch statement with the input of how many crops watered.

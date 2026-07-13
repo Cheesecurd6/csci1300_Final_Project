@@ -17,7 +17,7 @@ class Farm : public Location{
     Player thePlayer;
     
     public:
-    Farm(std::string n, std::vector<Villager> people);
+    Farm(std::string n, std::vector<Villager> people, int l);
     void plant(int parsnipSeeds, int starfuitSeeds, int blueberrySeeds);
     void harvestParsnips(Item inventory[10],int howManyHarvest);
     void harvestStarfruits(Item inventory[10],int howManyHarvest);

@@ -7,7 +7,7 @@
 class Location {
     public:
 
-    Location(std::string n, std::vector<Villager> p);
+    Location(std::string n, std::vector<Villager> p, int l);
     std::string getName() const;
     std::vector<Villager> getPeople() const;
     void getNeighboringLocations() const;
@@ -20,6 +20,7 @@ class Location {
     std::vector<Villager> people;
     std::string name;
     std::vector<Location> neighbors;
+    int luck;
 };
 
 #endif

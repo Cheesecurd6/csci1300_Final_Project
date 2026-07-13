@@ -19,7 +19,7 @@ class Town : public Location{
     void questCheck(int p, Quest playerQuests[10], Item inventory[10]);
     void bundleCheck(int q, Quest playerQuests[10], Item inventory[10]);
     void bundlePlanner(Quest playerQuests[10], int bundleTracker[]);
-    Town(std::string n, std::vector<Villager> people);
+    Town(std::string n, std::vector<Villager> people, int l);
 
     private:
     Player thePlayer;

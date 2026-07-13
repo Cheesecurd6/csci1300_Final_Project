@@ -28,7 +28,8 @@ void Location::setNeighbors(std::vector<Location> nearbyLocations) {
     neighbors = nearbyLocations;
 }
 
-Location::Location(std::string n, std::vector<Villager> p) {
+Location::Location(std::string n, std::vector<Villager> p, int l) {
     name = n;
     people = p;
+    luck = l;
 }
