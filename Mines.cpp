@@ -8,6 +8,10 @@ using namespace std;
 
 Mines::Mines(std::string n, std::vector<Villager> people) : Location(n,people){}
 
+
+Player Mines::getThePlayer() {
+  return thePlayer;
+}
 void Mines::Mine (Item inventory[], int bundleTracker[]) {
   int roll;
   std::mt19937 mt{std::random_device{}()};
@@ -185,8 +189,87 @@ bool Mines::addItem(Item inventory[10], Item questReward) {
     }
 }
 
-bool Mines::mineTerminal(Player p, Item inventory[], Quest q[]) {
+bool Mines::mineTerminal(Player p, Item inventory[], Quest playerQuests[], int bundleTracker[]) {
   thePlayer = p;
+
+  while(true) {
+    int choice;
+
+    cout << endl << endl;
+    cout << "Day: " << thePlayer.getDay() << " Time: " << thePlayer.getTime() << endl;
+    cout << "What would you like to do next? " << endl;
+    //First menu
+    cout << "===========================" << endl;
+    cout << "1. Leave the " << getName() << endl;
+    cout << "2. Talk to the dwarf" << endl;
+    cout << "3. Check inventory" << endl;
+    cout << "4. Check quests" << endl;
+    cout << "5. Check map" << endl;
+    cout << "6. Sell/Buy items to the dwarf" << endl;
+    cout << "7. Going mining" << endl;
+    cout << "-1. Exit the game" << endl;
+    cout << "===========================" << endl;
+    cin >> choice;
+    if (thePlayer.setTime()) {
+        cout << "It got too late, you passed out" << endl;
+        thePlayer.newDayOutside();
+        return true;
+    }
+    switch(choice) {
+      case 1: {
+        cout << "Leaving the mines! Going to town." << endl;
+        thePlayer.setLocation("Town");
+        return true;
+        break;
+      }
+      case 2: {}
+
+      case 3: {
+        cout << "The items in your inventory are:" << endl;
+        for (int i = 0; i < 10; i++) {
+            if (!(inventory[i].getAmount() == 0)) {
+            cout << inventory[i].getAmount() << " " << inventory[i].getName() << endl;
+            }
+        }
+        break;
+      }
+
+      case 4: {
+        bool hasQuests = false;
+        cout << "Your bundle quests are: " << endl;
+        for (int i = 0; i < 5; i++) {
+            if (playerQuests[i].getIfActive()) {
+                hasQuests = true;
+                cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() << "." << endl;
+            }
+        }
+        hasQuests = false;
+        cout << "Your other quests are: " << endl;
+        for (int i = 5; i < 10; i++) {
+            if (playerQuests[i].getIfActive()) {
+                hasQuests = true;
+                cout << playerQuests[i].getName() << ": " << playerQuests[i].getDescription() <<  ". The reward is " << playerQuests[i].getReward().getName()  << "." << endl;
+            }
+        }
+        if (!hasQuests) {
+            cout << "You have no other quests active currently" << endl;
+        }
+        break;
+      }
+      case 5: {
+        cout << "                Mines" << endl;
+        cout << "                  |" << endl;
+        cout << "                  |" << endl;
+        cout << "Farm ----------- Town ----------- Joja Mart" << endl;
+        cout << "                  |" << endl;
+        cout << "                  |" << endl;
+        cout << "                Beach" << endl;
+
+        cout << endl << "Currently at " << thePlayer.getLocation() << "." << endl;
+        break;
+      }
+    }
+  }
 }
 
 

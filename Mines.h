@@ -21,8 +21,9 @@ class Mines : public Location {
     void Mine (Item inventory[], int bundleTracker[]);
     bool searchPlayerInventory(Item questItem, Item inventory[10]);
     void questCheck(int p, Quest playerQuests[10], Item inventory[10]);
-    bool mineTerminal(Player p, Item inventory[], Quest q[]);
+    bool mineTerminal(Player p, Item inventory[], Quest playerQuests[], int bundleTracker[]);
     Mines(std::string n, std::vector<Villager> people);
+    Player getThePlayer();
 
 };
 

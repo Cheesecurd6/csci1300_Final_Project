@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 #include "player.h"
 #include "location.h"
 #include "villager.h"
@@ -9,6 +10,7 @@
 #include "Crop.h"
 #include "Town.h"
 #include "Quest.h"
+#include "Mines.h"
 using namespace std;
 
 
@@ -24,9 +26,33 @@ void whereAmI(std::string name,std::string location) {
 
 
 int main() {
+    vector<Villager> townPeople{};
     Player mainPlayer;
     vector<Villager> farmPeople;
-    vector<Villager> townPeople {Villager("the town's mayor", "Lewis","Bring Lewis his parsnips"),Villager("the local storekeep for the general store we got here", "Pierre","Research for Pierre")};
+    vector<Villager> minePeople {Villager("the only dwarf left", "The Dwarf", "All the Ores")};
+    
+    ifstream inFile("townVillager.txt");
+    if (!inFile.is_open()) {
+        cout << "Error: could not open townVillager.txt" << endl;
+        return 1;
+    }
+    string line;
+    while (getline(inFile, line)) {
+        string description;
+        string name;
+        string quest;
+        int comma1 = line.find(",");
+        description = line.substr(0, comma1);
+        int comma2 = line.find(",",comma1 + 1);
+        name = (line.substr(comma1 + 1, (comma2 - comma1 -1)));
+        int comma3 = line.find(",",comma2 + 1);
+        quest = (line.substr(comma2 + 1, (comma3 - comma2 -1)));
+        townPeople.push_back(Villager(description,name,quest));
+    }
+    inFile.close();
+
+    
+
     Quest playerQuests[10] = {
                             Quest("Bring 10 blueberries to the final bundle in town", "Complete the final bundle's crops requirement", Item("being one step closer to finishing the bundle"),Item("Grows so that one plant can produce fruit mutiple times ", 10, "Blueberry(s)", 0),1,0),
                             Quest("Bring truffle oil to the final bundle in town", "Complete the final bundle's animal product requirement", Item("being one step closer to finishing the bundle"), Item("Truffle oil smells funky but can be used to cook amazing dishes",1,"Truffle Oil",0),1,0),
@@ -38,6 +64,7 @@ int main() {
                         };
     Farm farm("Farm", farmPeople);
     Town town("Town", townPeople);
+    Mines mines("Mines",minePeople);
     std::string farmName;
     Item parsnipSeeds("The humblest of crops " , 10, "Parsnip seeds", 1);
     //Item starfruitSeeds("Truly luxurious fruit with a slight tangy flavor ", 15, "Starfruit seeds", 1);
@@ -68,6 +95,10 @@ int main() {
         else if (mainPlayer.getLocation() == "Town") {
             gameOn = town.townTerminal(mainPlayer,inventory,playerQuests,bundleTracker);
             mainPlayer = town.getThePlayer();
+        }
+        else if(mainPlayer.getLocation() == "Mines") {
+            gameOn = mines.mineTerminal(mainPlayer,inventory,playerQuests,bundleTracker);
+            mainPlayer = mines.getThePlayer();
         }
     }
 
