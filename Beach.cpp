@@ -244,9 +244,9 @@
     while(true) {
         int choice;
         for (int i = 0; i < 10; i++) {
-        if ((inventory[i].getName() == "Emerald(s)") && (inventory[i].getAmount() >= 3)) {
-            if (bundleTracker[4] == 2) {
-            bundleTracker[4] = 3;
+        if ((inventory[i].getName() == "Tuna") && (inventory[i].getAmount() >= 5)) {
+            if (bundleTracker[3] <= 2) {
+            bundleTracker[3] = 3;
             }
         }
         }
@@ -280,9 +280,12 @@
             case 2: {
                 int choice3;
                 cout << "===========================" << endl;
-                cout << "\"Oh hello there " << thePlayer.getName() << ", I'm " << getPeople()[0].getName() << " " << getPeople()[0].getDescription() << ", are you a spy for the shadow people?\"" << endl;
+                cout << "\"Oh hello there " << thePlayer.getName() << ", I'm " << getPeople()[0].getName() << " " << getPeople()[0].getDescription() << ", what can I do for you?\"" << endl;
                 cout << "===========================" << endl;
                 questCheck(0, playerQuests, inventory);
+                if (bundleTracker[3] <= 3) {
+                    bundleTracker[3] = 4;
+                }
 
                 cout << "===========================" << endl;
                 cout << "1. \"What fish are there?\"" << endl;
@@ -323,7 +326,7 @@
                                     playerQuests[i].setIfActive(1);
                                 } 
                             }
-                            if (bundleTracker[3] == 1) {
+                            if (bundleTracker[3] <= 1) {
                                 bundleTracker[3] = 2;
                             }
                         }

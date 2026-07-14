@@ -104,10 +104,10 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                                 cout << "For the blueberries you'll just have to buy 2 seeds from the store we got here and plant them yourself." << endl;
                                 cout << "I can help you with the truffle oil myself, just ask me later if there's anything I need help with." << endl;
                                 cout << "Pierre definitely has a crystal fruit so go ask him if you can help him with anything in return for the fruit." << endl;
-                                cout << "The octopus you'd definitely have to ask Willy about." << endl;
+                                cout << "The octopus you'd definitely have to ask Willy about, he lives at the beach." << endl;
                                 cout << "Finally, the diamond is the thing I'm most unsure about, maybe travel to the mines and see if the Dwarf can help you. Be warned he's a tad paranoid.\"" << endl;
                                 for (int i = 0; i < 5; i++) {
-                                    if (bundleTracker[i] == 0) {
+                                    if (bundleTracker[i] <= 0) {
                                         bundleTracker[i] = 1;
                                     }
                                 }
@@ -132,7 +132,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                                             playerQuests[i].setIfActive(1);
                                         } 
                                     } 
-                                    if (bundleTracker[1] == 1) {
+                                    if (bundleTracker[1] <= 1) {
                                             bundleTracker[1] = 2;
                                     }
                                 
@@ -307,7 +307,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                             buy(inventory,"Blueberry seeds", "Grows so that one plant can produce mutiple fruits when harvested",35);
                             for (int i = 0; i < 10; i++) {
                                 if ((inventory[i].getName() == "Blueberry seeds") && (inventory[i].getAmount() >= 2)) {
-                                    if (bundleTracker[0] == 1) {
+                                    if (bundleTracker[0] <= 1) {
                                         bundleTracker[0] = 2;
                                     }
                                 }
@@ -559,6 +559,24 @@ void Town::bundlePlanner(Quest playerQuests[10], int bundleTracker[]) {
         }
         else if (bundleTracker[2] == 4) {
             cout << "Harvest your starfruit and bring it to Pierre" << endl;
+        }
+    }
+    if (!playerQuests[3].getIfCompleted()) {
+        cout << "Fish requirement: ";
+        if (bundleTracker[3] == 0) {
+            cout << "Talk to Mayor Lewis about your next step" << endl;
+        }
+        else if (bundleTracker[3] == 1) {
+            cout << "Go to the beach and talk to Willy about getting an octopus" << endl;
+        }
+        else if (bundleTracker[3] == 2) {
+            cout << "Fish for 5 tuna at the beach" << endl;
+        }
+        else if (bundleTracker[3] == 3) {
+            cout << "Bring you 5 tuna to Willy" << endl;
+        }
+        else if (bundleTracker[3] == 4) {
+            cout << "Use the deluxe bait Willy gave you to fish for an octopus" << endl;
         }
     }
     if (!playerQuests[4].getIfCompleted()) {

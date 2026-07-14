@@ -101,19 +101,19 @@ if (thePlayer.getIfDayPassed()) {
 while(true) {
     int choice;
     if (getHarvestable(blueberries) >= 2) {
-        if (bundleTracker[0] == 3) {
+        if (bundleTracker[0] <= 3) {
             bundleTracker[0] = 4;
         }
     }
 
     if (getHarvestable(parsnips) >= 10) {
-        if (bundleTracker[1] == 3) {
+        if (bundleTracker[1] <= 3) {
             bundleTracker[1] = 4;
         }
     }
 
     if (getHarvestable(starfruits) >= 1) {
-        if (bundleTracker[2] == 3) {
+        if (bundleTracker[2] <= 3) {
             bundleTracker[2] = 4;
         }
     }
@@ -204,7 +204,7 @@ while(true) {
                             }
                             
                             if (getPlanted(parsnips) >= 10) {
-                                if (bundleTracker[1] == 2) {
+                                if (bundleTracker[1] <= 2) {
                                     bundleTracker[1] = 3;
                                 }
                             }
@@ -258,7 +258,7 @@ while(true) {
                                 cout << "You don't have any starfruit seeds" << endl;
                             }
                             if (getPlanted(starfruits) >= 1) {
-                                if (bundleTracker[2] == 2) {
+                                if (bundleTracker[2] <= 2) {
                                     bundleTracker[2] = 3;
                                 }
                             }
@@ -311,7 +311,7 @@ while(true) {
                                 cout << "You don't have any blueberry seeds" << endl;
                             }
                             if (getPlanted(blueberries) >= 2) {
-                                if (bundleTracker[0] == 2) {
+                                if (bundleTracker[0] <= 2) {
                                     bundleTracker[0] = 3;
                                 }
                             }

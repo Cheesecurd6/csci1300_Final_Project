@@ -230,7 +230,7 @@ bool Mines::mineTerminal(Player p, Item inventory[], Quest playerQuests[], int b
     int choice;
     for (int i = 0; i < 10; i++) {
       if ((inventory[i].getName() == "Emerald(s)") && (inventory[i].getAmount() >= 3)) {
-        if (bundleTracker[4] == 2) {
+        if (bundleTracker[4] <= 2) {
           bundleTracker[4] = 3;
         }
       }
@@ -309,7 +309,7 @@ bool Mines::mineTerminal(Player p, Item inventory[], Quest playerQuests[], int b
                               playerQuests[i].setIfActive(1);
                           } 
                       }
-                      if (bundleTracker[4] == 1) {
+                      if (bundleTracker[4] <= 1) {
                         bundleTracker[4] = 2;
                       }
                 }
