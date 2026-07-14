@@ -11,6 +11,7 @@
 #include "Town.h"
 #include "Quest.h"
 #include "Mines.h"
+#include "Beach.h"
 using namespace std;
 
 
@@ -29,6 +30,7 @@ int main() {
     vector<Villager> townPeople{};
     Player mainPlayer;
     vector<Villager> farmPeople;
+    vector<Villager> beachPeople{Villager("the town's local fisherman", "Willy","Supply Issues")};
     vector<Villager> minePeople {Villager("the only dwarf left", "The Dwarf", "The Crown Jewels")};
 
     ifstream inFile("townVillager.txt");
@@ -61,11 +63,13 @@ int main() {
                             Quest("Bring a diamond to the final bundle in town", "Complete the final bundle's mineral requirement", Item("being one step closer to finishing the bundle"),Item("Shiny shiny", 1, "Diamond(s)", 0),1,0),
                             Quest("Gather 10 parsnips and give them to Mayor Lewis, free of charge, in exchange for a reward","Bring Lewis his parsnips", Item("Truffle oil smells funky but can be used to cook amazing dishes",1,"Truffle Oil",0), Item("The humblest of crops" , 10, "Parsnip(s)", 0),0,0 ), 
                             Quest("Take the starfruit seed Pierre gave you and plant it. Deliver to him the final product","Research for Pierre",Item("A prize fruit, often only foraged during the winter or collected from the coldest depths of the mines",1,"Crystal Fruit",0), Item("Truly luxurious fruit with a slight tangy flavor", 1 , "Starfruit(s)",0 ),0,0),
+                            Quest("Fish at the beach for 5 sardines and then bring them to Willy", "Supply Issues", Item("The very base bait available on the market",1,"Deluxe Bait", 0), Item("One of the more valuable fish in the sea", 5, "Tuna", 0),0,0),
                             Quest("Venture into the mines and find an emerald for the Dwarf","The Crown Jewels", Item("Shiny shiny", 1, "Diamond(s)", 0), Item("A lovely shade of green with an enchanting shimmer", 3, "Emerald(s)",0),0,0)
                         };
     Farm farm("Farm", farmPeople,0);
     Town town("Town", townPeople,0);
     Mines mines("Mines",minePeople,0);
+    Beach beach("Beach",beachPeople,0);
     std::string farmName;
     Item parsnipSeeds("The humblest of crops " , 10, "Parsnip seeds", 1);
     //Item starfruitSeeds("Truly luxurious fruit with a slight tangy flavor ", 15, "Starfruit seeds", 1);
@@ -100,6 +104,10 @@ int main() {
         else if(mainPlayer.getLocation() == "Mines") {
             gameOn = mines.mineTerminal(mainPlayer,inventory,playerQuests,bundleTracker);
             mainPlayer = mines.getThePlayer();
+        }
+        else if(mainPlayer.getLocation() == "Beach") {
+            gameOn = beach.beachTerminal(mainPlayer,inventory,playerQuests,bundleTracker);
+            mainPlayer = beach.getThePlayer();
         }
     }
 

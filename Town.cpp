@@ -104,7 +104,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                                 cout << "For the blueberries you'll just have to buy 2 seeds from the store we got here and plant them yourself." << endl;
                                 cout << "I can help you with the truffle oil myself, just ask me later if there's anything I need help with." << endl;
                                 cout << "Pierre definitely has a crystal fruit so go ask him if you can help him with anything in return for the fruit." << endl;
-                                cout << "The octopus you'd definitely have to ask Willey about." << endl;
+                                cout << "The octopus you'd definitely have to ask Willy about." << endl;
                                 cout << "Finally, the diamond is the thing I'm most unsure about, maybe travel to the mines and see if the Dwarf can help you. Be warned he's a tad paranoid.\"" << endl;
                                 for (int i = 0; i < 5; i++) {
                                     if (bundleTracker[i] == 0) {

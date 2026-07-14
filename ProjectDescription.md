@@ -30,7 +30,7 @@ Items of the bundle will require help from the villagers or Joja to get.
 
 Sometimes the help will be the item given directly to the player after a favor and enough relationship with a villager. For example, Lewis will give truffle oil to the player once they help him with his affair with Marnie and negotiating with Joja. The Joja route would be to help them sabatoge Lewis in exchange for truffle oil. The sabatoge would be easy and take very little effort.
 
-The item might also only be acquired by getting a certain item to then get the bundle item. For example, Willy will provide the player ultra deluxe bait to help catch octopus in exchange for helping him fix his shack and bait supply. The player can also just buy Joja brand Super Bait.
+The item might also only be acquired by getting a certain item to then get the bundle item. For example, Willy will provide the player deluxe bait to help catch octopus in exchange for helping him fix his shack and bait supply. The player can also just buy Joja brand Super Bait.
 
 Picking the Joja option will increase their influence up to a number of 10.
 
