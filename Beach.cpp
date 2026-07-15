@@ -431,7 +431,7 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
                         }
 
                         case 5: {
-                            sell(inventory,"Octopus",100);
+                            sell(inventory,"Octopus",500);
                             break;
                         }
                         case 6: {

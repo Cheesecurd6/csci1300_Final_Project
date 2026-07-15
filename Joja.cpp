@@ -167,7 +167,7 @@ bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bu
                         break;
                     }
                     case 3: {
-                        cout << "\"Nothing will happen immediatley, but well you hold a certain sway in this town. Buying from us is an endorsement, and an endorsement from you is worth more than gold. People will see the Joja side of things eventually. They are already starting too. We'll help you build the community center, but that won't drive us out of town.\"" << endl;
+                        cout << "\"Nothing will happen immediateley, but well you hold a certain sway in this town. Buying from us is an endorsement, and an endorsement from you is worth more than gold. People will see the Joja side of things eventually. They are already starting too. We'll help you build the community center, but that won't drive us out of town.\"" << endl;
                         break;
                     }
                 }
@@ -279,7 +279,7 @@ bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bu
                             break;
                         }
                         case 8: {
-                            buy(inventory,"Diamond","Shiny shiny", 1000);
+                            buy(inventory,"Diamond(s)","Shiny shiny", 1000);
                             break;
                         }
                         case 9: {
