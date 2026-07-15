@@ -25,6 +25,7 @@ class Player {
     void setEnergy(int playerEnergy);
     void setJoja(int playerJoja);
     void setGold(int additionalGold);
+    void setIfDay();
 
     
     private:

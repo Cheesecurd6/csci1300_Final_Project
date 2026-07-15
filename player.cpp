@@ -73,6 +73,10 @@
         return dayHasPassed;
     }
 
+    void Player::setIfDay() {
+        dayHasPassed = 0;
+    }
+
     int Player::getGold() {
         return gold;
     }

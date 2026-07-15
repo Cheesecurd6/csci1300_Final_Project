@@ -521,6 +521,7 @@ cout << "===========================" << endl;
 cout << "It's a new day on the farm." << endl;
 cout << "===========================" << endl;
 
+thePlayer.setIfDay();
 }
 
 
