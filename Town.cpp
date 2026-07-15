@@ -6,6 +6,7 @@
 #include "player.h"
 #include "Item.h"
 #include "Town.h"
+#include "Validation.h"
 using namespace std;
 
 Town::Town(std::string n, std::vector<Villager> people, int l) : Location(n, people,l) {}
@@ -29,9 +30,9 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
         cout << "5. Check map" << endl;
         cout << "6. Sell/Buy items at the store" << endl;
         cout << "7. Check the bundle" << endl;
-        cout << "-1. Exit the game" << endl;
+        cout << "0. Exit the game" << endl;
         cout << "===========================" << endl;
-        cin >> choice;
+        choice = promptInt(0,7);
         if (thePlayer.setTime()) {
             cout << "It got too late, you passed out" << endl;
             thePlayer.newDayOutside();
@@ -48,7 +49,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                 cout << "3. The Joja Mart" << endl;
                 cout << "4. The Beach" << endl;
                 cout << "===========================" << endl;
-                cin >> choice2;
+                choice2 = promptInt(1,4);
                 switch(choice2) {
                     case 1: {
                         thePlayer.setLocation("Farm");
@@ -80,7 +81,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                 cout << "1. Talk to " << getPeople()[0].getName() << endl;
                 cout << "2. Talk to " << getPeople()[1].getName() << endl;
                 cout << "===========================" << endl;
-                cin >> choice2;
+                choice2 = promptInt(1,2);
                 switch(choice2) {
                     case 1: {
                         int choice3;
@@ -94,7 +95,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                         cout << "2. \"How's Joja's influence in Stardew Valley?\"" << endl;
                         cout << "3. \"Is there anything I can help you with?\"" << endl;
                         cout << "===========================" << endl;
-                        cin >> choice3;
+                        choice3 = promptInt(1,3);
                         switch (choice3) {
                             case 1:{
                                 cout << "\"Well theres a few important things you can do." << endl;
@@ -157,7 +158,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                         cout << "3. \"Is there anything I can help you with?\"" << endl;
                         cout << "===========================" << endl;
 
-                        cin >> choice3;
+                        choice3 = promptInt(1,3);
                         switch (choice3) {
                             case 1:{}
                             case 2:{}
@@ -272,7 +273,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                     cout << "6. Sell blueberries" << endl;
                     cout << "7. Exit" << endl;
                     cout << "===========================" << endl;
-                    cin >> choice2;
+                    choice2 = promptInt(1,7);
 
                     if (thePlayer.setTime()) {
                         cout << "It got too late, you passed out" << endl;
@@ -352,7 +353,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                 break;
             }
 
-            case -1: {
+            case 0: {
                 return false;
             }
         }
@@ -364,7 +365,7 @@ void Town::buy(Item inventory[10], std::string name, std::string description, in
     int amountBought;
     cout << name << " cost " << price << " gold." << endl;
     cout << "How many would you like to purchase? ";
-    cin >> amountBought;
+    amountBought = promptInt(0,1000);
 
     if (amountBought * price <= thePlayer.getGold()) {
         bool spaceFound = false;
@@ -410,7 +411,7 @@ void Town::sell(Item inventory[10], std::string name, int value) {
     if (found) {
         cout << "You currently have " << inventory[index].getAmount() << " " << inventory[index].getName() << "." << endl;
         cout << "How many do you want to sell? ";
-        cin >> amountSold;
+        amountSold = promptInt(0,1000);
 
     if (amountSold <= inventory[index].getAmount()) {
         inventory[index].setAmount(-amountSold);

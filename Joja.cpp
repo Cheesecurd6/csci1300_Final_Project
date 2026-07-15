@@ -7,6 +7,7 @@
 #include "Item.h"
 #include "Town.h"
 #include "Joja.h"
+#include "Validation.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ void Joja::buy(Item inventory[10], std::string name, std::string description, in
     int amountBought;
     cout << name << " cost " << price << " gold." << endl;
     cout << "How many would you like to purchase? ";
-    cin >> amountBought;
+    amountBought = promptInt(0,1000);
 
     if (amountBought * price <= thePlayer.getGold()) {
         bool spaceFound = false;
@@ -76,7 +77,7 @@ bool Joja::addItem(Item inventory[10], Item questReward) {
     }
 }
 
-bool searchPlayerInventory(Item questItem, Item inventory[10]) {
+bool Joja::searchPlayerInventory(Item questItem, Item inventory[10]) {
     for (int i = 0; i < 10; i++) {
         if (inventory[i].getName() == questItem.getName()) {
             if(inventory[i].getAmount() >= questItem.getAmount()) {
@@ -115,6 +116,7 @@ void Joja::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
 
 bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bundleTracker[]) {
     thePlayer = p;
+    cout << bundleTracker[1] << endl;
     while(true) {
         int choice;
         cout << endl << endl;
@@ -128,9 +130,9 @@ bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bu
         cout << "4. Check quests" << endl;
         cout << "5. Check map" << endl;
         cout << "6. Buy items" << endl;
-        cout << "-1. Exit the game" << endl;
+        cout << "0. Exit the game" << endl;
         cout << "===========================" << endl;
-        cin >> choice;
+        choice = promptInt(0,6);
         if (thePlayer.setTime()) {
             cout << "It got too late, you passed out" << endl;
             thePlayer.newDayOutside();
@@ -154,7 +156,7 @@ bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bu
                 cout << "2. \"Do you ever feel bad that your corporation's greed is destroying this town?\"" << endl;
                 cout << "3. \"What'll happen to the community center if I buy items from you?\"" << endl;
                 cout << "===========================" << endl;
-                cin >> choice3;
+                choice3 = promptInt(0,3);
                 switch(choice3) {
                     case 1: {
                         cout << "\"Young man Joja has it all, blueberries, truffle oil, crystal fruit, octopus, even lab-grown diamonds. I hear those are the things your looking for. If you need help finding anything I'm happy to help. We also sell seeds, at much more affordable prices than that swindler Pierre. Just remember join us, thrive.\"" << endl;
@@ -233,7 +235,7 @@ bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bu
                     cout << "8. Buy diamonds" << endl;
                     cout << "9. Exit" << endl;
                     cout << "===========================" << endl;
-                    cin >> choice2;
+                    choice2 = promptInt(1,9);
 
                     if (thePlayer.setTime()) {
                         cout << "It got too late, you passed out" << endl;
@@ -284,7 +286,7 @@ bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bu
                 }
                 break;
             }
-            case -1: {
+            case 0: {
                 return false;
                 break;
             }

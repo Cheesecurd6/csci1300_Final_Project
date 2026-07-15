@@ -2,6 +2,7 @@
 #include <vector>
 #include <random>
 #include "Beach.h"
+#include "Validation.h"
 
 using namespace std;
 
@@ -36,7 +37,7 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
     cout << "1. Yes" << endl;
     cout << "2. No" << endl;
     cout << "===========================" << endl;
-    cin >> choice;
+    choice = promptInt(1,2);
 
     if (choice == 1) {
         cout << "===========================" << endl;
@@ -47,7 +48,7 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
         if (found2) {
             cout << "2. Deluxe Bait" << endl;
         }
-        cin >> choice2;
+        choice2 = promptInt(1,2);
         switch(choice2) {
             case 1: {
                 if (searchPlayerInventory(Item("Just normal bait used to catch fish", 1 , "Bait", 5), inventory)) {
@@ -113,8 +114,7 @@ void Beach::buy(Item inventory[10], std::string name, std::string description, i
     int amountBought;
     cout << name << " cost " << price << " gold." << endl;
     cout << "How many would you like to purchase? ";
-    cin >> amountBought;
-
+    amountBought = promptInt(0,1000);
     if (amountBought * price <= thePlayer.getGold()) {
         bool spaceFound = false;
         for (unsigned int i = 0; i < 10; i++) {
@@ -159,8 +159,7 @@ void Beach::sell(Item inventory[10], std::string name, int value) {
     if (found) {
         cout << "You currently have " << inventory[index].getAmount() << " " << inventory[index].getName() << "." << endl;
         cout << "How many do you want to sell? ";
-        cin >> amountSold;
-
+        amountSold = promptInt(0,1000);
         if (amountSold <= inventory[index].getAmount()) {
             inventory[index].setAmount(-amountSold);
             thePlayer.setGold(amountSold * value);
@@ -262,9 +261,9 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
         cout << "5. Check map" << endl;
         cout << "6. Sell/Buy items from Willy" << endl;
         cout << "7. Go Fishing" << endl;
-        cout << "-1. Exit the game" << endl;
+        cout << "0. Exit the game" << endl;
         cout << "===========================" << endl;
-        cin >> choice;
+        choice = promptInt(0,7);
         if (thePlayer.setTime()) {
             cout << "It got too late, you passed out" << endl;
             thePlayer.newDayOutside();
@@ -292,7 +291,7 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
                 cout << "2. \"How can I fish for better fish?\"" << endl;
                 cout << "3. \"How can I get an octopus?\"" << endl;
                 cout << "===========================" << endl;
-                cin >> choice3;
+                choice3 = promptInt(1,3);
                 switch (choice3) {
                     case 1:{
                     cout << "\"There's a lot of things you might pull out of the ocean." << endl;
@@ -403,7 +402,7 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
                     cout << "5. Sell octopus" << endl;
                     cout << "6. Exit" << endl;
                     cout << "===========================" << endl;
-                    cin >> choice2;
+                    choice2 = promptInt(1,6);
 
                     if (thePlayer.setTime()) {
                         cout << "It got too late, you passed out" << endl;
@@ -447,7 +446,7 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
                 Fish(inventory);
                 break;
             }
-            case -1: {
+            case 0: {
                 return false;
                 break;
             }

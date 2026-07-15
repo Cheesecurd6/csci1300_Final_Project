@@ -3,6 +3,7 @@
 #include <string>
 #include <random>
 #include "Mines.h"
+#include "Validation.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ void Mines::Mine (Item inventory[]) {
     cout << "1. Yes" << endl;
     cout << "2. No" << endl;
     cout << "===========================" << endl;
-    cin >> choice;
+    choice = promptInt(1,2);
 
     if (choice == 1) {
       if (searchPlayerInventory(Item("Explosive device used in the mines", 1 , "Bomb", 100), inventory)) {
@@ -137,7 +138,7 @@ void Mines::buy(Item inventory[10], std::string name, std::string description, i
   int amountBought;
   cout << name << " cost " << price << " gold." << endl;
   cout << "How many would you like to purchase? ";
-  cin >> amountBought;
+  amountBought = promptInt(0,1000);
 
   if (amountBought * price <= thePlayer.getGold()) {
       bool spaceFound = false;
@@ -182,7 +183,7 @@ void Mines::sell(Item inventory[10], std::string name, int value) {
   if (found) {
       cout << "You currently have " << inventory[index].getAmount() << " " << inventory[index].getName() << "." << endl;
       cout << "How many do you want to sell? ";
-      cin >> amountSold;
+      amountSold = promptInt(0,1000);
 
     if (amountSold <= inventory[index].getAmount()) {
         inventory[index].setAmount(-amountSold);
@@ -247,9 +248,9 @@ bool Mines::mineTerminal(Player p, Item inventory[], Quest playerQuests[], int b
     cout << "5. Check map" << endl;
     cout << "6. Sell/Buy items to the dwarf" << endl;
     cout << "7. Go mining, takes double the time of other actions" << endl;
-    cout << "-1. Exit the game" << endl;
+    cout << "0. Exit the game" << endl;
     cout << "===========================" << endl;
-    cin >> choice;
+    choice = promptInt(0,7);
     if (thePlayer.setTime()) {
         cout << "It got too late, you passed out" << endl;
         thePlayer.newDayOutside();
@@ -274,7 +275,7 @@ bool Mines::mineTerminal(Player p, Item inventory[], Quest playerQuests[], int b
         cout << "2. \"How can I find better more valuable things in the mines?\"" << endl;
         cout << "3. \"How can I obtain a diamond?\"" << endl;
         cout << "===========================" << endl;
-        cin >> choice3;
+        choice3 = promptInt(1,3);
         switch (choice3) {
             case 1:{
               cout << "\"There's a lot of different things you might find down there." << endl;
@@ -391,7 +392,7 @@ bool Mines::mineTerminal(Player p, Item inventory[], Quest playerQuests[], int b
             cout << "7. Sell diamonds" << endl;
             cout << "8. Exit" << endl;
             cout << "===========================" << endl;
-            cin >> choice2;
+            choice2 = promptInt(1,8);
 
             if (thePlayer.setTime()) {
                 cout << "It got too late, you passed out" << endl;
@@ -451,7 +452,7 @@ bool Mines::mineTerminal(Player p, Item inventory[], Quest playerQuests[], int b
         break;
       }
 
-      case -1: {
+      case 0: {
         return false;
         break;
       }

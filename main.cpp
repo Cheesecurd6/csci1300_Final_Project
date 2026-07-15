@@ -12,6 +12,7 @@
 #include "Quest.h"
 #include "Mines.h"
 #include "Beach.h"
+#include "Joja.h"
 using namespace std;
 
 
@@ -32,6 +33,7 @@ int main() {
     vector<Villager> farmPeople;
     vector<Villager> beachPeople{Villager("the town's local fisherman", "Willy","Supply Issues")};
     vector<Villager> minePeople {Villager("the only dwarf left", "The Dwarf", "The Crown Jewels")};
+    vector<Villager> jojaPeople {Villager("the local Joja representative", "Morris", "N/A")};
 
     ifstream inFile("townVillager.txt");
     if (!inFile.is_open()) {
@@ -70,6 +72,7 @@ int main() {
     Town town("Town", townPeople,0);
     Mines mines("Mines",minePeople,0);
     Beach beach("Beach",beachPeople,0);
+    Joja jojaMart("Joja Mart",jojaPeople,0);
     std::string farmName;
     Item parsnipSeeds("The humblest of crops " , 10, "Parsnip seeds", 1);
     //Item starfruitSeeds("Truly luxurious fruit with a slight tangy flavor ", 15, "Starfruit seeds", 1);
@@ -108,6 +111,10 @@ int main() {
         else if(mainPlayer.getLocation() == "Beach") {
             gameOn = beach.beachTerminal(mainPlayer,inventory,playerQuests,bundleTracker);
             mainPlayer = beach.getThePlayer();
+        }
+        else if(mainPlayer.getLocation() == "Joja Mart") {
+            gameOn = jojaMart.jojaTerminal(mainPlayer,inventory,playerQuests,bundleTracker);
+            mainPlayer = jojaMart.getThePlayer();
         }
     }
 

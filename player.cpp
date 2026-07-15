@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include "player.h"
+#include "Validation.h"
 
     std::string Player::getLocation() const {
         return location;
@@ -23,7 +24,7 @@
     }
     void Player::setName() {
         std::cout << "What's your name? ";
-        getline(std::cin , name);
+        promptString();
     }
     void Player::setDay(int playerDay) {
         day = playerDay;

@@ -4,6 +4,7 @@
 #include "Farm.h"
 #include "Crop.h"
 #include "Item.h"
+#include "Validation.h"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ void Farm::plant(int parsnipSeeds, int starfuitSeeds, int blueberrySeeds) {
 void Farm::waterCrops(vector<Crop> crops,string name) {
     int waterCount;
     cout << "How many do you want to water? ";
-    cin >> waterCount;
+    waterCount = promptInt(0,1000);
     if ((thePlayer.getEnergy() - 2*waterCount) < 0) {
         cout << "You don't have enough energy to do that" << endl;
     } 
@@ -129,9 +130,9 @@ while(true) {
     cout << "4. Check quests" << endl;
     cout << "5. Check map" << endl;
     cout << "6. Sleep" << endl;
-    cout << "-1. Exit the game" << endl;
+    cout << "0. Exit the game" << endl;
     cout << "===========================" << endl;
-    cin >> choice;
+    choice = promptInt(0,6);
     //Choice for first menu
     switch(choice) {
 
@@ -178,14 +179,14 @@ while(true) {
                 cout << "9. Harvest blueberries" << endl;
                 cout << "10. Exit" << endl;
                 cout << "===========================" << endl;
-                cin >> choice2;
+                choice2 = promptInt(1,10);
                 //choice for second menu
                     switch (choice2) {
                         case 1: {
                             bool found = false;
                             int cropCount;
                             cout << "How many do you want to plant? ";
-                            cin >> cropCount;
+                            cropCount = promptInt(0,1000);
                             for (int i = 0; i < 10; i++) {
                                 if (inventory[i].getName() == "Parsnip seeds") {
                                     found = true;
@@ -240,7 +241,7 @@ while(true) {
                             bool found = false;
                             int cropCount;
                             cout << "How many do you want to plant? ";
-                            cin >> cropCount;
+                            cropCount = promptInt(0,1000);
                             for (int i = 0; i < 10; i++) {
                                 if (inventory[i].getName() ==  "Starfruit seeds") {
                                     found = true;
@@ -293,7 +294,7 @@ while(true) {
                             bool found = false;
                             int cropCount;
                             cout << "How many do you want to plant? ";
-                            cin >> cropCount;
+                            cropCount = promptInt(0,1000);
                             for (int i = 0; i < 10; i++) {
                                 if (inventory[i].getName() == "Blueberry seeds") {
                                     found = true;
@@ -424,7 +425,7 @@ while(true) {
         }
 
         
-        case -1: {
+        case 0: {
             return false;
         }
         default: {
@@ -440,7 +441,7 @@ void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string
     bool spaceFound = false;
     int howManyHarvest;
     cout << "How many do you want to harvest? ";
-    cin >> howManyHarvest;
+    howManyHarvest = promptInt(0,1000);
     for (unsigned int i = 0; i < crops.size();) {
         if (crops[i].getIfHarvestable()) {
             harvestCount++;
