@@ -113,8 +113,8 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                             case 2:{}
                             case 3: {
                                 cout << endl;
-                                bool isActive;
-                                bool isCompleted;
+                                bool isActive = false;
+                                bool isCompleted = false;
                                 for (int i = 0; i < 10; i++) {
                                     if (playerQuests[i].getName() == getPeople()[0].getQuest()) {
                                         isActive = playerQuests[i].getIfActive();
@@ -163,8 +163,8 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                             case 2:{}
                             case 3: {
                                 cout << endl;
-                                bool isActive;
-                                bool isCompleted;
+                                bool isActive = false;
+                                bool isCompleted = false;
                                 for (int i = 0; i < 10; i++) {
                                     if (playerQuests[i].getName() == getPeople()[1].getQuest()) {
                                         isActive = playerQuests[i].getIfActive();

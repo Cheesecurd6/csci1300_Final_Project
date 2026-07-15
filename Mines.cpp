@@ -293,8 +293,8 @@ bool Mines::mineTerminal(Player p, Item inventory[], Quest playerQuests[], int b
             }
             case 3: {
                 cout << endl;
-                bool isActive;
-                bool isCompleted;
+                bool isActive = false;
+                bool isCompleted = false;
                 for (int i = 0; i < 10; i++) {
                     if (playerQuests[i].getName() == getPeople()[0].getQuest()) {
                         isActive = playerQuests[i].getIfActive();

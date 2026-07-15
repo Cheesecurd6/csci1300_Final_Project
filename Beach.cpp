@@ -53,11 +53,13 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
                 if (searchPlayerInventory(Item("Just normal bait used to catch fish", 1 , "Bait", 5), inventory)) {
                     luck++;
                 }
+                break;
             }
             case 2: {
                 if (searchPlayerInventory(Item("Deluxe bait attracting much rarer fish", 1 , "Deluxe Bait", 100), inventory)) {
                     luck+=3;
                 }
+                break;
             }
         }
     }
@@ -144,7 +146,7 @@ void Beach::buy(Item inventory[10], std::string name, std::string description, i
 
 void Beach::sell(Item inventory[10], std::string name, int value) {
     int amountSold;
-    int index;
+    int index =-1;
     bool found = 0;
     cout << name << " sell for " << value << " gold each" << endl;
     for (int i = 0; i < 10; i++) {
@@ -159,13 +161,13 @@ void Beach::sell(Item inventory[10], std::string name, int value) {
         cout << "How many do you want to sell? ";
         cin >> amountSold;
 
-    if (amountSold <= inventory[index].getAmount()) {
-        inventory[index].setAmount(-amountSold);
-        thePlayer.setGold(amountSold * value);
-    }
-    else {
-        cout << "You don't have that many " << name  << "." << endl;
-    }
+        if (amountSold <= inventory[index].getAmount()) {
+            inventory[index].setAmount(-amountSold);
+            thePlayer.setGold(amountSold * value);
+        }
+        else {
+            cout << "You don't have that many " << name  << "." << endl;
+        }
     }
     else {
         cout << "You don't have any " << name <<  " to sell." << endl;
@@ -254,11 +256,11 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
         //First menu
         cout << "===========================" << endl;
         cout << "1. Leave the " << getName() << endl;
-        cout << "2. Talk to Willey" << endl;
+        cout << "2. Talk to Willy" << endl;
         cout << "3. Check inventory" << endl;
         cout << "4. Check quests" << endl;
         cout << "5. Check map" << endl;
-        cout << "6. Sell/Buy items from Willey" << endl;
+        cout << "6. Sell/Buy items from Willy" << endl;
         cout << "7. Go Fishing" << endl;
         cout << "-1. Exit the game" << endl;
         cout << "===========================" << endl;
@@ -270,7 +272,7 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
         }
         switch(choice) {
             case 1: {
-                cout << "Leaving the mines! Going to town." << endl;
+                cout << "Leaving the beach! Going to town." << endl;
                 thePlayer.setLocation("Town");
                 return true;
                 break;
@@ -308,8 +310,8 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
                     }
                     case 3: {
                         cout << endl;
-                        bool isActive;
-                        bool isCompleted;
+                        bool isActive = false;
+                        bool isCompleted = false;
                         for (int i = 0; i < 10; i++) {
                             if (playerQuests[i].getName() == getPeople()[0].getQuest()) {
                                 isActive = playerQuests[i].getIfActive();

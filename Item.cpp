@@ -38,6 +38,5 @@ using namespace std;
     if (amount == 0) {
         description = " ";
         amount = 0;
-        seed = 1;
     }
     }
