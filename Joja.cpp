@@ -160,12 +160,15 @@ bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bu
                 switch(choice3) {
                     case 1: {
                         cout << "\"Young man Joja has it all, blueberries, truffle oil, crystal fruit, octopus, even lab-grown diamonds. I hear those are the things your looking for. If you need help finding anything I'm happy to help. We also sell seeds, at much more affordable prices than that swindler Pierre. Just remember join us, thrive.\"" << endl;
+                        break;
                     }
                     case 2: {
                         cout << "\"No.\"" << endl;
+                        break;
                     }
                     case 3: {
                         cout << "\"Nothing will happen immediatley, but well you hold a certain sway in this town. Buying from us is an endorsement, and an endorsement from you is worth more than gold. People will see the Joja side of things eventually. They are already starting too. We'll help you build the community center, but that won't drive us out of town.\"" << endl;
+                        break;
                     }
                 }
                 break;
@@ -277,6 +280,7 @@ bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bu
                         }
                         case 8: {
                             buy(inventory,"Diamond","Shiny shiny", 1000);
+                            break;
                         }
                         case 9: {
                             exit = false;

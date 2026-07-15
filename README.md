@@ -10,7 +10,7 @@ Complete the final bundle consisting of starfruit, truffle oil, a diamond, a stu
 
 ## How to compile and run
 
-g++ -Wall -Werror -Wpedantic -Wextra Crop.cpp Farm.cpp Item.cpp location.cpp player.cpp villager.cpp Quest.cpp Town.cpp main.cpp Mines.cpp Beach.cpp -o main
+g++ -Wall -Werror -Wpedantic -Wextra Crop.cpp Farm.cpp Item.cpp location.cpp player.cpp villager.cpp Quest.cpp Town.cpp main.cpp Mines.cpp Beach.cpp Validation.cpp Joja.cpp -o main
 
 ## How to play
 
