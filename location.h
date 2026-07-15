@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "villager.h"
+#include "player.h"
 
 class Location {
     public:
@@ -11,6 +12,7 @@ class Location {
     std::string getName() const;
     std::vector<Villager> getPeople() const;
     void getNeighboringLocations() const;
+    Player getThePlayer();
 
     void setPeople(std::vector<Villager> locationPeople);
     void setName(std::string locationName);
@@ -20,6 +22,7 @@ class Location {
     std::vector<Villager> people;
     std::string name;
     std::vector<Location> neighbors;
+    Player thePlayer;
     int luck;
 };
 

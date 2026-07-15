@@ -1,10 +1,11 @@
-    #include <string>
-    #include <vector>
-    #include <random>
-    #include "Beach.h"
+#include <string>
+#include <vector>
+#include <random>
+#include "Beach.h"
 
-    using namespace std;
-    Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,people,l){}
+using namespace std;
+
+Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,people,l){}
 
     void Beach::Fish (Item inventory[]) {
     bool found = false;
@@ -104,8 +105,8 @@
     }
     
     luck = 0;
-    }
-    void Beach::buy(Item inventory[10], std::string name, std::string description, int price) {
+}
+void Beach::buy(Item inventory[10], std::string name, std::string description, int price) {
 
     int amountBought;
     cout << name << " cost " << price << " gold." << endl;
@@ -139,9 +140,9 @@
         cout << "You don't have enough gold to buy that many." << endl;
     }
         
-    }
+}
 
-    void Beach::sell(Item inventory[10], std::string name, int value) {
+void Beach::sell(Item inventory[10], std::string name, int value) {
     int amountSold;
     int index;
     bool found = 0;
@@ -169,9 +170,9 @@
     else {
         cout << "You don't have any " << name <<  " to sell." << endl;
     }
-    }
+}
 
-    bool Beach::addItem(Item inventory[10], Item questReward) {
+bool Beach::addItem(Item inventory[10], Item questReward) {
     bool spaceFound = false;
     for (unsigned int i = 0; i < 10; i++) {
             if (inventory[i].getName() == questReward.getName()) {
@@ -197,26 +198,23 @@
         return true;
     }
     }
-    Player Beach::getThePlayer() {
-    return thePlayer;
-    }
 
     bool Beach::searchPlayerInventory(Item questItem, Item inventory[10]) {
     for (int i = 0; i < 10; i++) {
-    if (inventory[i].getName() == questItem.getName()) {
-        if(inventory[i].getAmount() >= questItem.getAmount()) {
-            inventory[i].setAmount(-questItem.getAmount());
-            return true;
+        if (inventory[i].getName() == questItem.getName()) {
+            if(inventory[i].getAmount() >= questItem.getAmount()) {
+                inventory[i].setAmount(-questItem.getAmount());
+                return true;
+            }
+            else {
+                return false;
+            }
         }
-        else {
-            return false;
-        }
-    }
     }
     return false;
-    }
+}
 
-    void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
+void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
     for (int i = 0; i < 10; i++) {
         if (playerQuests[i].getName() == getPeople()[p].getQuest()) {
             if (playerQuests[i].getIfActive()) {
@@ -237,7 +235,7 @@
             }
         } 
     }
-    }
+}
 
     bool Beach::beachTerminal(Player p, Item inventory[], Quest playerQuests[], int bundleTracker[]) {
     thePlayer = p;

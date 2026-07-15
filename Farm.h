@@ -14,7 +14,6 @@ class Farm : public Location{
     std::vector<Crop> parsnips;
     std::vector<Crop> starfruits;
     std::vector<Crop> blueberries;
-    Player thePlayer;
     
     public:
     Farm(std::string n, std::vector<Villager> people, int l);
@@ -26,7 +25,6 @@ class Farm : public Location{
     
 
     
-    Player getThePlayer();
 
     int getUnwatered(std::vector<Crop> crops);
     int getPlanted(std::vector<Crop> crops);

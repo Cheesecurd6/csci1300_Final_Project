@@ -13,16 +13,13 @@ class Town : public Location{
     void buy(Item inventory[10], std::string name, std::string description, int price);
     void sell(Item inventory[10], std::string name, int value);
     bool addItem(Item inventory[10], Item questReward);
-    Player getThePlayer();
-    bool townTerminal(Player p, Item inventory[10], Quest playerQuests[10], int bundleTracker[]);
     bool searchPlayerInventory(Item questItem, Item inventory[10]);
     void questCheck(int p, Quest playerQuests[10], Item inventory[10]);
+    bool townTerminal(Player p, Item inventory[10], Quest playerQuests[10], int bundleTracker[]);
     void bundleCheck(int q, Quest playerQuests[10], Item inventory[10]);
     void bundlePlanner(Quest playerQuests[10], int bundleTracker[]);
     Town(std::string n, std::vector<Villager> people, int l);
 
-    private:
-    Player thePlayer;
 
 };
 

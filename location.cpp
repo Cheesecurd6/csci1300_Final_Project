@@ -33,3 +33,7 @@ Location::Location(std::string n, std::vector<Villager> p, int l) {
     people = p;
     luck = l;
 }
+
+Player Location::getThePlayer() {
+    return thePlayer;
+}

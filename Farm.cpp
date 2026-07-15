@@ -433,10 +433,6 @@ while(true) {
 }
 }
 
-Player Farm::getThePlayer() {
-return thePlayer;
-}
-
         
 
 void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string name,std::string description) {

@@ -10,9 +10,6 @@ using namespace std;
 
 Town::Town(std::string n, std::vector<Villager> people, int l) : Location(n, people,l) {}
 
-Player Town::getThePlayer() {
-    return thePlayer;
-}
 
 bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], int bundleTracker[]) {
     thePlayer = p;
