@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <random>
 #include "player.h"
 #include "Validation.h"
 
@@ -38,8 +39,8 @@
             energy = playerEnergy;
         }
     }
-    void Player::setJoja(int playerJoja) {
-        joja = playerJoja;
+    void Player::setJoja() {
+        joja++;
     }
 
     bool Player::setTime() {
@@ -56,6 +57,9 @@
         day++;
         energy = 100;
         location = "Farm";
+        std::mt19937 mt{std::random_device{}()};
+        std::uniform_int_distribution<> d3{ 1, 3 };
+        weather = d3(mt);
         return true;
     }
 
@@ -90,4 +94,8 @@
     }
     void Player::setBundle(bool s) {
         bundleDone = s;
+    }
+    
+    int Player::getWeather() {
+        return weather;
     }

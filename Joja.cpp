@@ -42,6 +42,9 @@ void Joja::buy(Item inventory[10], std::string name, std::string description, in
         if (spaceFound == false) {
             cout << "Your unable to buy, you don't have any inventory space" << endl;
         }
+        else {
+            thePlayer.setJoja();
+        }
     } 
     else {
         cout << "You don't have enough gold to buy that many." << endl;

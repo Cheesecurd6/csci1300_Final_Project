@@ -81,6 +81,11 @@ int main() {
     int bundleTracker[5] {0,0,0,0,0};
 
     std::cout << "Welcome to my final project" << std::endl << std::endl << std::endl;
+    cout << "===========================" << endl;
+    cout << "You're the newest farmer in Stardew Valley. You've been here almost a year now and have been steadily working to complete the town's community center and get it refurbished. Now only one last obstacle stands in your way, the final bundle. Various items that can be collected across the local area. Work with the townspeople to collect them or sellout to Joja Mart and just buy them. The choice is yours." << endl;
+    cout << "Explore the valley and tend to your farm. Get tips from the locals. If you need any help on what to do next check the bundle in town." << endl;
+    cout << "Good luck!" << endl;
+    cout << "===========================" << endl;
     mainPlayer.setEnergy(100);
     mainPlayer.setName();
     farm.setName("Farm");

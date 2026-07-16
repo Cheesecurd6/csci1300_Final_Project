@@ -14,6 +14,7 @@ class Player {
     bool getBundle();
     void setBundle(bool s);
     bool getIfDayPassed();
+    int getWeather();
 
     void setLocation(std::string playerLocation);
     bool newDay();
@@ -23,7 +24,7 @@ class Player {
     void setName();
     void setDay(int playerDay);
     void setEnergy(int playerEnergy);
-    void setJoja(int playerJoja);
+    void setJoja();
     void setGold(int additionalGold);
     void setIfDay();
 
@@ -31,13 +32,15 @@ class Player {
     private:
     std::string location;
     std::string name;
+    int weather = 1;
     int time = 0;
     int day = 1;
     int energy = 100;
-    int joja;
+    int joja = 0;
     int gold = 500;
     bool dayHasPassed = 0;
     bool bundleDone = 0;
+
 };
 
 #endif

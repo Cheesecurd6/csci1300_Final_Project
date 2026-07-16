@@ -17,10 +17,13 @@ void Mines::Mine (Item inventory[]) {
   int roll;
   int choice;
   bool found = false;
+  if (thePlayer.getWeather() == 3) {
+        luck++;
+  }
   std::mt19937 mt{std::random_device{}()};
-  std::uniform_int_distribution<> d100{ 1, 100 };
-  std::uniform_int_distribution<> weighted100 {60,100};
-  std::uniform_int_distribution<> doubleWeighted100 {70,100};
+  std::uniform_int_distribution<> d1000{ 1, 1000 };
+  std::uniform_int_distribution<> weighted1000 {600,1000};
+  std::uniform_int_distribution<> doubleWeighted1000 {700,1000};
   for (int i = 0; i < 10; i++) {
     if (inventory[i].getName() == "Bomb") {
         if(inventory[i].getAmount() >= 0) {
@@ -43,16 +46,16 @@ void Mines::Mine (Item inventory[]) {
     }
   }
   if (luck == 2) {
-    roll = doubleWeighted100(mt);
+    roll = doubleWeighted1000(mt);
   }
   else if (luck == 1) {
-    roll = weighted100(mt);
+    roll = weighted1000(mt);
   }
   else {
-    roll = d100(mt);
+    roll = d1000(mt);
   }
 
-  if (roll >= 99) {
+  if (roll >= 999) {
     cout << "\"You've freed me from my entrapment by that witch. As a reward I give you a mineral prized among you folk, a diamond.\"" << endl;
     if (addItem(inventory,Item ("Shiny shiny", 1, "Diamond(s)", 0))) {
       cout << "\"Here you go!\"" << endl;
@@ -61,28 +64,28 @@ void Mines::Mine (Item inventory[]) {
       cout << "\"Oh no! It looks like you don't have any inventory space. Oh well I guess I can't give this to you after all.\"" << endl;
     }
   }
-  else if (roll >= 85) {
+  else if (roll >= 850) {
     cout << "While splitting apart a particularly troublesome rock something green and very shiny pops out. It's an emerald!" << endl;
     if (addItem(inventory, Item("A lovely shade of green with an enchanting shimmer", 1, "Emerald(s)",0))) {}
     else {
       cout << "Unfortunately, you don't have enough inventory space and lose the item." << endl;
     }
   }
-  else if (roll >= 75) {
+  else if (roll >= 750) {
     cout << "On a very chilly level of the mines you stumble across a reflective blue mineral just laying on the ground. It's a frozen tear!" << endl;
     if (addItem(inventory, Item("A crystal teardrop rumored to be the result of a yeti crying", 1, "Frozen Tear(s)", 0))){}
     else {
       cout << "Unfortunately, you don't have enough inventory space and lose the item." << endl;
     }
   }
-  else if (roll >= 60) {
+  else if (roll >= 600) {
     cout << "You find a node of yellow shiny material and break it open inside you find something. It's gold ore!" << endl;
     if(addItem(inventory, Item("Very valuable and shiny", 1, "Gold Ore", 0))){}
     else {
       cout << "Unfortunately, you don't have enough inventory space and lose the item." << endl;
     }
   }
-  else if (roll >= 30) {
+  else if (roll >= 300) {
     cout << "Upon cracking open a node of ore you find something. It's iron ore!" << endl;
     if (addItem(inventory, Item("Durable and versatile iron is very prized, albeit less than gold", 2, "Iron Ore", 0))){}
     else {

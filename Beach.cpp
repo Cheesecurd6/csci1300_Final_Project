@@ -14,11 +14,14 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
     int roll;
     int choice;
     int choice2;
+    if (thePlayer.getWeather() == 2) {
+        luck++;
+    }
     std::mt19937 mt{std::random_device{}()};
-    std::uniform_int_distribution<> d100{ 1, 100 };
-    std::uniform_int_distribution<> weighted100 {60,100};
-    std::uniform_int_distribution<> doubleWeighted100 {75,100};
-    std::uniform_int_distribution<> tripleWeighted100 {99,100};
+    std::uniform_int_distribution<> d1000{ 1, 1000 };
+    std::uniform_int_distribution<> weighted1000 {600,1000};
+    std::uniform_int_distribution<> doubleWeighted1000 {750,1000};
+    std::uniform_int_distribution<> tripleWeighted1000 {999,100};
     for (int i = 0; i < 10; i++) {
     if (inventory[i].getName() == "Bait") {
         if(inventory[i].getAmount() >= 0) {
@@ -66,33 +69,33 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
     }
     }
     if (luck >= 3) {
-        roll = tripleWeighted100(mt);
+        roll = tripleWeighted1000(mt);
     }
     else if (luck == 2) {
-        roll = doubleWeighted100(mt);
+        roll = doubleWeighted1000(mt);
     }
     else if (luck == 1) {
-        roll = weighted100(mt);
+        roll = weighted1000(mt);
     }
     else {
-        roll = d100(mt);
+        roll = d1000(mt);
     }
 
-    if (roll >= 99) {
+    if (roll >= 999) {
         cout << "Something bites on the line and your forced to pull with all your might. Whatever the thing is it's very strong pulling this way and that. With a final heave you tear the thing out of the water. It's an octopus!" << endl;
         if (addItem(inventory,Item ("A mysterious creature from the depths of the ocean; delicious with a little lemona and salt", 1, "Octopus",0))) {}
     else {
         cout << "Unfortunately, you don't have enough inventory space and lose the item." << endl;
     }
     }
-    else if (roll >= 75) {
+    else if (roll >= 750) {
         cout << "You catch something large on the line and immediatley reel it in. It's a Tilapia!" << endl;
         if (addItem(inventory, Item("A large and tasty fish", 1, "Tilapia",0))) {}
     else {
         cout << "Unfortunately, you don't have enough inventory space and lose the item." << endl;
     }
     }
-    else if (roll >= 50) {
+    else if (roll >= 500) {
         cout << "You feel a familiar tugging on the line and start to pull up, a fish breaches the ocean surface. It's a Tuna!" << endl;
         if (addItem(inventory, Item("One of the more valuable fish in the sea", 1, "Tuna", 0))){}
     else {
@@ -303,7 +306,7 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
                     break;
                     }
                     case 2:{
-                    cout << "\"To fish for better fish you should I either fish while it's raining, or buy bait from me and use that when fishing." << endl;
+                    cout << "\"To fish for better fish you should either fish while it's raining, or buy bait from me and use that when fishing." << endl;
                     cout << "\"Both those things increase your luck.\"" << endl;
                     break;
                     }

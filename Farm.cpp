@@ -139,6 +139,11 @@ while(true) {
         case 1: {
             cout << "Leaving the farm! Going to town." << endl;
             thePlayer.setLocation("Town");
+            if (thePlayer.setTime()) {
+                cout << "It got too late, you passed out" << endl;
+                thePlayer.newDayOutside();
+                return true;
+            }
             return true;
             break;
         }
@@ -503,25 +508,50 @@ void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string
 }
 
 void Farm::newDay() {
-thePlayer.newDay();
+    string actualWeather;
+    thePlayer.newDay();
+    if (thePlayer.getWeather() == 1) {
+        actualWeather = "sunny";
+    }
+    else if(thePlayer.getWeather() == 2) {
+        actualWeather = "rainy";
+    }
+    else if (thePlayer.getWeather() == 3) {
+        actualWeather = "stormy";
+    }
+    else {
+        actualWeather = "==============";
+    }
 
-for (unsigned int i = 0; i < parsnips.size(); i++) {
-    parsnips[i].nextDay();
-}
+    for (unsigned int i = 0; i < parsnips.size(); i++) {
+        parsnips[i].nextDay();
+    }
 
-for (unsigned int i = 0; i < starfruits.size(); i++) {
-    starfruits[i].nextDay();
-}
+    for (unsigned int i = 0; i < starfruits.size(); i++) {
+        starfruits[i].nextDay();
+    }
 
-for (unsigned int i = 0; i < blueberries.size(); i++) {
-    blueberries[i].nextDay();
-}
-cout << endl;
-cout << "===========================" << endl;
-cout << "It's a new day on the farm." << endl;
-cout << "===========================" << endl;
+    for (unsigned int i = 0; i < blueberries.size(); i++) {
+        blueberries[i].nextDay();
+    }
+    cout << endl;
+    cout << "===========================" << endl;
+    cout << "It's a new day on the farm." << endl;
+    cout << "The weather is " << actualWeather << "." << endl;
+    cout << "===========================" << endl;
 
-thePlayer.setIfDay();
+    if (thePlayer.getWeather() == 2 || thePlayer.getWeather() == 3) {
+        for (unsigned int i = 0; i < parsnips.size(); i++) {
+                parsnips[i].water();
+        }
+        for (unsigned int i = 0; i < starfruits.size(); i++) {
+                starfruits[i].water();
+        }
+        for (unsigned int i = 0; i < blueberries.size(); i++) {
+                blueberries[i].water();
+        }
+    }
+    thePlayer.setIfDay();
 }
 
 
