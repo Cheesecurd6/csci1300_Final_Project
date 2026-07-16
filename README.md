@@ -10,7 +10,11 @@ Complete the final bundle consisting of 10 blueberries, truffle oil, a diamond, 
 
 ## How to compile and run
 
+Compile:
 g++ -Wall -Werror -Wpedantic -Wextra Crop.cpp Farm.cpp Item.cpp location.cpp player.cpp villager.cpp Quest.cpp Town.cpp main.cpp Mines.cpp Beach.cpp Validation.cpp Joja.cpp -o main
+
+Run:
+./main
 
 ## How to play
 
