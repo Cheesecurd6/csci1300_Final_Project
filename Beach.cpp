@@ -333,10 +333,10 @@ void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
                             }
                         }
                         else if (!isCompleted && isActive) {
-                            cout << "\"Yes the task I gave you earlier.\"" << endl;
+                            cout << "\"By doing the taks I have you earlier.\"" << endl;
                         }
                         else if(isCompleted) {
-                            cout << "\"No nothing else for now.\"" << endl;
+                            cout << "\"I can't help you with that. I'm sorry lad I'm kind of busy right now and can't help you make more deluxe bait.\"" << endl;
                         }
                         break;
                     }

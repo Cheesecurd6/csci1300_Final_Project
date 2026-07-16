@@ -20,8 +20,21 @@ using namespace std;
 
 
 
-void whereAmI(std::string name,std::string location) {
-    cout << "Hi " << name << " you're currently at the" << location << endl;
+void gameEnd(Player thePlayer) {
+    cout << "===========================" << endl;
+    if(thePlayer.getJojaInfluence() <= 2 ) {
+        cout << "You managed to complete the final bundle in time with little to no help from Joja. The villagers of Stardew Valley rejoice at the refurbished Community Center and stand together in solidarity against Joja." << endl;
+        cout << "You win!" << endl;
+    }
+    else if (thePlayer.getJojaInfluence() == 3) {
+        cout << "The Community Center is completed but with noticable help from Joja. The townsfolk recognize that and don't stand completely against Joja. However, they still support each other and Pierre is still the main grocer in town." << endl;
+        cout << "You win!" << endl;
+    }
+    else {
+        cout << "With a large amount of help from Joja you complete the final bundle and rebuild the Community Center. As a result although the town's community is made stronger by the Community Center they also flock to Joja. Pierre is forced to go out of business and the long shadow of the Joja corporation is cast across the town." << endl;
+        cout << "You win?" << endl;
+    }
+    cout << "===========================" << endl;
 }
 
 
@@ -82,7 +95,7 @@ int main() {
 
     std::cout << "Welcome to my final project" << std::endl << std::endl << std::endl;
     cout << "===========================" << endl;
-    cout << "You're the newest farmer in Stardew Valley. You've been here almost a year now and have been steadily working to complete the town's community center and get it refurbished. Now only one last obstacle stands in your way, the final bundle. Various items that can be collected across the local area. Work with the townspeople to collect them or sellout to Joja Mart and just buy them. The choice is yours." << endl;
+    cout << "You're the newest farmer in Stardew Valley. You've been here almost a year now and have been steadily working to complete the town's community center and get it refurbished. Now only one last obstacle stands in your way, the final bundle. Various items that can be collected across the local area. Work with the townspeople to collect them or sellout to Joja Mart and just buy them. The choice is your. You have 10 days to get the job done or time will run out." << endl;
     cout << "Explore the valley and tend to your farm. Get tips from the locals. If you need any help on what to do next check the bundle in town." << endl;
     cout << "Good luck!" << endl;
     cout << "===========================" << endl;
@@ -94,11 +107,16 @@ int main() {
     bool gameOn = true;
     while (gameOn) {
         if (mainPlayer.getBundle()) {
-            cout << "Congratulations you win!" << endl;
+            cout << "Congratulations you've completed the final bundle!" << endl;
+            gameEnd(mainPlayer);
             break;
         }
         if (mainPlayer.getDay() == 10) {
+            cout << "===========================" << endl;
             cout << "Game over" << endl;
+            cout << "You failed to complete the final bundle in time. As a result the town stagnates and the Community Center falls back into disrepair." << endl;
+            cout << "You lose." << endl;
+            cout << "===========================" << endl;
             break;
         }
         if (mainPlayer.getLocation() == "Farm") {
@@ -118,7 +136,7 @@ int main() {
             mainPlayer = beach.getThePlayer();
         }
         else if(mainPlayer.getLocation() == "Joja Mart") {
-            gameOn = jojaMart.jojaTerminal(mainPlayer,inventory,playerQuests,bundleTracker);
+            gameOn = jojaMart.jojaTerminal(mainPlayer,inventory,playerQuests);
             mainPlayer = jojaMart.getThePlayer();
         }
     }

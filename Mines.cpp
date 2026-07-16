@@ -318,10 +318,10 @@ bool Mines::mineTerminal(Player p, Item inventory[], Quest playerQuests[], int b
                       }
                 }
                 else if (!isCompleted && isActive) {
-                    cout << "\"Yes the task I gave you earlier.\"" << endl;
+                    cout << "\"By doing the task I gave you earlier or just doing the task I gave you.\"" << endl;
                 }
                 else if(isCompleted) {
-                    cout << "\"No nothing else for now.\"" << endl;
+                    cout << "\"I gave you my only diamond, if you want another you'll have to find it yourself.\"" << endl;
                 }
                 break;
             }

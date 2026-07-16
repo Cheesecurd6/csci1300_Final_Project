@@ -43,7 +43,9 @@ void Joja::buy(Item inventory[10], std::string name, std::string description, in
             cout << "Your unable to buy, you don't have any inventory space" << endl;
         }
         else {
-            thePlayer.setJoja();
+            if (amountBought > 0) {
+                thePlayer.setJoja();
+            }
         }
     } 
     else {
@@ -117,9 +119,8 @@ void Joja::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
     }
 }
 
-bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bundleTracker[]) {
+bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[]) {
     thePlayer = p;
-    cout << bundleTracker[1] << endl;
     while(true) {
         int choice;
         cout << endl << endl;
@@ -229,7 +230,7 @@ bool Joja::jojaTerminal(Player p, Item inventory[], Quest playerQuests[], int bu
                     cout << "Day: " << thePlayer.getDay() << " Time: " << thePlayer.getTime() << endl;
                     cout << "You currently have " << thePlayer.getGold() << " gold" << endl;
                     cout << "===========================" << endl;
-                    cout << "What do you want to buy/sell?" << endl;
+                    cout << "What do you want to buy?" << endl;
                     cout << "===========================" << endl;
                     cout << "1. Buy parsnip seeds" << endl;
                     cout << "2. Buy starfruit seeds" << endl;

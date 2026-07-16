@@ -113,14 +113,15 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                             }
                             case 2:{
                                 if (thePlayer.getJojaInfluence() <= 2) {
-                                    cout << "Joja's influence in town isn't too large yet, but if you dont wan't them to expand make sure you don't buy from them." << endl;
+                                    cout << "\"Joja's influence in town isn't too large yet, but if you dont wan't them to expand make sure you don't buy from them.\"" << endl;
                                 }
                                 else if (thePlayer.getJojaInfluence() == 3) {
-                                    cout << "We're definitely at a tipping point, you should really stop buying from Joja Mart. The townspeople follow your example." << endl;
+                                    cout << "\"We're definitely at a tipping point, you should really stop buying from Joja Mart. The townspeople follow your example.\"" << endl;
                                 }
                                 else {
-                                    cout << "They've gained a significant foothold in the valley, there's no way to dislodge them now." << endl;
+                                    cout << "\"They've gained a significant foothold in the valley, there's no way to dislodge them now.\"" << endl;
                                 }
+                                break;
                             }
                             case 3: {
                                 cout << endl;
@@ -172,17 +173,19 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], in
                         switch (choice3) {
                             case 1:{
                                 if (thePlayer.getJojaInfluence() <= 2) {
-                                    cout << "Pretty good lately, most of the townspeople come by and shop even if I have higher prices than the Joja Mart." << endl;
+                                    cout << "\"Pretty good lately, most of the townspeople come by and shop even if I have higher prices than the Joja Mart.\"" << endl;
                                 }
                                 else if (thePlayer.getJojaInfluence() == 3) {
-                                    cout << "Less and less people are shopping here nowadays. Alot have switched over to shopping at Joja, no thanks to you. However, I think I can still stay afloat." << endl;
+                                    cout << "\"Less and less people are shopping here nowadays. A lot have switched over to shopping at Joja, no thanks to you. However, I think I can still stay afloat.\"" << endl;
                                 }
                                 else {
-                                    cout << "Honestly, not many people shop here anymore. They've followed your example and have defected to Joja. I think I'll have to close doors soon." << endl;
+                                    cout << "\"Honestly, not many people shop here anymore. They've followed your example and have defected to Joja. I think I'll have to close doors soon.\"" << endl;
                                 }
+                                break;
                             }
                             case 2:{
-                                cout << "I only sell seeds, and I will buy crops from you. Just stop buy the store in town anytime and I'll be able to help." << endl;
+                                cout << "\"I only sell seeds, and I will buy crops from you. Just stop buy the store in town anytime and I'll be able to help.\"" << endl;
+                                break;
                             }
                             case 3: {
                                 cout << endl;
