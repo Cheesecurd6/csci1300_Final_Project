@@ -14,8 +14,8 @@ class Town : public Location{
     void sell(Item inventory[10], std::string name, int value);
     bool addItem(Item inventory[10], Item questReward);
     bool searchPlayerInventory(Item questItem, Item inventory[10]);
-    void questCheck(int p, Quest playerQuests[9], Item inventory[10]);
-    bool townTerminal(Player p, Item inventory[10], Quest playerQuests[9], int bundleTracker[]);
+    void questCheck(int p, Quest playerQuests[], Item inventory[10]);
+    bool townTerminal(Player p, Item inventory[10], Quest playerQuests[], int bundleTracker[]);
     void bundleCheck(int q, Quest playerQuests[10], Item inventory[10]);
     void bundlePlanner(Quest playerQuests[10], int bundleTracker[]);
     Town(std::string n, std::vector<Villager> people, int l);

@@ -21,7 +21,7 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
     std::uniform_int_distribution<> d1000{ 1, 1000 };
     std::uniform_int_distribution<> weighted1000 {600,1000};
     std::uniform_int_distribution<> doubleWeighted1000 {750,1000};
-    std::uniform_int_distribution<> tripleWeighted1000 {999,100};
+    std::uniform_int_distribution<> tripleWeighted1000 {999,1000};
     for (int i = 0; i < 10; i++) {
     if (inventory[i].getName() == "Bait") {
         if(inventory[i].getAmount() >= 0) {
@@ -301,7 +301,7 @@ void Beach::questCheck(int p, Quest playerQuests[], Item inventory[10]) {
                     cout << "Sardines are the most common fish you'll find." << endl;
                     cout << "Tuna are also pretty easy to come by." << endl;
                     cout << "Tilapia are harder to catch." << endl;
-                    cout << "However, the rarest thing to find is definitely octopuses, in my whole time here I've only caught one." << endl;
+                    cout << "However, the rarest thing to find is definitely octopus, in my whole time here I've only caught one." << endl;
                     cout << "If you're interested in catching one come to me and I'll show you how to do it.\"" << endl;
                     break;
                     }

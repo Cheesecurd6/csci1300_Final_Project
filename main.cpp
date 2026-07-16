@@ -82,7 +82,7 @@ int main() {
                             Quest("Gather 10 parsnips and give them to Mayor Lewis, free of charge, in exchange for a reward","Bring Lewis his parsnips", Item("Truffle oil smells funky but can be used to cook amazing dishes",1,"Truffle Oil",0), Item("The humblest of crops" , 10, "Parsnip(s)", 0),0,0 ), 
                             Quest("Take the starfruit seed Pierre gave you and plant it. Deliver to him the final product","Research for Pierre",Item("A prize fruit, often only foraged during the winter or collected from the coldest depths of the mines",1,"Crystal Fruit",0), Item("Truly luxurious fruit with a slight tangy flavor", 1 , "Starfruit(s)",0 ),0,0),
                             Quest("Fish at the beach for 5 tuna and then bring them to Willy", "Supply Issues", Item("The very base bait available on the market",1,"Deluxe Bait", 0), Item("One of the more valuable fish in the sea", 5, "Tuna", 0),0,0),
-                            Quest("Venture into the mines and find an emerald for the Dwarf","The Crown Jewels", Item("Shiny shiny", 1, "Diamond(s)", 0), Item("A lovely shade of green with an enchanting shimmer", 3, "Emerald(s)",0),0,0)
+                            Quest("Venture into the mines and find three emeralds for the Dwarf","The Crown Jewels", Item("Shiny shiny", 1, "Diamond(s)", 0), Item("A lovely shade of green with an enchanting shimmer", 3, "Emerald(s)",0),0,0)
                         };
     // All locations
     Farm farm("Farm", farmPeople,0);
