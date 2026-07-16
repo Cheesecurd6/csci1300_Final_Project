@@ -96,7 +96,7 @@ bool Joja::searchPlayerInventory(Item questItem, Item inventory[10]) {
     }
     return false;
 }
-void Joja::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
+void Joja::questCheck(int p, Quest playerQuests[], Item inventory[10]) {
         for (int i = 0; i < 10; i++) {
         if (playerQuests[i].getName() == getPeople()[p].getQuest()) {
             if (playerQuests[i].getIfActive()) {

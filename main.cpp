@@ -21,6 +21,7 @@ using namespace std;
 
 
 void gameEnd(Player thePlayer) {
+    // Different endings depending on how much help the player got from Joja
     cout << "===========================" << endl;
     if(thePlayer.getJojaInfluence() <= 2 ) {
         cout << "You managed to complete the final bundle in time with little to no help from Joja. The villagers of Stardew Valley rejoice at the refurbished Community Center and stand together in solidarity against Joja." << endl;
@@ -41,13 +42,15 @@ void gameEnd(Player thePlayer) {
 
 
 int main() {
-    vector<Villager> townPeople{};
+    // Initializes the player and villagers at each location;
     Player mainPlayer;
+    vector<Villager> townPeople{};
     vector<Villager> farmPeople;
     vector<Villager> beachPeople{Villager("the town's local fisherman", "Willy","Supply Issues")};
     vector<Villager> minePeople {Villager("the only dwarf left", "The Dwarf", "The Crown Jewels")};
     vector<Villager> jojaPeople {Villager("the local Joja representative", "Morris", "N/A")};
 
+    //Reads in the info for the town villagers
     ifstream inFile("townVillager.txt");
     if (!inFile.is_open()) {
         cout << "Error: could not open townVillager.txt" << endl;
@@ -69,8 +72,8 @@ int main() {
     inFile.close();
 
     
-
-    Quest playerQuests[10] = {
+    // All the quests in the game
+    Quest playerQuests[9] = {
                             Quest("Bring 10 blueberries to the final bundle in town", "Complete the final bundle's crops requirement", Item("being one step closer to finishing the bundle"),Item("Grows so that one plant can produce fruit mutiple times ", 10, "Blueberry(s)", 0),1,0),
                             Quest("Bring truffle oil to the final bundle in town", "Complete the final bundle's animal product requirement", Item("being one step closer to finishing the bundle"), Item("Truffle oil smells funky but can be used to cook amazing dishes",1,"Truffle Oil",0),1,0),
                             Quest("Bring a crystal fruit to the final bundle in town", "Complete the final bundle's forage requirement", Item("being one step closer to finishing the bundle"), Item("A prize fruit, often only foraged during the winter or collected from the coldest depths of the mines",1,"Crystal Fruit",0),1,0),
@@ -81,15 +84,14 @@ int main() {
                             Quest("Fish at the beach for 5 tuna and then bring them to Willy", "Supply Issues", Item("The very base bait available on the market",1,"Deluxe Bait", 0), Item("One of the more valuable fish in the sea", 5, "Tuna", 0),0,0),
                             Quest("Venture into the mines and find an emerald for the Dwarf","The Crown Jewels", Item("Shiny shiny", 1, "Diamond(s)", 0), Item("A lovely shade of green with an enchanting shimmer", 3, "Emerald(s)",0),0,0)
                         };
+    // All locations
     Farm farm("Farm", farmPeople,0);
     Town town("Town", townPeople,0);
     Mines mines("Mines",minePeople,0);
     Beach beach("Beach",beachPeople,0);
     Joja jojaMart("Joja Mart",jojaPeople,0);
-    std::string farmName;
+
     Item parsnipSeeds("The humblest of crops " , 10, "Parsnip seeds", 1);
-    //Item starfruitSeeds("Truly luxurious fruit with a slight tangy flavor ", 15, "Starfruit seeds", 1);
-    //Item blueberrySeeds("Grows so that one plant can produce fruit mutiple times ", 5, "Blueberry seeds", 1);
     Item inventory[10] {parsnipSeeds};
     int bundleTracker[5] {0,0,0,0,0};
 
@@ -101,17 +103,20 @@ int main() {
     cout << "===========================" << endl;
     mainPlayer.setEnergy(100);
     mainPlayer.setName();
-    farm.setName("Farm");
-
     mainPlayer.setLocation(farm.getName());
+
+    // Tracks if the Player still wants to play
     bool gameOn = true;
     while (gameOn) {
         if (mainPlayer.getBundle()) {
+            // Once the bundle is complete
             cout << "Congratulations you've completed the final bundle!" << endl;
+            //Different ending function
             gameEnd(mainPlayer);
             break;
         }
         if (mainPlayer.getDay() == 10) {
+            // Once the player runs out of time
             cout << "===========================" << endl;
             cout << "Game over" << endl;
             cout << "You failed to complete the final bundle in time. As a result the town stagnates and the Community Center falls back into disrepair." << endl;
@@ -119,6 +124,12 @@ int main() {
             cout << "===========================" << endl;
             break;
         }
+
+        // While the game is on this loop constantly runs and checks the player's location
+        // Depending on the location the player then enters that location's menu
+        // A copy of the player is sent into the location, everything else inventory, quests, and bundle progress is passed by reference
+        // The menu is a bool function so when the player exits that location it'll return true if the player still wants to play or false if not
+        // Then, if the player is still playing, the copy of the player is passed out and assigned to the old version of the player
         if (mainPlayer.getLocation() == "Farm") {
             gameOn = farm.farmTerminal(mainPlayer,inventory, playerQuests,bundleTracker);
             mainPlayer = farm.getThePlayer();

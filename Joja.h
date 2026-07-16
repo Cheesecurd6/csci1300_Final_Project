@@ -17,7 +17,7 @@ class Joja : public Location {
     void sell(Item inventory[10], std::string name, int value);
     bool addItem(Item inventory[10], Item questReward);
     bool searchPlayerInventory(Item questItem, Item inventory[10]);
-    void questCheck(int p, Quest playerQuests[10], Item inventory[10]);
+    void questCheck(int p, Quest playerQuests[], Item inventory[10]);
     bool jojaTerminal(Player p, Item inventory[], Quest playerQuests[]);
 };
 

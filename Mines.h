@@ -20,7 +20,7 @@ class Mines : public Location {
     bool addItem(Item inventory[10], Item questReward);
     void Mine (Item inventory[]);
     bool searchPlayerInventory(Item questItem, Item inventory[10]);
-    void questCheck(int p, Quest playerQuests[10], Item inventory[10]);
+    void questCheck(int p, Quest playerQuests[9], Item inventory[10]);
     bool mineTerminal(Player p, Item inventory[], Quest playerQuests[], int bundleTracker[]);
     Mines(std::string n, std::vector<Villager> people, int l);
     Player getThePlayer();

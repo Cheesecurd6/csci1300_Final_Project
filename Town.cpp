@@ -12,7 +12,7 @@ using namespace std;
 Town::Town(std::string n, std::vector<Villager> people, int l) : Location(n, people,l) {}
 
 
-bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[10], int bundleTracker[]) {
+bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[], int bundleTracker[]) {
     thePlayer = p;
 
     while(true) {
@@ -493,7 +493,7 @@ bool Town::addItem(Item inventory[10], Item questReward) {
     }
 }
 
- void Town::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
+ void Town::questCheck(int p, Quest playerQuests[], Item inventory[10]) {
     for (int i = 0; i < 10; i++) {
         if (playerQuests[i].getName() == getPeople()[p].getQuest()) {
             if (playerQuests[i].getIfActive()) {

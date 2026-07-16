@@ -218,7 +218,7 @@ bool Beach::addItem(Item inventory[10], Item questReward) {
     return false;
 }
 
-void Beach::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
+void Beach::questCheck(int p, Quest playerQuests[], Item inventory[10]) {
     for (int i = 0; i < 10; i++) {
         if (playerQuests[i].getName() == getPeople()[p].getQuest()) {
             if (playerQuests[i].getIfActive()) {

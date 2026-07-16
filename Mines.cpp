@@ -115,7 +115,7 @@ bool Mines::searchPlayerInventory(Item questItem, Item inventory[10]) {
   }
   return false;
 }
-void Mines::questCheck(int p, Quest playerQuests[10], Item inventory[10]) {
+void Mines::questCheck(int p, Quest playerQuests[], Item inventory[10]) {
   for (int i = 0; i < 10; i++) {
     if (playerQuests[i].getName() == getPeople()[p].getQuest()) {
         if (playerQuests[i].getIfActive()) {
