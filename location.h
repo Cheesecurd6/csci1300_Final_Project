@@ -6,24 +6,26 @@
 #include "player.h"
 
 class Location {
+    // All game locations inhereit from this class
     public:
-
     Location(std::string n, std::vector<Villager> p, int l);
     std::string getName() const;
     std::vector<Villager> getPeople() const;
-    void getNeighboringLocations() const;
     Player getThePlayer();
 
     void setPeople(std::vector<Villager> locationPeople);
     void setName(std::string locationName);
-    void setNeighbors(std::vector<Location> nearbyLocations);
     
     protected:
+    // The villagers libing there
     std::vector<Villager> people;
+    // Locations name
     std::string name;
-    std::vector<Location> neighbors;
+    // The locations copy of the player
     Player thePlayer;
+    // The locations luck
     int luck;
+
 };
 
 #endif

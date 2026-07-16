@@ -8,7 +8,6 @@ class Crop {
     int daysToGrow;
     int daysGrown;
     bool wateredToday;
-    // bool dayHasPassed;
     bool h;
 
     public:

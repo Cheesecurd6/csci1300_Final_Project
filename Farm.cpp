@@ -11,8 +11,9 @@ using namespace std;
 Farm::Farm(std::string n, std::vector<Villager> people, int l) : Location(n, people, l) {
 }
 
-// Try/Catch statement with the input of how many crops watered.
+
 void Farm::plant(int parsnipSeeds, int starfuitSeeds, int blueberrySeeds) {
+    // Plants by creating new crops and pushing back in the vector
     for(int i = 0; i < parsnipSeeds; i++) {
         parsnips.push_back(Crop("parsnip" , 2, false));
     }
@@ -38,20 +39,23 @@ void Farm::waterCrops(vector<Crop> crops,string name) {
     else {
         int count = 0;
         for (unsigned int i = 0; i < crops.size(); i++) {
+            // Searches through the vector if a crop is unwatered than water it
             if (!crops[i].getWaterStatus()) {
                 crops[i].water();
                 count++;
+                // If the amount of crops watered reaches how many the player wants then stop
                 if (count == waterCount) {
                     thePlayer.setEnergy(thePlayer.getEnergy() - 2*count);
                     break;
                 }
+                // If the amount of crops the player wants watered is larger than the actual amount waterable then stop
                 else if (i == (crops.size() - 1) ){
                     thePlayer.setEnergy(thePlayer.getEnergy() - 2*count);
                     break;
                 }
             }
         }
-
+        // Reassigns the crop vector we passed in to the corresponding actual vector of the farm
         if(name == "parsnips") {
             parsnips = crops;
         }
@@ -96,11 +100,13 @@ int Farm::getHarvestable(std::vector<Crop> crops) {
 bool Farm::farmTerminal(Player p, Item inventory[], Quest playerQuests[], int bundleTracker[]) {
 // Overview of what can be done on the farm
 thePlayer = p;
+// If a day has passed outside the farm run what would happen if a day happened on the farm
 if (thePlayer.getIfDayPassed()) {
     newDay();
 }
 while(true) {
     int choice;
+    // Bundle tracker info seeing if the player has grown enough of certain crops
     if (getHarvestable(blueberries) >= 2) {
         if (bundleTracker[0] <= 3) {
             bundleTracker[0] = 4;
@@ -122,7 +128,7 @@ while(true) {
     cout << endl << endl;
     cout << "Day: " << thePlayer.getDay() << " Time: " << thePlayer.getTime() << endl;
     cout << "What would you like to do next? " << endl;
-
+    // First menu
     cout << "===========================" << endl;
     cout << "1. Leave the " << getName() << endl;
     cout << "2. Tend to the farm" << endl;
@@ -139,6 +145,7 @@ while(true) {
         case 1: {
             cout << "Leaving the farm! Going to town." << endl;
             thePlayer.setLocation("Town");
+            // Time tracker
             if (thePlayer.setTime()) {
                 cout << "It got too late, you passed out" << endl;
                 thePlayer.newDayOutside();
@@ -192,6 +199,7 @@ while(true) {
                             int cropCount;
                             cout << "How many do you want to plant? ";
                             cropCount = promptInt(0,1000);
+                            // Checks to see if there's enough seeds
                             for (int i = 0; i < 10; i++) {
                                 if (inventory[i].getName() == "Parsnip seeds") {
                                     found = true;
@@ -447,15 +455,18 @@ void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string
     int howManyHarvest;
     cout << "How many do you want to harvest? ";
     howManyHarvest = promptInt(0,1000);
+    // Does not immediateley increment i
     for (unsigned int i = 0; i < crops.size();) {
+        // Searches through the vector to see which crops are harvestable
         if (crops[i].getIfHarvestable()) {
             harvestCount++;
+            // If it's harvestable remove it from the vector
             crops.erase(crops.begin() + i);
-        
-
-        if (harvestCount == howManyHarvest){
-            break;
-        }
+            // See if enough are harvested
+            if (harvestCount == howManyHarvest){
+                break;
+            }
+            // Do not increase i, this prevents the issue where only every other harvestable crop is harvested
         }
         else {
             i++;
@@ -472,6 +483,8 @@ void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string
             blueberries = crops;
         }
 
+    // Adds the harvested items to inventory, for bluberries 5 times the amount harvested is added
+    // Sees if the item is already in the player's inventory if so it just adds
     for (unsigned int i = 0; i < 10; i++) {
         if (inventory[i].getName() == name) {
         spaceFound = true;
@@ -484,7 +497,7 @@ void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string
         break;
         }
     }
-
+    // If the item isn't already there it must make a new item
     for (unsigned int i = 0; i < 10; i++) {
         if (spaceFound == true) {break;}
         if (inventory[i].getAmount() == 0) {
@@ -509,7 +522,9 @@ void Farm::harvestCrops(std::vector<Crop> crops, Item inventory[10], std::string
 
 void Farm::newDay() {
     string actualWeather;
+    // Adds to the players day
     thePlayer.newDay();
+    // Displays what the weather is with words
     if (thePlayer.getWeather() == 1) {
         actualWeather = "sunny";
     }
@@ -523,6 +538,7 @@ void Farm::newDay() {
         actualWeather = "==============";
     }
 
+    // Each crop goes through nextDay()
     for (unsigned int i = 0; i < parsnips.size(); i++) {
         parsnips[i].nextDay();
     }
@@ -540,6 +556,7 @@ void Farm::newDay() {
     cout << "The weather is " << actualWeather << "." << endl;
     cout << "===========================" << endl;
 
+    // If it's stormy or rainy water all crops
     if (thePlayer.getWeather() == 2 || thePlayer.getWeather() == 3) {
         for (unsigned int i = 0; i < parsnips.size(); i++) {
                 parsnips[i].water();
@@ -551,6 +568,8 @@ void Farm::newDay() {
                 blueberries[i].water();
         }
     }
+    // If a day has passed outside the farm then this function would be called
+    // Now set it that no day has passed outside
     thePlayer.setIfDay();
 }
 

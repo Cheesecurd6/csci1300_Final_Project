@@ -25,7 +25,7 @@
     }
     void Player::setName() {
         std::cout << "What's your name? ";
-        promptString();
+        name = promptString();
     }
     void Player::setDay(int playerDay) {
         day = playerDay;
@@ -53,10 +53,12 @@
     }
 
     bool Player::newDay() {
+        // Rests the player and brings them back to the farm
         time = 0;
         day++;
         energy = 100;
         location = "Farm";
+        // Rolls to see what the weather is today
         std::mt19937 mt{std::random_device{}()};
         std::uniform_int_distribution<> d3{ 1, 3 };
         weather = d3(mt);
@@ -64,6 +66,7 @@
     }
 
     bool Player::newDayOutside() {
+        // Tracks if a day has passed outside
         dayHasPassed = 1;
         location = "Farm";
         return true;
@@ -78,6 +81,7 @@
     }
 
     void Player::setIfDay() {
+        // Resets so no day has passed outside
         dayHasPassed = 0;
     }
 

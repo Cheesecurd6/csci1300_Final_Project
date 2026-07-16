@@ -11,6 +11,7 @@
 
 class Farm : public Location{
     private:
+    // Vectors storing the actual crops of the farm
     std::vector<Crop> parsnips;
     std::vector<Crop> starfruits;
     std::vector<Crop> blueberries;

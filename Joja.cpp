@@ -42,6 +42,7 @@ void Joja::buy(Item inventory[10], std::string name, std::string description, in
         if (spaceFound == false) {
             cout << "Your unable to buy, you don't have any inventory space" << endl;
         }
+        // If an actual amount of Joja product is bought larger than 0 than their influence in the town goes up
         else {
             if (amountBought > 0) {
                 thePlayer.setJoja();

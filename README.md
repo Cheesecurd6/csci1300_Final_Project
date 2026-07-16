@@ -6,7 +6,7 @@ My game's theme is based off of the game Stardew Valley. It's not a one to one r
 
 ## Goal
 
-Complete the final bundle consisting of starfruit, truffle oil, a diamond, a sturgeon, and cactus.
+Complete the final bundle consisting of 10 blueberries, truffle oil, a diamond, an octopus, and a crystal fruit.
 
 ## How to compile and run
 
@@ -14,14 +14,25 @@ g++ -Wall -Werror -Wpedantic -Wextra Crop.cpp Farm.cpp Item.cpp location.cpp pla
 
 ## How to play
 
-Entering numbers 1-9 to do actions presented by the terminal.
+Entering numbers 0-9 to do actions presented by the terminal.
 
 ## Classes
 
-Player, Villager, Location, Item, Quest, Inventory, Bundle, Weather.
+Player, Villager, Location, Beach, Farm, Joja, Mines, Town, Crop, Item, Quest.
 
-Exact uses of the classses TBA.
+Exact uses of the classses: 
+The player class tracks the players name, energy, gold, time and other stats. 
+The villager class tracks villagers name, description, and quest.
+The location class has the general stats for locations.
+Beach class for the beach location, has the fishing function.
+Farm class for the farm location, has functions all related to farming.
+Joja class for the Joja mart location.
+Mines class for the mines, has the mining function.
+Town class for the town location.
+Crop class for tracking crops planted on the farm.
+Item class for storing information about items name, description, value.
+Quest class for tracking quest names, descriptions, rewards, and requirements.
 
 ## Extra credit
 
-Weather system with gameplay effects, smarter bundle planner, random number generator for fishing, mining, and foraging luck.
+Weather system with gameplay effects, smarter bundle planner, random number generator for the weather, fishing, and mining results.

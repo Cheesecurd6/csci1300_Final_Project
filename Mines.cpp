@@ -14,9 +14,11 @@ Player Mines::getThePlayer() {
   return thePlayer;
 }
 void Mines::Mine (Item inventory[]) {
+  // Same as fishing at the beach
   int roll;
   int choice;
   bool found = false;
+  // Weather increasing luck
   if (thePlayer.getWeather() == 3) {
         luck++;
   }
@@ -25,6 +27,7 @@ void Mines::Mine (Item inventory[]) {
   std::uniform_int_distribution<> weighted1000 {600,1000};
   std::uniform_int_distribution<> doubleWeighted1000 {700,1000};
   for (int i = 0; i < 10; i++) {
+    // Searches to see if the player does have a bomb
     if (inventory[i].getName() == "Bomb") {
         if(inventory[i].getAmount() >= 0) {
             found = true;

@@ -12,13 +12,10 @@ class Player {
     int getTime();
     int getGold();
     bool getBundle();
-    void setBundle(bool s);
     bool getIfDayPassed();
     int getWeather();
 
     void setLocation(std::string playerLocation);
-    bool newDay();
-    bool newDayOutside();
     bool setTime();
     void setRealTime(int t);
     void setName();
@@ -27,6 +24,9 @@ class Player {
     void setJoja();
     void setGold(int additionalGold);
     void setIfDay();
+    void setBundle(bool s);
+    bool newDay();
+    bool newDayOutside();
 
     
     private:

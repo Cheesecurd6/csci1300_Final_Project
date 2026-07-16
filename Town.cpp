@@ -42,6 +42,7 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[], int 
         switch(choice) {
             case 1: {
                 int choice2;
+                // Let's the player go to mutiple locations since the town is at the center of the map
                 cout << "Where do you want to go?" << endl;
                 cout << "===========================" << endl;
                 cout << "1. The Farm" << endl;
@@ -352,7 +353,9 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[], int 
             }
 
             case 7: {
+                // Bundle check
                 bool bundleComplete = 1;
+                // Sees if the player has any items for the bundle
                 for (int i = 0; i < 5; i++) {
                     bundleCheck(i, playerQuests, inventory);
                 }
@@ -363,14 +366,15 @@ bool Town::townTerminal(Player p, Item inventory[10], Quest playerQuests[], int 
                         cout << playerQuests[i].getRequirement().getAmount() << " " << playerQuests[i].getRequirement().getName() << "." << endl;
                     }
                 }
-                
+                // Gives advice on what to do next for the bunle
                 bundlePlanner(playerQuests,bundleTracker);
+                // If any of the bundle quests are uncompleted then set the bundle to incomplete
                 for (int i = 0; i < 5; i++) {
                     if (!playerQuests[i].getIfCompleted()) {
                         bundleComplete = 0;
                     }
                 }
-
+                // If the bundle is complete go back to main
                 if (bundleComplete) {
                     thePlayer.setBundle(1);
                     return true;
@@ -529,6 +533,7 @@ bool Town::addItem(Item inventory[10], Item questReward) {
  
 void Town::bundlePlanner(Quest playerQuests[10], int bundleTracker[]) {
     cout << "Bundle Planner: " << endl;
+    // Checks to see if a requirement is still needed if so provides the next step
     if (!playerQuests[0].getIfCompleted()) {
         cout << "Crop requirement: ";
         if (bundleTracker[0] == 0) {

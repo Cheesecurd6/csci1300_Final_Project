@@ -8,15 +8,18 @@ using namespace std;
 
 Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,people,l){}
 
-    void Beach::Fish (Item inventory[]) {
+void Beach::Fish (Item inventory[]) {
+    // Fishing function
     bool found = false;
     bool found2 = false;
     int roll;
     int choice;
     int choice2;
+    // If it's raining then add luck
     if (thePlayer.getWeather() == 2) {
         luck++;
     }
+    // Using random distrubtion to effectively roll a dice to decide the fishing outcome
     std::mt19937 mt{std::random_device{}()};
     std::uniform_int_distribution<> d1000{ 1, 1000 };
     std::uniform_int_distribution<> weighted1000 {600,1000};
@@ -35,6 +38,7 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
     }
     }
     if (found || found2) {
+    // Asks if the player wants to use bait
     cout << "===========================" << endl;
     cout << "Do you want to use bait?" << endl;
     cout << "1. Yes" << endl;
@@ -42,32 +46,33 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
     cout << "===========================" << endl;
     choice = promptInt(1,2);
 
-    if (choice == 1) {
-        cout << "===========================" << endl;
-        cout << "What kind of bait?" << endl;
-        if (found) {
-            cout << "1. Normal Bait" << endl;
-        }
-        if (found2) {
-            cout << "2. Deluxe Bait" << endl;
-        }
-        choice2 = promptInt(1,2);
-        switch(choice2) {
-            case 1: {
-                if (searchPlayerInventory(Item("Just normal bait used to catch fish", 1 , "Bait", 5), inventory)) {
-                    luck++;
-                }
-                break;
+        if (choice == 1) {
+            cout << "===========================" << endl;
+            cout << "What kind of bait?" << endl;
+            if (found) {
+                cout << "1. Normal Bait" << endl;
             }
-            case 2: {
-                if (searchPlayerInventory(Item("Deluxe bait attracting much rarer fish", 1 , "Deluxe Bait", 100), inventory)) {
-                    luck+=3;
+            if (found2) {
+                cout << "2. Deluxe Bait" << endl;
+            }
+            choice2 = promptInt(1,2);
+            switch(choice2) {
+                case 1: {
+                    if (searchPlayerInventory(Item("Just normal bait used to catch fish", 1 , "Bait", 5), inventory)) {
+                        luck++;
+                    }
+                    break;
                 }
-                break;
+                case 2: {
+                    if (searchPlayerInventory(Item("Deluxe bait attracting much rarer fish", 1 , "Deluxe Bait", 100), inventory)) {
+                        luck+=3;
+                    }
+                    break;
+                }
             }
         }
     }
-    }
+    // Decides based on the luck today what die to use
     if (luck >= 3) {
         roll = tripleWeighted1000(mt);
     }
@@ -81,6 +86,7 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
         roll = d1000(mt);
     }
 
+    //Different outcomes of fishing
     if (roll >= 999) {
         cout << "Something bites on the line and your forced to pull with all your might. Whatever the thing is it's very strong pulling this way and that. With a final heave you tear the thing out of the water. It's an octopus!" << endl;
         if (addItem(inventory,Item ("A mysterious creature from the depths of the ocean; delicious with a little lemona and salt", 1, "Octopus",0))) {}
@@ -109,11 +115,11 @@ Beach::Beach(std::string n, std::vector<Villager> people, int l) : Location(n,pe
         cout << "Unfortunately, you don't have enough inventory space and lose the item." << endl;
     }
     }
-    
+
     luck = 0;
 }
 void Beach::buy(Item inventory[10], std::string name, std::string description, int price) {
-
+    // Buying menu
     int amountBought;
     cout << name << " cost " << price << " gold." << endl;
     cout << "How many would you like to purchase? ";
@@ -148,6 +154,7 @@ void Beach::buy(Item inventory[10], std::string name, std::string description, i
 }
 
 void Beach::sell(Item inventory[10], std::string name, int value) {
+    // Selling menu
     int amountSold;
     int index =-1;
     bool found = 0;
@@ -177,6 +184,7 @@ void Beach::sell(Item inventory[10], std::string name, int value) {
 }
 
 bool Beach::addItem(Item inventory[10], Item questReward) {
+    // Just adds an item to the player's inventory will return false if no space is found
     bool spaceFound = false;
     for (unsigned int i = 0; i < 10; i++) {
             if (inventory[i].getName() == questReward.getName()) {
@@ -201,9 +209,10 @@ bool Beach::addItem(Item inventory[10], Item questReward) {
     else {
         return true;
     }
-    }
+}
 
-    bool Beach::searchPlayerInventory(Item questItem, Item inventory[10]) {
+bool Beach::searchPlayerInventory(Item questItem, Item inventory[10]) {
+    // Searches through the player's inventory for a quest item
     for (int i = 0; i < 10; i++) {
         if (inventory[i].getName() == questItem.getName()) {
             if(inventory[i].getAmount() >= questItem.getAmount()) {
@@ -220,11 +229,15 @@ bool Beach::addItem(Item inventory[10], Item questReward) {
 
 void Beach::questCheck(int p, Quest playerQuests[], Item inventory[10]) {
     for (int i = 0; i < 10; i++) {
+        // Finds the specific quest for the villager
         if (playerQuests[i].getName() == getPeople()[p].getQuest()) {
+            // Sees if that quest is active
             if (playerQuests[i].getIfActive()) {
+                // Sees if the player has the item needed in their inventory
                 if (searchPlayerInventory(playerQuests[i].getRequirement(),inventory)) {
                     cout << "===========================" << endl;
                     cout << "\"Oh I see you have the items I asked for thank you for this. Now for your reward.\"" << endl;
+                    // Sees if there's space for the reward
                     if (addItem(inventory,playerQuests[i].getReward())) {
                         cout << "\"Here you go, it's " << playerQuests[i].getReward().getName() << ".\"" << endl;
                         cout << "===========================" << endl;
@@ -245,6 +258,7 @@ void Beach::questCheck(int p, Quest playerQuests[], Item inventory[10]) {
     thePlayer = p;
     while(true) {
         int choice;
+        // Bundle tracker for tuna
         for (int i = 0; i < 10; i++) {
         if ((inventory[i].getName() == "Tuna") && (inventory[i].getAmount() >= 5)) {
             if (bundleTracker[3] <= 2) {
@@ -320,7 +334,7 @@ void Beach::questCheck(int p, Quest playerQuests[], Item inventory[10]) {
                                 isCompleted = playerQuests[i].getIfCompleted();
                             } 
                         } 
-
+                        // If the quest is not active and yet to be completed
                         if (!isCompleted && !isActive) {
                             cout << "\"If you want an octopus your gonna need the right bait, the normal bait I sell isn't going to cut it. Deluxe bait is what you need. Unfortunately, my supply has been cut off by that Joja man and his goons. Go fish up 5 tuna and I'll be able to make the bait.\"" << endl;
                             for (int i = 0; i < 10; i++) {
@@ -332,9 +346,11 @@ void Beach::questCheck(int p, Quest playerQuests[], Item inventory[10]) {
                                 bundleTracker[3] = 2;
                             }
                         }
+                        // If the quest is still going
                         else if (!isCompleted && isActive) {
                             cout << "\"By doing the taks I have you earlier.\"" << endl;
                         }
+                        // If the quest is done completely
                         else if(isCompleted) {
                             cout << "\"I can't help you with that. I'm sorry lad I'm kind of busy right now and can't help you make more deluxe bait.\"" << endl;
                         }

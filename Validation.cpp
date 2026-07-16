@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Validation.h"
 
+// Makes sure a valid input is entered so the program does not crash
 string promptString() {
     string validation;
     getline(cin,validation);

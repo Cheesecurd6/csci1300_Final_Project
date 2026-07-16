@@ -15,6 +15,8 @@
     void Crop::water() {
         wateredToday = true;
     }
+    // When the next day comes if the crop has been watered today it'll grow and then go to being unwatered
+    // Harvestable is also called to check if the crop is now harvestable
     void Crop::nextDay() {
         if (wateredToday) {
                 daysGrown++;
