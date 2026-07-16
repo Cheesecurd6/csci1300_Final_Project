@@ -97,8 +97,8 @@ int main() {
 
     std::cout << "Welcome to my final project" << std::endl << std::endl << std::endl;
     cout << "===========================" << endl;
-    cout << "You're the newest farmer in Stardew Valley. You've been here almost a year now and have been steadily working to complete the town's community center and get it refurbished. Now only one last obstacle stands in your way, the final bundle. Various items that can be collected across the local area. Work with the townspeople to collect them or sellout to Joja Mart and just buy them. The choice is your. You have 10 days to get the job done or time will run out." << endl;
-    cout << "Explore the valley and tend to your farm. Get tips from the locals. If you need any help on what to do next check the bundle in town." << endl;
+    cout << "You're the newest farmer in Stardew Valley. You've been here almost a year now and have been steadily working to complete the town's community center and get it refurbished. Now only one last obstacle stands in your way, the final bundle. Various items that can be collected across the local area. Work with the townspeople to collect them or sellout to Joja Mart and just buy them. The choice is your. You have 10 days to get the job done, each day has 20 turns." << endl;
+    cout << "Explore the valley and tend to your farm. Get tips from the locals. If you need any help on what to do next check the bundle in town. Also, if your doing any action that'll give you an item make sure to have the space needed for that item or you will lose it permanently." << endl;
     cout << "Good luck!" << endl;
     cout << "===========================" << endl;
     mainPlayer.setEnergy(100);
